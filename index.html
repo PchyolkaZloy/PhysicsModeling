@@ -10,6 +10,7 @@
 
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
+
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -28,7 +29,8 @@
                        id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Dropdown
                     </a>
-                    <ul class="dropdown-menu" >
+                    <ul class="dropdown-menu" data-bs-theme="dark">
+                        <li><h5 class="dropdown-header">Dropdown header</h5></li>
                         <li><a class="dropdown-item" href="#">Action</a></li>
                         <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li>
@@ -38,16 +40,38 @@
                     </ul>
                 </li>
 
-                <li class="nav-item" onclick="location.href='https://t.me/psevdovich'">
-                    <a class="nav-link" href="#">Author</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://t.me/psevdovich" target="_blank">Author</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div id="myDiv"></div>
-<script src="src/hello.js"></script>
+<div class="main graph">
+    <div id="myDiv"></div>
+
+</div>
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+            <input class="form-control" type="text" placeholder="Default input"
+                   aria-label="default input example">
+        </div>
+        <div class="col">
+            <input class="form-control" type="text" placeholder="Default input"
+                   aria-label="default input example">
+        </div>
+        <div class="col">
+            <input class="form-control" type="text" placeholder="Default input"
+                   aria-label="default input example">
+        </div>
+        <div><button type="button" class="btn btn-success">Success</button></div>
+    </div>
+</div>
+
+<script src="src/graph1.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
