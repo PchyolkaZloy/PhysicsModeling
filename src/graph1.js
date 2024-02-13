@@ -74,7 +74,7 @@ function countWithMidPoint(stepCount, dt) {
     return y_vec6D;
 }
 
-function drawGraph(formGraphData, stepCount = 100000, tEnd = 5000) {
+function drawGraph(formGraphData, stepCount = 100000, tEnd = 50) {
     particle.charge = formGraphData.charge
     console.log(particle.charge)
     particle.velocity = formGraphData.velocity
