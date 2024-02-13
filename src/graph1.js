@@ -23,68 +23,63 @@ let particle = {
 let magneticInduction = [1.0, 0.0, 0.0]
 
 
-function vectorProd(vec1, vec2) {
+function vectorProd(firstVec3D, secondVec3D) {
     return [
-        vec1[1] * vec2[2] - vec1[2] * vec2[1],
-        vec1[2] * vec2[0] - vec1[0] * vec2[2],
-        vec1[0] * vec2[1] - vec1[1] * vec2[0]
+        firstVec3D[1] * secondVec3D[2] - firstVec3D[2] * secondVec3D[1],
+        firstVec3D[2] * secondVec3D[0] - firstVec3D[0] * secondVec3D[2],
+        firstVec3D[0] * secondVec3D[1] - firstVec3D[1] * secondVec3D[0]
     ];
 }
 
-function vectorProdWithNum6D(vec, num) {
-    return [num * vec[0], num * vec[1], num * vec[2], num * vec[3], num * vec[4], num * vec[5]]
+function vectorProdWithNum6D(vec6D, num) {
+    return [num * vec6D[0], num * vec6D[1], num * vec6D[2],
+        num * vec6D[3], num * vec6D[4], num * vec6D[5]]
 }
 
-function vectorSum6D(vec1, vec2) {
-    return [vec1[0] + vec2[0], vec1[1] + vec2[1], vec1[2] + vec2[2],
-        vec1[3] + vec2[3], vec1[4] + vec2[4], vec1[5] + vec2[5]]
+function vectorSum6D(firstVec6D, secondVec6D) {
+    return [firstVec6D[0] + secondVec6D[0], firstVec6D[1] + secondVec6D[1], firstVec6D[2] + secondVec6D[2],
+        firstVec6D[3] + secondVec6D[3], firstVec6D[4] + secondVec6D[4], firstVec6D[5] + secondVec6D[5]]
 }
 
-function func(vec) {
-    let vel_vec = [vec[3], vec[4], vec[5]]
+function func(vec6D) {
+    let vel_vec = [vec6D[3], vec6D[4], vec6D[5]]
     let F = vectorProdWithNum6D(vectorProd(vel_vec, magneticInduction), particle.charge);
-
-    particle.positions.x.push(vel_vec[0])
-    particle.positions.y.push(vel_vec[1])
-    particle.positions.z.push(vel_vec[2])
 
     return [vel_vec[0], vel_vec[1], vel_vec[2],
         F[0] / particle.mass, F[1] / particle.mass, F[2] / particle.mass];
 }
 
-const dt = 0.05
-N = 1000
+const stepCount = 100000
+const t0 = 0
+const tEnd = 50
+const dt = (tEnd - t0) / stepCount
 
-function midpoint() {
-    var t = Array.from(Array(N + 1), (_, k) => k * dt);
-    var y = Array(N + 1).fill(0);
+/**
+ * @source https://jurasic.dev/ode/
+ * @returns {any[]}
+ */
+function countWithMidPoint() {
+    let y_vec6D = Array(stepCount + 1).fill(0);
 
-    y[0] = [particle.positions.x[0], particle.positions.y[0], particle.positions.z[0],
+    y_vec6D[0] = [particle.positions.x[0], particle.positions.y[0], particle.positions.z[0],
         particle.velocity[0], particle.velocity[1], particle.velocity[2]]
 
-    for (let i = 0; i < N; i++) {
-        const k1 = func(y[i]);
-        const k2 = func(vectorSum6D(y[i], vectorProdWithNum6D(k1, dt / 2)));
+    for (let i = 0; i < stepCount; i++) {
+        const k1_vec6D = func(y_vec6D[i]);
+        const k2_vec6D = func(vectorSum6D(y_vec6D[i], vectorProdWithNum6D(k1_vec6D, dt / 2)));
 
-        y[i + 1] = vectorSum6D(y[i], vectorProdWithNum6D(k2, dt));
+        y_vec6D[i + 1] = vectorSum6D(y_vec6D[i], vectorProdWithNum6D(k2_vec6D, dt));
+
+        particle.positions.x.push(y_vec6D[i][0])
+        particle.positions.y.push(y_vec6D[i][1])
+        particle.positions.z.push(y_vec6D[i][2])
     }
 
-    return y;
+    return y_vec6D;
 }
 
-y = midpoint()
+countWithMidPoint()
 
-particle.positions.x = []
-particle.positions.y = []
-particle.positions.z = []
-
-for (let i = 0; i < y.length; i++) {
-    particle.positions.x.push(y[i][0])
-    particle.positions.y.push(y[i][1])
-    particle.positions.z.push(y[i][2])
-}
-
-console.log(particle.positions)
 
 var data = [
     {
