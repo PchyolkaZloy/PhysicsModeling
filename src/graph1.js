@@ -7,7 +7,7 @@
  */
 let particle = {
     velocity: [1.0, 1.0, 0.0],
-    charge: 1,
+    charge: -1,
     mass: 1,
     positions: {
         x: [0.0],
@@ -81,7 +81,7 @@ function countWithMidPoint() {
 countWithMidPoint()
 
 
-var data = [
+let data = [
     {
         type: 'scatter3d',
         mode: 'lines',
@@ -90,8 +90,16 @@ var data = [
         z: particle.positions.z,
     },
 ];
-var layout = {
+let layout = {
     autosize: true,
+    width: 1200,
+    height: 600,
+    margin: {
+        l: 0,
+        r: 0,
+        b: 10,
+        t: 10,
+    },
 
 };
 
