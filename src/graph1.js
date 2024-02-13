@@ -76,11 +76,8 @@ function countWithMidPoint(stepCount, dt) {
 
 function drawGraph(formGraphData, stepCount = 100000, tEnd = 50) {
     particle.charge = formGraphData.charge
-    console.log(particle.charge)
     particle.velocity = formGraphData.velocity
-    console.log(particle.velocity)
     magneticInduction = formGraphData.induction
-    console.log(magneticInduction)
 
     const dt = tEnd / stepCount
 
@@ -91,20 +88,103 @@ function drawGraph(formGraphData, stepCount = 100000, tEnd = 50) {
         {
             type: 'scatter3d',
             mode: 'lines',
+            name: "Movement",
+            marker: {
+                color: 'rgb(36,178,255)',
+                size: 8
+            },
             x: particle.positions.x,
             y: particle.positions.y,
             z: particle.positions.z,
         },
+        {
+            type: 'scatter3d',
+            mode: 'lines',
+            name: 'Induction',
+            marker: {
+                color: 'rgb(255,0,174)',
+                size: 80,
+            },
+            x: [0, magneticInduction[0]],
+            y: [0, magneticInduction[1]],
+            z: [0, magneticInduction[1]],
+
+        },
     ];
     let layout = {
         autosize: true,
-        height: 600,
+        height: 550,
         width: 1400,
         margin: {
             l: 0,
-            r: 0,
+            r: 10,
             b: 10,
             t: 10,
+        },
+        showlegend: true,
+        legend: {
+            x: 1,
+            y: 0.5
+        },
+        scene: {
+            aspectmode: "auto",
+            xaxis: {
+                title: {
+                    text: '<b>X</b>',
+                    font: {
+                        family: 'Arial, serif',
+                        size: 18,
+                        color: 'black'
+                    }
+                },
+                showgrid: true,
+                zeroline: true,
+                showline: true,
+                gridcolor: '#bdbdbd',
+                gridwidth: 2,
+                zerolinecolor: '#969696',
+                zerolinewidth: 4,
+                linecolor: '#636363',
+                linewidth: 10
+            },
+            yaxis: {
+                title: {
+                    text: '<b>Y</b>',
+                    font: {
+                        family: 'Arial, serif',
+                        size: 18,
+                        color: 'black'
+                    }
+                },
+                showgrid: true,
+                zeroline: true,
+                showline: true,
+                gridcolor: '#bdbdbd',
+                gridwidth: 2,
+                zerolinecolor: '#969696',
+                zerolinewidth: 4,
+                linecolor: '#636363',
+                linewidth: 10
+            },
+            zaxis: {
+                title: {
+                    text: '<b>Z</b>',
+                    font: {
+                        family: 'Arial, serif',
+                        size: 18,
+                        color: 'black'
+                    }
+                },
+                showgrid: true,
+                zeroline: true,
+                showline: true,
+                gridcolor: '#bdbdbd',
+                gridwidth: 2,
+                zerolinecolor: '#969696',
+                zerolinewidth: 4,
+                linecolor: '#636363',
+                linewidth: 10
+            }
         },
 
     };
