@@ -108,7 +108,7 @@ function drawGraph(formGraphData) {
                 color: 'black'
             },
             marker: {
-                color: 'rgb(255,0,174)',
+                color: 'rgb(255,0,175)',
                 size: 80,
             },
             x: [0, magneticInduction[0]],
