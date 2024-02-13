@@ -5,3 +5,8 @@
 :root {
     --bs-body-bg: var(--bs-gray-100);
 }
+
+#main\ graph {
+    display: flex;
+    justify-content: space-around;
+}
