@@ -74,14 +74,15 @@ function countWithMidPoint(stepCount, dt) {
     return y_vec6D;
 }
 
-function drawGraph(formGraphData, stepCount = 100000, tEnd = 50) {
+function drawGraph(formGraphData) {
     particle.charge = formGraphData.charge
     particle.velocity = formGraphData.velocity
     magneticInduction = formGraphData.induction
+    particle.mass = formGraphData.mass
 
-    const dt = tEnd / stepCount
+    const dt = formGraphData.time / formGraphData.steps
 
-    countWithMidPoint(stepCount, dt)
+    countWithMidPoint(formGraphData.steps, dt)
 
 
     let data = [
@@ -90,7 +91,7 @@ function drawGraph(formGraphData, stepCount = 100000, tEnd = 50) {
             mode: 'lines',
             name: "Movement",
             marker: {
-                color: 'rgb(36,178,255)',
+                color: 'rgb(7,113,171)',
                 size: 8
             },
             x: particle.positions.x,
@@ -101,6 +102,11 @@ function drawGraph(formGraphData, stepCount = 100000, tEnd = 50) {
             type: 'scatter3d',
             mode: 'lines',
             name: 'Induction',
+            font: {
+                family: 'Arial, serif',
+                size: 18,
+                color: 'black'
+            },
             marker: {
                 color: 'rgb(255,0,174)',
                 size: 80,
@@ -123,11 +129,17 @@ function drawGraph(formGraphData, stepCount = 100000, tEnd = 50) {
         },
         showlegend: true,
         legend: {
+            font: {
+                family: 'Arial, serif',
+                size: 18,
+                color: 'black',
+            },
             x: 1,
-            y: 0.5
+            xanchor: 'right',
+            y: 0.5,
         },
+        paper_bgcolor: 'rgba(239,239,239,0.82)',
         scene: {
-            aspectmode: "auto",
             xaxis: {
                 title: {
                     text: '<b>X</b>',
@@ -201,6 +213,9 @@ const defaultGraphData = {
     charge: 1,
     induction: [1, 0, 0],
     velocity: [1, 1, 0],
+    time: 50,
+    steps: 100000,
+    mass: 1
 }
 
 drawGraph(defaultGraphData)
