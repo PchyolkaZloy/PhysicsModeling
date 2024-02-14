@@ -28,21 +28,20 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#"
                        id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown
+                        Tasks
                     </a>
                     <ul class="dropdown-menu" data-bs-theme="dark">
-                        <li><h5 class="dropdown-header">Dropdown header</h5></li>
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><h5 class="dropdown-header">Choose task</h5></li>
+                        <li><a class="dropdown-item" href="index.html">Task 1</a></li>
+                        <li><a class="dropdown-item disabled" href="#">Task 2</a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="https://t.me/psevdovich" target="_blank">Author</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/PchyolkaZloy/PhysicsModeling" target="_blank">GitHub</a>
                 </li>
             </ul>
         </div>
@@ -59,29 +58,29 @@
         <div class="container text-center">
             <div class="row">
                 <div class="col">
-                    <label>Заряд (Кл)
+                    <label>Charge (Coulomb)
                         <input id="charge" name="charge" value="1">
                     </label><br>
-                    <label>Магнитная индукция (радиус-вектор)
+                    <label>Magnetic induction (radius vector)
                         <input id="induction" name="induction" value="1 0 0">
                     </label><br>
-                    <label>Скорость (радиус-вектор)
+                    <label>Velocity (radius vector)
                         <input id="velocity" name="velocity" value="1 1 0">
                     </label><br>
                 </div>
                 <div class="col">
-                    <label>Время полёта (с)
+                    <label>Flight speed (sec)
                         <input id="time" name="time" value="50">
                     </label><br>
-                    <label>Количество шагов (точность)
+                    <label>Steps count (accuracy)
                         <input id="steps" name="steps" value="100000">
                     </label><br>
-                    <label>Масса заряда (кг)
+                    <label>Mass of charge (kg)
                         <input id="mass" name="mass" value="1">
                     </label><br>
                 </div>
             </div>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Draw!">
         </div>
     </form>
     <script src="src/forms.js"></script>
