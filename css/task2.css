@@ -30,8 +30,16 @@
 }
 
 .modal-body img {
-    max-width: 100%; /* Максимальная ширина картинки равна ширине родительского контейнера (modal-body) */
-    max-height: 70vh; /* Максимальная высота картинки равна 70% высоты окна просмотра */
-    width: auto; /* Автоматическая ширина для сохранения пропорций */
-    height: auto; /* Автоматическая высота для сохранения пропорций */
+    max-width: 100%;
+    max-height: 70vh;
+    width: auto;
+    height: auto;
+}
+
+#description{
+    margin-top: 20px;
+}
+
+#accord {
+    margin-top: 20px;
 }
