@@ -1,0 +1,16 @@
+#main {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.row {
+    width: 95vw;
+}
+
+#forms {
+}
+
+#graph {
+    height: 85vh;
+}
