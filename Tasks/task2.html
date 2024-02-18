@@ -51,27 +51,48 @@
     <div class="row">
         <div class="col-2 container text-center" id="forms">
             <form>
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <label> Radious
-                        <input class="form-control"/>
-                    </label>
+
+                <div data-mdb-input-init class="form-floating mb-4">
+                    <input class="form-control" id="radius" placeholder="#" value="test value"/>
+                    <label for="radius">Radius</label>
                 </div>
 
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <label> Amount
-                        <input class="form-control"/>
-                    </label>
+                <div data-mdb-input-init class="form-floating mb-4">
+                    <input class="form-control" id="amount" placeholder="#" value="test asdasd1241"/>
+                    <label for="radius">Amount</label>
                 </div>
 
-                <div data-mdb-input-init class="form-outline mb-4">
-                    <label> Force
-                        <input class="form-control"/>
-                    </label>
+                <div data-mdb-input-init class="form-floating mb-4">
+                    <input class="form-control" id="force" placeholder="#" value="test force"/>
+                    <label for="radius">Force</label>
                 </div>
 
                 <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block">Draw!</button>
             </form>
             <script src="../src/task2/forms.js"></script>
+
+            <br>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#descriptionModal">
+                Task description
+            </button>
+
+            <div class="modal fade" id="descriptionModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="descriptionModalLabel">Description</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <img src="../png/task2.png" alt="Here was a picture of this task">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-10" id="graph">
             <script src="../src/task2/graph.js"></script>

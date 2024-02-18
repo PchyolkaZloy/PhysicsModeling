@@ -218,13 +218,14 @@ const defaultGraphData = {
 
 drawGraph(defaultGraphData)
 
-var graphDiv = document.getElementById('graph');
+let graphDiv = document.getElementById('graph');
 
 function resizePlot() {
-    Plotly.relayout(graphDiv, {
-        width: graphDiv.offsetWidth,
-        height: graphDiv.offsetHeight
-    });
+    Plotly.relayout(graphDiv,
+        {
+            width: graphDiv.offsetWidth,
+            height: graphDiv.offsetHeight
+        });
 }
 
 window.addEventListener('DOMContentLoaded', resizePlot);
