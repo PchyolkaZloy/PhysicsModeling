@@ -122,7 +122,38 @@
             </div>
         </div>
         <div class="col-lg-10" id="graph">
-            <script src="../src/task2/graph.js"></script>
+            <script>
+                const R = 1;
+                const N = 100
+                const I = 1;
+                const numPoints = 1000;
+
+                // Создание массива значений x от -R до R
+                const xValues = Array.from({length: numPoints}, (_, i) => -R + 2 * R * (i / (numPoints - 1)));
+
+                // Вычисление магнитной индукции B для каждого значения x
+                const BValues = xValues.map(x => {
+                    const factor = 8 * Math.PI * Math.pow(10, -7) * N * I / Math.sqrt(125); // множитель для удобства
+                    return factor * Math.pow(R, 2) / Math.pow(Math.pow(R, 2) + Math.pow(x, 2), 3 / 2);
+                });
+
+                // Создание графика
+                const trace = {
+                    x: xValues,
+                    y: BValues,
+                    mode: 'lines',
+                    type: 'scatter',
+                    name: 'Magnetic Induction B(x)'
+                };
+
+                const layout = {
+                    title: 'Magnetic Induction B(x) for Helmholtz Coils',
+                    xaxis: {title: 'Distance from Center (x)'},
+                    yaxis: {title: 'Magnetic Induction (B)'}
+                };
+
+                Plotly.newPlot('graph', [trace], layout);
+            </script>
         </div>
     </div>
 </div>
