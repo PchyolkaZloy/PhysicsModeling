@@ -1,12 +1,17 @@
-:root {
-    --bs-body-bg: var(--bs-gray-100);
+html,
+body {
+    height: 95%;
 }
 
-.xtick {
-    font-weight: bold;
+
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    margin: 0 auto -30px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-#main\ graph {
-    display: flex;
-    justify-content: space-around;
+
+#footer {
+    font-family: "Lucida Console", "Courier New", monospace;
 }
