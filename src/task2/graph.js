@@ -1,14 +1,15 @@
 /**
  * @source https://en.wikipedia.org/wiki/Helmholtz_coil
+ * @source1 https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D0%B3%D0%BD%D0%B8%D1%82%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%BD%D0%B0%D1%8F
  * @type {number}
  */
-const magneticConst = 1.257 * Math.PI * Math.pow(10, -6)
+const magneticConst = 1.256637 * Math.PI * Math.pow(10, -6)
 
 let graphData = {
-    R: 1,
-    I: 1,
-    amount: 10,
-    dist: 1,
+    R: 0,
+    I: 0,
+    turnsAmount: 0,
+    dist: 0,
     xValues: [],
     bValues: []
 }
@@ -18,7 +19,7 @@ function xsi(x) {
 }
 
 function magneticInduction(x) {
-    return (magneticConst * graphData.amount * graphData.I) / (2 * graphData.R)
+    return (magneticConst * graphData.turnsAmount * graphData.I) / (2 * graphData.R)
         * (xsi(x - graphData.R / 2) + xsi(x + graphData.R / 2))
 }
 
@@ -38,11 +39,11 @@ function count(stepCount) {
 function drawGraph(formGraphData) {
     graphData.R = formGraphData.R
     graphData.I = formGraphData.I
-    graphData.amount = formGraphData.amount
+    graphData.turnsAmount = formGraphData.turnsAmount
     graphData.dist = formGraphData.dist
-    let stepCount = formGraphData.stepCount
+    let pointsCount = formGraphData.pointsCount
 
-    count(stepCount)
+    count(pointsCount)
 
     const data = {
         x: graphData.xValues,
@@ -54,7 +55,12 @@ function drawGraph(formGraphData) {
 
     const layout = {
         title: 'Magnetic Induction B(x) for Helmholtz Coils',
-        yaxis: {title: 'Magnetic Induction (B)'}
+        yaxis: {
+            title: 'Magnetic Induction B, T',
+        },
+        xaxis: {
+            title: 'Distance X, m',
+        }
     };
 
     Plotly.newPlot('graph', [data], layout);
@@ -64,11 +70,11 @@ function drawGraph(formGraphData) {
 }
 
 let defaultGraphData = {
-    R: 1,
+    R: 0.5,
     I: 1,
-    amount: 10,
-    dist: 1,
-    stepCount: 10000
+    turnsAmount: 10,
+    dist: 0.5,
+    pointsCount: 10000
 }
 
 drawGraph(defaultGraphData)
