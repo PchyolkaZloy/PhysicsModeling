@@ -43,3 +43,8 @@
 #accord {
     margin-top: 20px;
 }
+
+.modal-body img {
+    max-width: 100%;
+    height: auto;
+}
