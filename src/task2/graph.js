@@ -11,16 +11,21 @@ let graphData = {
     turnsAmount: 0,
     dist: 0,
     xValues: [],
-    bValues: []
+    bValues: [],
+    b1Values: [],
+    b2Values: []
 }
 
 function xsi(x) {
     return Math.pow(1 + Math.pow(x / graphData.R, 2), -1.5)
 }
 
-function magneticInduction(x) {
-    return (magneticConst * graphData.turnsAmount * graphData.I) / (2 * graphData.R)
-        * (xsi(x - graphData.R / 2) + xsi(x + graphData.R / 2))
+function magneticInduction1(x) {
+    return (magneticConst * graphData.turnsAmount * graphData.I) / (2 * graphData.R) * xsi(x - graphData.R / 2)
+}
+
+function magneticInduction2(x) {
+    return (magneticConst * graphData.turnsAmount * graphData.I) / (2 * graphData.R) * xsi(x + graphData.R / 2)
 }
 
 function generateXArrayByDist(dist, stepCount) {
@@ -31,9 +36,11 @@ function generateXArrayByDist(dist, stepCount) {
 
 function count(stepCount) {
     graphData.xValues = generateXArrayByDist(graphData.dist, stepCount)
-    graphData.bValues = graphData.xValues.map(x => {
-        return magneticInduction(x)
-    })
+    for (let i = 0; i < graphData.xValues.length; i++) {
+        graphData.b1Values.push(magneticInduction1(graphData.xValues[i]))
+        graphData.b2Values.push(magneticInduction2(graphData.xValues[i]))
+        graphData.bValues.push(graphData.b1Values[i] + graphData.b2Values[i])
+    }
 }
 
 function drawGraph(formGraphData) {
@@ -45,37 +52,66 @@ function drawGraph(formGraphData) {
 
     count(pointsCount)
 
-    const data = {
+    const dataB = {
         x: graphData.xValues,
         y: graphData.bValues,
         mode: 'lines',
         type: 'scatter',
-        name: 'Magnetic Induction B(x)'
+        name: '$B(x)$'
+    };
+
+    const dataB1 = {
+        x: graphData.xValues,
+        y: graphData.b1Values,
+        mode: 'lines',
+        type: 'scatter',
+        name: '$B_{1}(x)$'
+    };
+
+    const dataB2 = {
+        x: graphData.xValues,
+        y: graphData.b2Values,
+        mode: 'lines',
+        type: 'scatter',
+        name: '$B_{2}(x)$'
     };
 
     const layout = {
-        title: 'Magnetic Induction B(x) for Helmholtz Coils',
-        autosize: true,
+        title: {
+            text: '$\\text{Magnetic Induction } B(x) \\text{ for Helmholtz Coils}$',
+            font: {
+                size: 20
+            }
+        },
         yaxis: {
-            title: 'Magnetic Induction B, T',
+            title: {
+                text: '$\\text{Magnetic Induction } B, T$',
+                font: {
+                    size: 20
+                }
+            }
         },
         xaxis: {
-            title: 'Distance X, m',
+            title: {
+                text: '$\\text{Distance } X, m$',
+                font: {
+                    size: 20
+                }
+            }
         },
         margin: {
             l: 50,
             r: 50,
+            t: 85
         },
-        /*showlegend: true,
+        showlegend: true,
         legend: {
             font: {
-                family: 'Arial, serif',
                 size: 18,
-                color: 'black',
             },
             x: 1,
             y: 0.5,
-        },*/
+        },
     };
 
     const config = {
@@ -85,10 +121,12 @@ function drawGraph(formGraphData) {
         responsive: true,
     }
 
-    Plotly.newPlot('graph', [data], layout, config);
+    Plotly.newPlot('graph', [dataB, dataB1, dataB2], layout, config);
 
     graphData.bValues = []
     graphData.xValues = []
+    graphData.b1Values = []
+    graphData.b2Values = []
 }
 
 let defaultGraphData = {
