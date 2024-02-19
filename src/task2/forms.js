@@ -3,7 +3,7 @@ function customFloatParse(name, numberString, defaultValue) {
         numberString = defaultValue
         alert(name + " have to be float number > 0. Setting to default value: " + defaultValue)
         document.getElementById(name).value = defaultValue
-        if (name === "radius") {
+        if (name === "radius") { // костыль
             document.getElementById("dist").value = defaultValue
         }
     } else {
@@ -32,7 +32,7 @@ function getData(form) {
     return {
         R: customFloatParse("radius", formData.getAll("radius"), 0.5),
         I: customFloatParse("amperage", formData.getAll("amperage"), 1),
-        turnsAmount: customIntegerParse("amount", formData.getAll("amount"), 10),
+        turnsAmount: customIntegerParse("turnsAmount", formData.getAll("turnsAmount"), 10),
         dist: customFloatParse("dist", formData.getAll("dist"), 0.5),
         pointsCount: customIntegerParse("steps", formData.getAll("steps"), 10000),
     }

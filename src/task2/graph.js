@@ -55,15 +55,37 @@ function drawGraph(formGraphData) {
 
     const layout = {
         title: 'Magnetic Induction B(x) for Helmholtz Coils',
+        autosize: true,
         yaxis: {
             title: 'Magnetic Induction B, T',
         },
         xaxis: {
             title: 'Distance X, m',
-        }
+        },
+        margin: {
+            l: 50,
+            r: 50,
+        },
+        /*showlegend: true,
+        legend: {
+            font: {
+                family: 'Arial, serif',
+                size: 18,
+                color: 'black',
+            },
+            x: 1,
+            y: 0.5,
+        },*/
     };
 
-    Plotly.newPlot('graph', [data], layout);
+    const config = {
+        scrollZoom: true,
+        displayModeBar: true,
+        displaylogo: false,
+        responsive: true,
+    }
+
+    Plotly.newPlot('graph', [data], layout, config);
 
     graphData.bValues = []
     graphData.xValues = []
