@@ -67,13 +67,12 @@ let defaultGraphData = {
     R: 1,
     I: 1,
     amount: 10,
-    dist: 10,
+    dist: 1,
     stepCount: 10000
 }
 
 drawGraph(defaultGraphData)
 
-/*
 let graphDiv = document.getElementById('graph');
 
 function resizePlot() {
@@ -86,5 +85,4 @@ function resizePlot() {
 
 window.addEventListener('DOMContentLoaded', resizePlot);
 window.addEventListener('resize', resizePlot);
-*/
 
