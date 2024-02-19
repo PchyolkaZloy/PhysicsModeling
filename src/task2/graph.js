@@ -5,150 +5,75 @@
 const magneticConst = 1.257 * Math.PI * Math.pow(10, -6)
 
 let graphData = {
-    R : 1,
-    I : 1,
-    b1: [],
-    b2: [],
-    b: []
+    R: 1,
+    I: 1,
+    amount: 10,
+    dist: 1,
+    xValues: [],
+    bValues: []
 }
 
-function func(x, R, I) {
-    return (magneticConst * I * Math.pow(R, 2)) / (2 * Math.pow((Math.pow(R, 2) + Math.pow(x, 2)), 1.5))
+function xsi(x) {
+    return Math.pow(1 + Math.pow(x / graphData.R, 2), -1.5)
 }
 
-function count(stepCount, xMax) {
-
+function magneticInduction(x) {
+    return (magneticConst * graphData.amount * graphData.I) / (2 * graphData.R)
+        * (xsi(x - graphData.R / 2) + xsi(x + graphData.R / 2))
 }
 
+function generateXArrayByDist(dist, stepCount) {
+    return Array.from(
+        {length: stepCount},
+        (_, i) => -dist + 2 * dist * (i / (stepCount - 1)));
+}
+
+function count(stepCount) {
+    graphData.xValues = generateXArrayByDist(graphData.dist, stepCount)
+    graphData.bValues = graphData.xValues.map(x => {
+        return magneticInduction(x)
+    })
+}
 
 function drawGraph(formGraphData) {
-    countWithMidPoint(formGraphData.steps, dt)
+    graphData.R = formGraphData.R
+    graphData.I = formGraphData.I
+    graphData.amount = formGraphData.amount
+    graphData.dist = formGraphData.dist
+    let stepCount = formGraphData.stepCount
 
+    count(stepCount)
 
-    let data = [
-        {
-            type: 'scatter3d',
-            mode: 'lines',
-            name: "Movement",
-            marker: {
-                color: 'rgb(7,113,171)',
-                size: 8
-            },
-            x: particle.positions.x,
-            y: particle.positions.y,
-            z: particle.positions.z,
-        },
-        {
-            type: 'scatter3d',
-            mode: 'lines',
-            name: 'Induction',
-            font: {
-                family: 'Arial, serif',
-                size: 18,
-                color: 'black'
-            },
-            marker: {
-                color: 'rgb(255,0,175)',
-                size: 80,
-            },
-            x: [0, magneticInduction[0]],
-            y: [0, magneticInduction[1]],
-            z: [0, magneticInduction[1]],
-
-        },
-    ];
-    let layout = {
-        autosize: true,
-        margin: {
-            l: 0,
-            r: 10,
-            b: 10,
-            t: 10,
-        },
-        showlegend: true,
-        legend: {
-            font: {
-                family: 'Arial, serif',
-                size: 18,
-                color: 'black',
-            },
-            x: 1,
-            xanchor: 'right',
-            y: 0.5,
-        },
-        paper_bgcolor: 'rgba(239,239,239,0.82)',
-        scene: {
-            xaxis: {
-                title: {
-                    text: '<b>X</b>',
-                    font: {
-                        family: 'Arial, serif',
-                        size: 18,
-                        color: 'black'
-                    }
-                },
-                showgrid: true,
-                zeroline: true,
-                showline: true,
-                gridcolor: '#bdbdbd',
-                gridwidth: 2,
-                zerolinecolor: '#969696',
-                zerolinewidth: 4,
-                linecolor: '#636363',
-                linewidth: 10
-            },
-            yaxis: {
-                title: {
-                    text: '<b>Y</b>',
-                    font: {
-                        family: 'Arial, serif',
-                        size: 18,
-                        color: 'black'
-                    }
-                },
-                showgrid: true,
-                zeroline: true,
-                showline: true,
-                gridcolor: '#bdbdbd',
-                gridwidth: 2,
-                zerolinecolor: '#969696',
-                zerolinewidth: 4,
-                linecolor: '#636363',
-                linewidth: 10
-            },
-            zaxis: {
-                title: {
-                    text: '<b>Z</b>',
-                    font: {
-                        family: 'Arial, serif',
-                        size: 18,
-                        color: 'black'
-                    }
-                },
-                showgrid: true,
-                zeroline: true,
-                showline: true,
-                gridcolor: '#bdbdbd',
-                gridwidth: 2,
-                zerolinecolor: '#969696',
-                zerolinewidth: 4,
-                linecolor: '#636363',
-                linewidth: 10
-            }
-        },
-
+    const data = {
+        x: graphData.xValues,
+        y: graphData.bValues,
+        mode: 'lines',
+        type: 'scatter',
+        name: 'Magnetic Induction B(x)'
     };
 
-    Plotly.newPlot('graph', data, layout);
+    const layout = {
+        title: 'Magnetic Induction B(x) for Helmholtz Coils',
+        yaxis: {title: 'Magnetic Induction (B)'}
+    };
 
-    particle.positions.x = [0]
-    particle.positions.y = [0]
-    particle.positions.z = [0]
+    Plotly.newPlot('graph', [data], layout);
+
+    graphData.bValues = []
+    graphData.xValues = []
 }
 
+let defaultGraphData = {
+    R: 1,
+    I: 1,
+    amount: 10,
+    dist: 10,
+    stepCount: 10000
+}
 
 drawGraph(defaultGraphData)
 
+/*
 let graphDiv = document.getElementById('graph');
 
 function resizePlot() {
@@ -161,3 +86,5 @@ function resizePlot() {
 
 window.addEventListener('DOMContentLoaded', resizePlot);
 window.addEventListener('resize', resizePlot);
+*/
+
