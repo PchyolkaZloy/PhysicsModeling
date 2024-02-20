@@ -48,3 +48,19 @@
 #graphForm {
     margin-top: 20px;
 }
+
+#description {
+    width: 60%;
+    display: none;
+}
+
+#descriptionDesktop {
+    width: 50%;
+    overflow-y: auto;
+}
+
+
+#descriptionMobile {
+    height: 40%;
+    overflow-y: auto;
+}
