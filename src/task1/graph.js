@@ -118,9 +118,6 @@ function drawGraph(formGraphData) {
         },
     ];
     let layout = {
-        autosize: true,
-        height: 550,
-        width: 1400,
         margin: {
             l: 0,
             r: 10,
@@ -201,7 +198,7 @@ function drawGraph(formGraphData) {
 
     };
 
-    Plotly.newPlot('myDiv', data, layout);
+    Plotly.newPlot('graph', data, layout);
 
     particle.positions.x = [0]
     particle.positions.y = [0]

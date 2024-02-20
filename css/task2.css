@@ -48,3 +48,7 @@
     max-width: 100%;
     height: auto;
 }
+
+#drawButton {
+    margin-top: 20px;
+}

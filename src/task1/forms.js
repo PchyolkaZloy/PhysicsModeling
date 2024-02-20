@@ -23,7 +23,7 @@ function getData(form) {
     }
 }
 
-document.getElementById("myForm").addEventListener("submit", function (e) {
+document.getElementById("graphForm").addEventListener("submit", function (e) {
     e.preventDefault();
     drawGraph(getData(e.target));
 });

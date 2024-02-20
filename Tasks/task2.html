@@ -68,7 +68,6 @@
                     <label for="amperage">Amperage (A)</label>
                 </div>
 
-
                 <div class="accordion" id="accord">
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -92,13 +91,11 @@
                     </div>
                 </div>
 
-
-                <button data-mdb-ripple-init type="submit" class="btn btn-primary" style="margin-top: 20px;">
+                <button id="drawButton" data-mdb-ripple-init type="submit" class="btn btn-primary">
                     Draw!
                 </button>
             </form>
             <script src="../src/task2/forms.js"></script>
-
 
             <div id="description">
                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
@@ -121,6 +118,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-10" id="graph">
             <script src="../src/task2/graph.js"></script>
         </div>

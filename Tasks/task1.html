@@ -49,42 +49,85 @@
     </div>
 </nav>
 
-<div id="graph">
-    <div id="myDiv"></div>
-    <script src="../src/task1/graph.js"></script>
-</div>
-<br>
-<div class="container text-center">
-    <form id="myForm">
-        <div class="container text-center">
-            <div class="row">
-                <div class="col">
-                    <label>Charge (Coulomb)
-                        <input id="charge" name="charge" value="1">
-                    </label><br>
-                    <label>Magnetic induction (radius vector)
-                        <input id="induction" name="induction" value="1 0 0">
-                    </label><br>
-                    <label>Velocity (radius vector)
-                        <input id="velocity" name="velocity" value="1 1 0">
-                    </label><br>
+<div class="container-fluid" id="main">
+    <div class="row">
+        <div class="col-lg-2 container text-center" id="forms">
+            <form id="graphForm">
+                <div class="form-floating mb-4">
+                    <input class="form-control" id="charge" name="charge" value="1" placeholder="#">
+                    <label for="charge">Charge (Coulomb)</label>
                 </div>
-                <div class="col">
-                    <label>Flight time (sec)
-                        <input id="time" name="time" value="50">
-                    </label><br>
-                    <label>Steps count (accuracy)
-                        <input id="steps" name="steps" value="100000">
-                    </label><br>
-                    <label>Mass of charge (kg)
-                        <input id="mass" name="mass" value="1">
-                    </label><br>
+
+                <div class="form-floating mb-4">
+                    <input class="form-control" id="induction" name="induction" value="1 0 0" placeholder="#">
+                    <label for="induction">Magnetic induction (radius vector)</label>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input class="form-control" id="velocity" name="velocity" value="1 1 0" placeholder="#">
+                    <label for="velocity">Velocity (radius vector)</label>
+                </div>
+
+                <div class="accordion" id="accord">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-controls="collapseOne">
+                            Optional Settings
+                        </button>
+                    </h2>
+
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
+                        <div class="accordion-body">
+                            <div class="form-floating mb-4">
+                                <input class="form-control" id="time" name="time" value="50" placeholder="#">
+                                <label for="time">Flight time (sec)</label>
+                            </div>
+
+                            <div class="form-floating mb-4">
+                                <input class="form-control" id="steps" name="steps" value="100000" placeholder="#">
+                                <label for="steps">Steps count (accuracy)</label>
+                            </div>
+
+                            <div class="form-floating mb-4">
+                                <input class="form-control" id="mass" name="mass" value="1" placeholder="#">
+                                <label for="mass">Mass of charge (kg)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <button data-mdb-ripple-init type="submit" class="btn btn-primary" style="margin-top: 20px;">
+                    Draw!
+                </button>
+            </form>
+            <script src="../src/task1/forms.js"></script>
+
+            <div id="description">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                        data-bs-target="#descriptionModal">
+                    Task description
+                </button>
+
+                <div class="modal fade" id="descriptionModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="../png/task1.png" alt="Here was a picture of this task" class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <input type="submit" value="Draw!">
         </div>
-    </form>
-    <script src="../src/task1/forms.js"></script>
+        <div class="col-lg-10" id="graph">
+            <script src="../src/task1/graph.js"></script>
+        </div>
+    </div>
 </div>
 
 
