@@ -118,17 +118,23 @@ function drawGraph(formGraphData) {
         },
     ];
     let layout = {
+        title: {
+            text: '$\\text{Charge Trajectory in Magnetic Field}$',
+            font: {
+                size: 32
+            }
+        },
         margin: {
             l: 0,
-            r: 10,
+            r: 50,
             b: 10,
-            t: 10,
+            t: 50,
         },
         showlegend: true,
         legend: {
             font: {
                 family: 'Arial, serif',
-                size: 18,
+                size: 16,
                 color: 'black',
             },
             x: 1,
@@ -198,7 +204,14 @@ function drawGraph(formGraphData) {
 
     };
 
-    Plotly.newPlot('graph', data, layout);
+    const config = {
+        scrollZoom: true,
+        displayModeBar: true,
+        displaylogo: false,
+        responsive: true,
+    }
+
+    Plotly.newPlot('graph', data, layout, config);
 
     particle.positions.x = [0]
     particle.positions.y = [0]

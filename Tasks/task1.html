@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/task1.css">
     <link rel="icon" href="../png/icon.png">
 
+    <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
@@ -53,19 +54,19 @@
     <div class="row">
         <div class="col-lg-2 container text-center" id="forms">
             <form id="graphForm">
-                <div class="form-floating mb-4">
+                <div class="form-floating mb-2">
                     <input class="form-control" id="charge" name="charge" value="1" placeholder="#">
                     <label for="charge">Charge (Coulomb)</label>
                 </div>
 
-                <div class="form-floating mb-4">
+                <div class="form-floating mb-2">
                     <input class="form-control" id="induction" name="induction" value="1 0 0" placeholder="#">
-                    <label for="induction">Magnetic induction (radius vector)</label>
+                    <label for="induction">Magnetic induction (vector)</label>
                 </div>
 
-                <div class="form-floating mb-4">
+                <div class="form-floating mb-2">
                     <input class="form-control" id="velocity" name="velocity" value="1 1 0" placeholder="#">
-                    <label for="velocity">Velocity (radius vector)</label>
+                    <label for="velocity">Velocity (vector)</label>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -78,17 +79,17 @@
 
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
-                            <div class="form-floating mb-4">
+                            <div class="form-floating mb-2">
                                 <input class="form-control" id="time" name="time" value="50" placeholder="#">
                                 <label for="time">Flight time (sec)</label>
                             </div>
 
-                            <div class="form-floating mb-4">
+                            <div class="form-floating mb-2">
                                 <input class="form-control" id="steps" name="steps" value="100000" placeholder="#">
                                 <label for="steps">Steps count (accuracy)</label>
                             </div>
 
-                            <div class="form-floating mb-4">
+                            <div class="form-floating">
                                 <input class="form-control" id="mass" name="mass" value="1" placeholder="#">
                                 <label for="mass">Mass of charge (kg)</label>
                             </div>

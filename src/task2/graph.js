@@ -57,7 +57,8 @@ function drawGraph(formGraphData) {
         y: graphData.bValues,
         mode: 'lines',
         type: 'scatter',
-        name: '$B(x)$'
+        name: '$B(x)$',
+        hovertemplate: '<b>B(x)</b>: %{y}<extra></extra>'
     };
 
     const dataB1 = {
@@ -65,7 +66,8 @@ function drawGraph(formGraphData) {
         y: graphData.b1Values,
         mode: 'lines',
         type: 'scatter',
-        name: '$B_{1}(x)$'
+        name: '$B_{1}(x)$',
+        hovertemplate: '<b>B1(x)</b>: %{y}<extra></extra>'
     };
 
     const dataB2 = {
@@ -73,7 +75,8 @@ function drawGraph(formGraphData) {
         y: graphData.b2Values,
         mode: 'lines',
         type: 'scatter',
-        name: '$B_{2}(x)$'
+        name: '$B_{2}(x)$',
+        hovertemplate: '<b>B2(x)</b>: %{y}<extra></extra>'
     };
 
     const layout = {
@@ -138,17 +141,3 @@ let defaultGraphData = {
 }
 
 drawGraph(defaultGraphData)
-
-let graphDiv = document.getElementById('graph');
-
-function resizePlot() {
-    Plotly.relayout(graphDiv,
-        {
-            width: graphDiv.offsetWidth,
-            height: graphDiv.offsetHeight
-        });
-}
-
-window.addEventListener('DOMContentLoaded', resizePlot);
-window.addEventListener('resize', resizePlot);
-

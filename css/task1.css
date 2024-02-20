@@ -45,7 +45,6 @@
     margin-top: 20px;
 }
 
-.modal-body img {
-    max-width: 100%;
-    height: auto;
+.form-floating label {
+    font-size: 14px;
 }
