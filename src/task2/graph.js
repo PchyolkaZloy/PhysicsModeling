@@ -100,7 +100,7 @@ function drawGraph(formGraphData) {
             }
         },
         margin: {
-            l: 50,
+            l: 85,
             r: 50,
             t: 85
         },
