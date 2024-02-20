@@ -126,7 +126,7 @@ function drawGraph(formGraphData) {
         },
         margin: {
             l: 0,
-            r: 50,
+            r: 0,
             b: 10,
             t: 50,
         },

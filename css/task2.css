@@ -36,14 +36,14 @@
     height: auto;
 }
 
-#description {
-    margin-top: 20px;
-}
-
 #accord {
     margin-top: 20px;
 }
 
 #drawButton {
+    margin-top: 20px;
+}
+
+#graphForm {
     margin-top: 20px;
 }

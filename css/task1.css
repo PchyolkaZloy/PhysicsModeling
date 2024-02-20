@@ -37,14 +37,14 @@
     height: auto;
 }
 
-#description {
-    margin-top: 20px;
-}
-
 #accord {
     margin-top: 20px;
 }
 
 .form-floating label {
     font-size: 14px;
+}
+
+#graphForm {
+    margin-top: 20px;
 }
