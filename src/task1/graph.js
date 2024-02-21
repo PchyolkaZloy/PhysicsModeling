@@ -121,14 +121,14 @@ function drawGraph(formGraphData) {
         title: {
             text: '$\\text{Charge Trajectory in Magnetic Field}$',
             font: {
-                size: 32
+                size: 18
             }
         },
         margin: {
             l: 0,
             r: 0,
             b: 10,
-            t: 50,
+            t: 80,
         },
         showlegend: true,
         legend: {

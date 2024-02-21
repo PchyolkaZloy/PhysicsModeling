@@ -54,13 +54,88 @@
         <div class="col-lg-2 container text-center" id="forms">
             <div id="descriptionOffCanvas">
                 <div class="offcanvas-content" id="description">
-                    <div class="offcanvas-header">
+                    <div class="offcanvas-header" style="position: fixed;">
                         <button type="button" class="btn-close" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
-                        <p>Some info</p>
+                        <div class="table-responsive">
+                            <h5 style="font-weight: bold;">Input parameters</h5>
+                            <table class="table table-striped table-responsive table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Form</th>
+                                    <th scope="col">Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Charge</td>
+                                    <td>In coulombs. Can be negative. Float number.</td>
+                                </tr>
+                                <tr>
+                                    <td>Magnetic induction</td>
+                                    <td>Defined by a radius vector with coordinates (x, y, z) separated by spaces.
+                                        Coordinates are float numbers.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Velocity of charge</td>
+                                    <td>Defined by a radius vector with coordinates (x, y, z) separated by spaces.
+                                        Coordinates are float numbers.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Flight time</td>
+                                    <td>In seconds. Affects the chart scale. More seconds - more charge
+                                        "flies" in the space on the graph. Float number.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Steps count</td>
+                                    <td>Number of steps for solving differential equations. The more steps, the
+                                        better the accuracy, but the lower the performance. Integer number.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mass of charge</td>
+                                    <td>In kilograms. Real number.</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div id="descriptionMainText">
+                            <p>Main forms are designed for the technical task of modeling.</p>
+                            <p>Optional settings are available in the form of a drop-down menu. They contain
+                                parameters that were not in the technical task, but that are involved in the
+                                construction of the graphics (more fine-tuning)</p>
+                            <br>
+                            <p>Explore the graph forms conveniently and efficiently using the menu in the top right
+                                corner in graph form.</p>
+                            <p>Legend allows to "disable" one of the plots (charge motion or magnetic induction) by
+                                clicking.</p>
+                            <br>
+                            <p> If you try to enter incorrect data, this field will return to the default value</p>
+                        </div>
+
+                        <div id="imageDescription">
+                            <p class="d-inline-flex gap-1">
+                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#imageCollapse" aria-expanded="false"
+                                        aria-controls="imageCollapse" style="margin-top: 20px;">
+                                    Image from lecture (RUS)
+                                </button>
+                            </p>
+
+                            <div class="collapse" id="imageCollapse">
+                                <div class="card card-body">
+                                    <img src="../png/task1.png" alt="Here was a picture of this task" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
 
                 <div class="d-flex justify-content-center align-items-center">
                     <button class="btn btn-primary d-none d-lg-block" type="button" data-bs-toggle="offcanvas"
@@ -80,7 +155,6 @@
                 </div>
                 <script src="../src/task1/offcanvas.js"></script>
             </div>
-
 
             <form id="graphForm">
                 <div class="form-floating mb-2">
@@ -116,12 +190,12 @@
                             <div class="form-floating mb-2">
                                 <input class="form-control" id="steps" name="steps" value="100000"
                                        placeholder="#">
-                                <label for="steps">Steps count (accuracy)</label>
+                                <label for="steps">Steps count</label>
                             </div>
 
                             <div class="form-floating">
                                 <input class="form-control" id="mass" name="mass" value="1" placeholder="#">
-                                <label for="mass">Mass of charge (kg)</label>
+                                <label for="mass">Mass (kg)</label>
                             </div>
                         </div>
                     </div>
@@ -133,9 +207,8 @@
                 </button>
                 <script src="../src/task1/forms.js"></script>
             </form>
-
-
         </div>
+
         <div class="col-lg-10" id="graph">
             <script src="../src/task1/graph.js"></script>
         </div>
