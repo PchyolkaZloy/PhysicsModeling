@@ -47,3 +47,37 @@
 #graphForm {
     margin-top: 20px;
 }
+
+#description {
+    display: none;
+}
+
+#descriptionDesktop {
+    width: 50%;
+    overflow-y: auto;
+}
+
+
+#descriptionMobile {
+    height: 50%;
+    overflow-y: auto;
+}
+
+#descriptionMainText {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.2;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#descriptionMainText p {
+    margin-bottom: 10px;
+}
+
+.btn-close {
+    background-color: #0d6dfb;
+    border-radius: 5px;
+}
