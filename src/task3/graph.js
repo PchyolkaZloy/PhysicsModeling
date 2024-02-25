@@ -1,7 +1,7 @@
 Highcharts.chart('graph', {
 
     title: {
-        text: 'Highcharts Vector plot'
+        text: 'Magnetic field'
     },
     xAxis: {
         min: 0,
@@ -17,23 +17,30 @@ Highcharts.chart('graph', {
         series: {
             states: {
                 inactive: {
-                    opacity: 2
+                    opacity: 1
                 },
             },
         },
+        vector: {
+            rotationOrigin: "start"
+        }
     },
 
     series: [
         {
             type: 'vector',
-            name: 'Sample vector field',
+            name: 'Magnetic field',
             keys: ['x', 'y', 'length', 'direction', 'color'],
             data: [
+                [50, 50, 100, 0, 'red'],
+                [50, 50, 100, 90, 'blue'],
+            ],
+            /*data: [
                 [5, 5, 190, 0, 'red'],
                 [5, 10, 185, 27, 'green'],
                 [5, 15, 180, 36, 'blue'],
                 [5, 20, 175, 45, 'black'],
-                [5, 25, 170, 54, 'yellow'],
+                [5, 25, 170, 54, '#f700ff'],
                 [5, 30, 165, 63],
                 [5, 35, 160, 72],
                 [5, 40, 155, 81],
@@ -390,7 +397,7 @@ Highcharts.chart('graph', {
                 [95, 85, 20, 324],
                 [95, 90, 15, 333],
                 [95, 95, 10, 342]
-            ],
+            ],*/
         },
         {
             type: 'scatter',
@@ -400,7 +407,7 @@ Highcharts.chart('graph', {
                 [20, 20],
                 [30, 30],
                 [40, 40],
-                [50, 50]
+                [80, 80]
             ],
             marker: {
                 symbol: 'circle',
