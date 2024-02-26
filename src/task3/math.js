@@ -26,7 +26,7 @@ class Vector {
     }
 
     rotation90(amperage) {
-        let newAngle = amperage >= 0 ? this.degree - 90 : this.degree + 90;
+        let newAngle = amperage >= 0 ? this.degree + 90 : this.degree - 90;
         this.degree = normalizeAngle(newAngle)
     }
 
@@ -54,11 +54,11 @@ class Current {
 }
 
 const currents = [
-    new Current(-10, new Point(25, 25)),
+    new Current(10, new Point(25, 25)),
 ];
 
 function countDist(firstPoint, secondPoint) {
-    return Math.sqrt(Math.pow(secondPoint.x - firstPoint.x, 2) + Math.pow(secondPoint.y - firstPoint.y, 2))
+    return Math.sqrt((secondPoint.x - firstPoint.x) ** 2 + (secondPoint.y - firstPoint.y) ** 2)
 }
 
 function scalarB(amperage, dist) {
@@ -66,12 +66,12 @@ function scalarB(amperage, dist) {
         return 0
     }
 
-    return coeffK * (amperage / dist)
+    return coeffK * (Math.abs(amperage) / dist)
 }
 
 
 function angleToLibAngle(angle) {
-    return (360 - (angle + 90));
+    return normalizeAngle(360 - (angle + 90));
     // (360 - (angle + 90)) % 360;
 }
 
@@ -112,7 +112,6 @@ for (let point of pointsArray) {
     vectorData.push([point.x, point.y, 1, angleToLibAngle(finalVector.degree), '#0004ff'])
 }
 
-vectorData.push([65, 60, 1, 315, '#ff0000'])
 let currentData = []
 for (const current of currents) {
     currentData.push([current.point.x, current.point.y])
