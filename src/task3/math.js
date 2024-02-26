@@ -7,15 +7,27 @@ class Point {
     }
 }
 
+function normalizeAngle(angle) {
+    while (angle >= 360) {
+        angle -= 360;
+    }
+
+    while (angle < 0) {
+        angle += 360;
+    }
+
+    return angle;
+}
+
 class Vector {
-    constructor(startPoint, degree, length) {
-        this.startPoint = startPoint;
-        this.degree = degree;
+    constructor(degree, length) {
+        this.degree = normalizeAngle(degree);
         this.length = length;
     }
 
     rotation90(amperage) {
-        this.degree = amperage >= 0 ? this.degree - 90 : this.degree + 90;
+        let newAngle = amperage >= 0 ? this.degree - 90 : this.degree + 90;
+        this.degree = normalizeAngle(newAngle)
     }
 
     sumWithOtherVectors(vectors) {
@@ -29,7 +41,7 @@ class Vector {
             totalY += Math.sin(radians) * vector.length;
         }
 
-        this.degree = Math.atan2(totalY, totalX) * (180 / Math.PI);
+        this.degree = normalizeAngle(Math.atan2(totalY, totalX) * (180 / Math.PI));
         this.length = Math.sqrt(totalX ** 2 + totalY ** 2);
     }
 }
@@ -42,10 +54,8 @@ class Current {
 }
 
 const currents = [
-    new Current(1, new Point(50, 50)),
-    new Current(1, new Point(60, 60)),
-
-]
+    new Current(-10, new Point(25, 25)),
+];
 
 function countDist(firstPoint, secondPoint) {
     return Math.sqrt(Math.pow(secondPoint.x - firstPoint.x, 2) + Math.pow(secondPoint.y - firstPoint.y, 2))
@@ -57,6 +67,12 @@ function scalarB(amperage, dist) {
     }
 
     return coeffK * (amperage / dist)
+}
+
+
+function angleToLibAngle(angle) {
+    return (360 - (angle + 90));
+    // (360 - (angle + 90)) % 360;
 }
 
 
@@ -79,37 +95,46 @@ for (let point of pointsArray) {
     let vectors = []
 
     for (let current of currents) {
+        if (point.x === 24 && point.y === 28) {
+            console.log()
+        }
         let vector = new Vector(
-            point,
-            Math.atan2(point.x - current.point.x, point.y - current.point.y) * 180 / Math.PI,
-            1)
+            Math.atan2(point.y - current.point.y, point.x - current.point.x) * 180 / Math.PI,
+            scalarB(current.amperage, countDist(current.point, point)))
 
         vector.rotation90(current.amperage)
         vectors.push(vector)
     }
 
-    let finalVector = new Vector(point, 0, 1)
+    let finalVector = new Vector(0, 1)
     finalVector.sumWithOtherVectors(vectors)
 
-    vectorData.push([finalVector.startPoint.x, finalVector.startPoint.y, 1, finalVector.degree, '#0004ff'])
+    vectorData.push([point.x, point.y, 1, angleToLibAngle(finalVector.degree), '#0004ff'])
 }
 
+vectorData.push([65, 60, 1, 315, '#ff0000'])
 let currentData = []
 for (const current of currents) {
     currentData.push([current.point.x, current.point.y])
 }
 
 Highcharts.chart('graph', {
-
     title: {
         text: 'Magnetic field'
-    }, xAxis: {
+    },
+    xAxis: {
         min: 0, max: 100, gridLineWidth: 1
-    }, yAxis: {
+    },
+    yAxis: {
         min: 0, max: 100, gridLineWidth: 1
-    }, /*tooltip: {
+    },
+    /*tooltip: {
         enabled: false // Отключаем всплывающие подсказки
     },*/
+    pane: {
+        startAngle: 90,
+        endAngle: 450
+    },
     colorAxis: {
         min: 0, // Минимальное значение цветовой шкалы
         max: 200, // Максимальное значение цветовой шкалы
@@ -127,25 +152,29 @@ Highcharts.chart('graph', {
                     opacity: 1
                 },
             },
-        }, vector: {
+        },
+        vector: {
             rotationOrigin: "start",
             vectorLength: 10,
         }
     },
 
-    series: [{
-        type: 'vector',
-        name: 'Magnetic field',
-        keys: ['x', 'y', 'length', 'direction', 'color'],
-        data: vectorData,
-        colorKey: 'length'
-    }, {
-        type: 'scatter',
-        name: 'Points',
-        color: 'black',
-        data: currentData,
-        marker: {
-            symbol: 'circle', radius: 4
+    series: [
+        {
+            type: 'vector',
+            name: 'Magnetic field',
+            keys: ['x', 'y', 'length', 'direction', 'color'],
+            data: vectorData,
+            colorKey: 'length'
+        },
+        {
+            type: 'scatter',
+            name: 'Points',
+            color: 'black',
+            data: currentData,
+            marker: {
+                symbol: 'circle', radius: 6
+            }
         }
-    }]
+    ]
 });
