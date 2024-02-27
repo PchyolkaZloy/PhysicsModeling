@@ -50,21 +50,49 @@ function getData() {
         vectorLength: 10,
     };
 
-    const defaultCoordinates = [
-        [35, 35],
-        [35, 65],
-        [65, 35],
-        [65, 65],
+    const defaultValues = [
+        [-1, [35, 35]],
+        [1, [35, 65]],
+        [1, [65, 35]],
+        [-1, [65, 65]],
     ]
+
+    const coordinatesSet = new Set();
 
     checkboxes.forEach((checkbox, index) => {
         const amperageInput = document.getElementById(`amperage${index + 1}`);
         const coordinatesInput = document.getElementById(`coordinates${index + 1}`);
 
         if (!amperageInput.disabled && !coordinatesInput.disabled) {
+            const amperage = customParseFloat(amperageInput, defaultValues[index][0]);
+            const coordinates = parseDataToArray(coordinatesInput, defaultValues[index][1]);
+
+            const coordinateString = JSON.stringify(coordinates);
+            if (coordinatesSet.has(coordinateString)) {
+                alert("Multiple coordinates detected! Setting to default values...");
+
+                checkboxes.forEach((element, i) => {
+                    const amperageInput = document.getElementById(`amperage${i + 1}`);
+                    const coordinatesInput = document.getElementById(`coordinates${i + 1}`);
+                    amperageInput.value = defaultValues[i][0];
+                    coordinatesInput.value = `${defaultValues[i][1][0]} ${defaultValues[i][1][1]}`;
+                });
+
+                graphData.currents = [];
+                defaultValues.forEach(row => {
+                    graphData.currents.push({
+                        amperage: row[0],
+                        coordinates: row[1],
+                    });
+                });
+                return;
+            } else {
+                coordinatesSet.add(coordinateString);
+            }
+
             graphData.currents.push({
-                amperage: customParseFloat(amperageInput, 1),
-                coordinates: parseDataToArray(coordinatesInput, defaultCoordinates[index]),
+                amperage: amperage,
+                coordinates: coordinates,
             });
         }
     });
@@ -72,7 +100,6 @@ function getData() {
     graphData.vectorsCount = customParseInteger(document.getElementById("vectorsCount"), graphData.vectorsCount);
     graphData.vectorLength = customParseInteger(document.getElementById("vectorLength"), graphData.vectorLength);
 
-    console.log(graphData)
     return graphData;
 }
 
