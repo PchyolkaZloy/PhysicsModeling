@@ -51,10 +51,10 @@ function getData() {
     };
 
     const defaultCoordinates = [
-        [25, 25],
-        [25, 75],
-        [75, 25],
-        [75, 75],
+        [35, 35],
+        [35, 65],
+        [65, 35],
+        [65, 65],
     ]
 
     checkboxes.forEach((checkbox, index) => {
