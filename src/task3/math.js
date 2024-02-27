@@ -7,7 +7,19 @@ class Point {
     }
 }
 
-function normalizeAngle(angle) {
+function normalizeAngleRadian(angle) {
+    while (angle >= 2 * Math.PI) {
+        angle -= 2 * Math.PI;
+    }
+
+    while (angle < 0) {
+        angle += 2 * Math.PI;
+    }
+
+    return angle;
+}
+
+function normalizeAngleDegrees(angle) {
     while (angle >= 360) {
         angle -= 360;
     }
@@ -21,13 +33,13 @@ function normalizeAngle(angle) {
 
 class Vector {
     constructor(degree, length) {
-        this.degree = normalizeAngle(degree);
+        this.degree = normalizeAngleRadian(degree);
         this.length = length;
     }
 
     rotation90(amperage) {
-        let newAngle = amperage >= 0 ? this.degree + 90 : this.degree - 90;
-        this.degree = normalizeAngle(newAngle)
+        let newAngle = amperage >= 0 ? this.degree + Math.PI / 2 : this.degree - Math.PI / 2;
+        this.degree = normalizeAngleRadian(newAngle)
     }
 
     sumWithOtherVectors(vectors) {
@@ -35,13 +47,11 @@ class Vector {
         let totalY = 0;
 
         for (let vector of vectors) {
-            const radians = vector.degree * (Math.PI / 180);
-
-            totalX += Math.cos(radians) * vector.length;
-            totalY += Math.sin(radians) * vector.length;
+            totalX += Math.cos(vector.degree) * vector.length;
+            totalY += Math.sin(vector.degree) * vector.length;
         }
 
-        this.degree = normalizeAngle(Math.atan2(totalY, totalX) * (180 / Math.PI));
+        this.degree = normalizeAngleRadian(Math.atan2(totalY, totalX));
         this.length = Math.sqrt(totalX ** 2 + totalY ** 2);
     }
 }
@@ -65,11 +75,9 @@ function scalarB(amperage, dist) {
     return coeffK * (Math.abs(amperage) / dist);
 }
 
-
 function angleToLibAngle(angle) {
-    return normalizeAngle(360 - (angle + 90));
+    return normalizeAngleDegrees(360 - (angle + 90));
 }
-
 
 function generatePoints(n) {
     const maximum = 100
@@ -119,127 +127,131 @@ function colorizeVectorByLength(maxMinLength, length) {
     return colors[colors.length - 1];
 }
 
+
+function countAndDrawMagneticField(currents, vectorCountPerRow, vectorLength) {
+    const pointsArray = generatePoints(vectorCountPerRow);
+    let vectorData = []
+
+    for (let point of pointsArray) {
+        let vectors = []
+
+        for (let current of currents) { // TODO проверять координаты токов
+            let vector = new Vector(
+                Math.atan2(point.y - current.point.y, point.x - current.point.x),
+                scalarB(current.amperage, countDist(current.point, point)));
+
+            vector.rotation90(current.amperage);
+            vectors.push(vector);
+        }
+
+        let finalVector = new Vector(0, 1)
+        finalVector.sumWithOtherVectors(vectors)
+
+        if (finalVector.length > 0) {
+            vectorData.push([point.x, point.y, finalVector.length, angleToLibAngle(finalVector.degree * (180 / Math.PI))])
+        }
+    }
+
+    let currentData = []
+    for (const current of currents) {
+        currentData.push([current.point.x, current.point.y, current.amperage])
+    }
+
+    let maxMin = findMaximumAndMinimumLength(vectorData)
+
+    for (const vector of vectorData) {
+        const lengthIndex = 2;
+        vector.push(colorizeVectorByLength(maxMin, vector[lengthIndex]));
+        vector.push(vector[lengthIndex]);
+        vector[lengthIndex] = 1;
+    }
+
+
+    Highcharts.chart('graph', {
+        colorAxis: {
+            min: maxMin.min,
+            max: maxMin.max - maxMin.min,
+            stops: [
+                [0, "#5d3eef"],
+                [0.05, '#0000FF'],
+                [0.1, "#00f7ff"],
+                [0.2, "#faee00"],
+                [0.4, "#ff8800"],
+                [0.9, "#ff0000"]
+            ],
+        },
+
+        title: {
+            text: 'Magnetic field created by several currents'
+        },
+
+        xAxis: {
+            min: 0,
+            max: 100,
+            gridLineWidth: 1
+        },
+
+        yAxis: {
+            min: 0,
+            max: 100,
+            gridLineWidth: 1
+        },
+
+        tooltip: {
+            formatter: function () {
+                if (this.series.type === 'vector') {
+                    return '<b>Start X: ' + this.point.x + '<br>Start Y: ' + this.point.y +
+                        '<br>Direction: ' + this.point.direction + '°' +
+                        '<br>Scalar: ' + this.point.scalar + ' T';
+                } else if (this.series.type === 'scatter') {
+                    const amperageIndex = 2;
+                    return '<b>X: ' + this.point.x + '<br>Y: ' + this.point.y + '<br>Amperage: ' + currentData[this.point.index][amperageIndex];
+                }
+            }
+        },
+
+        plotOptions: {
+            series: {
+                turboThreshold: 10500,
+                states: {
+                    inactive: {
+                        opacity: 1
+                    },
+                },
+            },
+            vector: {
+                rotationOrigin: "start",
+                vectorLength: vectorLength,
+            }
+        },
+
+        series: [
+            {
+                type: 'vector',
+                name: 'Magnetic field',
+                keys: ['x', 'y', 'length', 'direction', 'color', 'scalar'],
+                colorKey: 'scalar',
+                data: vectorData,
+                showInLegend: true
+            },
+            {
+                type: 'scatter',
+                name: 'Currents',
+                color: 'red',
+                data: currentData,
+                marker: {
+                    symbol: 'circle', radius: 6
+                },
+                showInLegend: true
+            },
+        ]
+    });
+}
+
 const currents = [
-    new Current(100, new Point(25, 25)),
+    new Current(20, new Point(25, 25)),
+    new Current(-10, new Point(75, 25)),
 
 ];
 
-const pointsArray = generatePoints(90); // maximum 100
-let vectorData = []
-
-for (let point of pointsArray) {
-    let vectors = []
-
-    for (let current of currents) { // TODO проверять координаты токов
-        let vector = new Vector(
-            Math.atan2(point.y - current.point.y, point.x - current.point.x) * 180 / Math.PI,
-            scalarB(current.amperage, countDist(current.point, point)))
-
-        vector.rotation90(current.amperage)
-        vectors.push(vector)
-    }
-
-    let finalVector = new Vector(0, 1)
-    finalVector.sumWithOtherVectors(vectors)
-
-    if (finalVector.length > 0) {
-        vectorData.push([point.x, point.y, finalVector.length, angleToLibAngle(finalVector.degree)])
-    }
-}
-
-let currentData = []
-for (const current of currents) {
-    currentData.push([current.point.x, current.point.y, current.amperage])
-}
-
-let maxMin = findMaximumAndMinimumLength(vectorData)
-
-for (const vector of vectorData) {
-    const lengthIndex = 2;
-    vector.push(colorizeVectorByLength(maxMin, vector[lengthIndex]));
-    vector.push(vector[lengthIndex]);
-    vector[lengthIndex] = 1;
-}
-
-
-Highcharts.chart('graph', {
-    colorAxis: {
-        min: maxMin.min,
-        max: maxMin.max - maxMin.min,
-        stops: [
-            [0, "#5d3eef"],
-            [0.05, '#0000FF'],
-            [0.1, "#00f7ff"],
-            [0.2, "#faee00"],
-            [0.4, "#ff8800"],
-            [0.9, "#ff0000"]
-        ],
-    },
-
-    title: {
-        text: 'Magnetic field created by several currents'
-    },
-
-    xAxis: {
-        min: 0,
-        max: 100,
-        gridLineWidth: 1
-    },
-
-    yAxis: {
-        min: 0,
-        max: 100,
-        gridLineWidth: 1
-    },
-
-    tooltip: {
-        formatter: function () {
-            if (this.series.type === 'vector') {
-                return '<b>X: ' + this.point.x + '<br>Y: ' + this.point.y +
-                    '<br>Direction: ' + this.point.direction + '°' +
-                    '<br>Scalar: ' + this.point.scalar + ' T';
-            } else if (this.series.type === 'scatter') {
-                const amperageIndex = 2;
-                return '<b>X: ' + this.point.x + '<br>Y: ' + this.point.y + '<br>Amperage: ' + currentData[this.point.index][amperageIndex];
-            }
-        }
-    },
-
-    plotOptions: {
-        series: {
-            turboThreshold: 10500,
-            states: {
-                inactive: {
-                    opacity: 1
-                },
-            },
-        },
-        vector: {
-            rotationOrigin: "start",
-            vectorLength: 10,
-        }
-    },
-
-    series: [
-        {
-            type: 'vector',
-            name: 'Magnetic field',
-            keys: ['x', 'y', 'length', 'direction', 'color', 'scalar'],
-            colorKey: 'scalar',
-            data: vectorData,
-            showInLegend: true
-        },
-        {
-            type: 'scatter',
-            name: 'Currents',
-            color: 'red',
-            data: currentData,
-            marker: {
-                symbol: 'circle', radius: 6
-            },
-            showInLegend: true
-        },
-    ]
-});
-
-vectorData = []
+countAndDrawMagneticField(currents, 100, 10)
