@@ -79,32 +79,38 @@ function angleToLibAngle(angle) {
     return normalizeAngleDegree(360 - (angle + 90));
 }
 
-function generatePoints(n) {
+function generatePoints(n, currents) {
     const maximum = 100
     let step = maximum / n
+    const pointsSet = new Set();
+
+    currents.forEach(current => {
+        const {x, y} = current.point;
+        pointsSet.add(`${x},${y}`);
+    });
+
     const points = [];
+
     for (let x = 0; x <= maximum; x += step) {
         for (let y = 0; y <= maximum; y += step) {
-            points.push(new Point(x, y));
+            if (!pointsSet.has(`${x},${y}`)) {
+                points.push(new Point(x, y));
+            }
         }
     }
     return points;
 }
 
 function findMaximumAndMinimumLength(vectorData) {
-    let minLength = 10000;
-    let maxLength = -1;
-    const lengthIndex = 2;
+    vectorData.sort((a, b) => a[2] - b[2]);
 
-    for (const vector of vectorData) {
-        if (vector[lengthIndex] > maxLength) {
-            maxLength = vector[lengthIndex];
-        } else if (vector[lengthIndex] < minLength) {
-            minLength = vector[lengthIndex]
-        }
-    }
+    const trimmedLength = Math.floor(vectorData.length * 0.01); // Удаляем по 1% с начала и конца
+    const trimmedData = vectorData.slice(trimmedLength, -trimmedLength);
 
-    return {min: minLength, max: maxLength}
+    let minLength = trimmedData[0][2];
+    let maxLength = trimmedData[trimmedData.length - 1][2];
+
+    return {min: minLength, max: maxLength};
 }
 
 
@@ -114,9 +120,9 @@ function colorizeVectorByLength(maxMinLength, length) {
             "#00f7ff", "#5eff00", "#faee00",
             "#ff8800", "#ff5600", "#ff0000"];
 
-    const proportions = [0, 0.01, 0.05, 0.1, 0.2, 0.3, 0.5, 0.8, 0.9];
+    const proportions = [0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.75, 0.9];
 
-    let colorCoeff = ((length - maxMinLength.min) / (maxMinLength.max - maxMinLength.min));
+    let colorCoeff = (length - maxMinLength.min) / (maxMinLength.max - maxMinLength.min);
 
     for (let i = 0; i < proportions.length; ++i) {
         if (colorCoeff <= proportions[i]) {
@@ -129,14 +135,13 @@ function colorizeVectorByLength(maxMinLength, length) {
 
 
 function countAndDrawMagneticField(graphData) {
-
     let currents = []
     for (const data of graphData.currents) {
         currents.push(new Current(data.amperage, new Point(data.coordinates[0], data.coordinates[1])));
     }
 
-    const pointsArray = generatePoints(graphData.vectorsCount);
-    let vectorData = []
+    const pointsArray = generatePoints(graphData.vectorsCount, currents);
+    let vectorsData = []
 
     for (let point of pointsArray) {
         let vectors = []
@@ -153,40 +158,27 @@ function countAndDrawMagneticField(graphData) {
         let finalVector = new Vector(0, 1)
         finalVector.sumWithOtherVectors(vectors)
 
-        if (finalVector.length > 0) {
-            vectorData.push([point.x, point.y, finalVector.length, angleToLibAngle(finalVector.radian * (180 / Math.PI))])
-        }
+        vectorsData.push([point.x, point.y, finalVector.length, angleToLibAngle(finalVector.radian * (180 / Math.PI))])
     }
 
-    let currentData = []
+    let currentsData = []
     for (const current of currents) {
-        currentData.push([current.point.x, current.point.y, current.amperage])
+        currentsData.push([current.point.x, current.point.y, current.amperage])
     }
 
-    let maxMin = findMaximumAndMinimumLength(vectorData)
+    let maxMin = findMaximumAndMinimumLength(vectorsData)
 
-    for (const vector of vectorData) {
+    for (const vector of vectorsData) {
         const lengthIndex = 2;
+
         vector.push(colorizeVectorByLength(maxMin, vector[lengthIndex]));
         vector.push(vector[lengthIndex]);
+
         vector[lengthIndex] = 1;
     }
 
 
     Highcharts.chart('graph', {
-        colorAxis: {
-            min: maxMin.min,
-            max: maxMin.max - maxMin.min,
-            stops: [
-                [0, "#5d3eef"],
-                [0.05, '#0000FF'],
-                [0.1, "#00f7ff"],
-                [0.2, "#faee00"],
-                [0.4, "#ff8800"],
-                [0.9, "#ff0000"]
-            ],
-        },
-
         title: {
             text: 'Magnetic field created by several currents'
         },
@@ -211,7 +203,8 @@ function countAndDrawMagneticField(graphData) {
                         '<br>Scalar: ' + this.point.scalar + ' T';
                 } else if (this.series.type === 'scatter') {
                     const amperageIndex = 2;
-                    return '<b>X: ' + this.point.x + '<br>Y: ' + this.point.y + '<br>Amperage: ' + currentData[this.point.index][amperageIndex];
+                    return '<b>X: ' + this.point.x + '<br>Y: ' + this.point.y +
+                        '<br>Amperage: ' + currentsData[this.point.index][amperageIndex];
                 }
             }
         },
@@ -237,14 +230,14 @@ function countAndDrawMagneticField(graphData) {
                 name: 'Magnetic field',
                 keys: ['x', 'y', 'length', 'direction', 'color', 'scalar'],
                 colorKey: 'scalar',
-                data: vectorData,
+                data: vectorsData,
                 showInLegend: true
             },
             {
                 type: 'scatter',
                 name: 'Currents',
                 color: 'red',
-                data: currentData,
+                data: currentsData,
                 marker: {
                     symbol: 'circle', radius: 6
                 },
@@ -257,10 +250,10 @@ function countAndDrawMagneticField(graphData) {
 
 const defaultGraphData = {
     currents: [
-        {amperage: 1, coordinates: [25, 25]},
-        {amperage: 1, coordinates: [25, 75]},
-        {amperage: 1, coordinates: [75, 25]},
-        {amperage: 1, coordinates: [75, 75]},
+        {amperage: -1, coordinates: [35, 35]},
+        {amperage: 1, coordinates: [35, 65]},
+        {amperage: 1, coordinates: [65, 35]},
+        {amperage: -1, coordinates: [65, 65]},
     ],
     vectorsCount: 75,
     vectorLength: 10,
