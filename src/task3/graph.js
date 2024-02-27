@@ -116,7 +116,7 @@ function findMaximumAndMinimumLength(vectorData) {
 
 function colorizeVectorByLength(maxMinLength, length) {
     const colors =
-        ["#5d3eef", "#2f00ff", "#1d68fa",
+        ["#7614f1", "#2f00ff", "#1d68fa",
             "#00f7ff", "#5eff00", "#faee00",
             "#ff8800", "#ff5600", "#ff0000"];
 
@@ -179,22 +179,45 @@ function countAndDrawMagneticField(graphData) {
 
 
     Highcharts.chart('graph', {
+        chart: {
+            backgroundColor: '#212529'
+        },
         title: {
-            text: 'Magnetic field created by several currents'
+            text: 'Magnetic field created by several currents',
+            style: {
+                color: '#fdfdfd',
+                fontFamily: "Arial, Helvetica, sans-serif",
+                fontWeight: 'lighter'
+            }
         },
 
         xAxis: {
             min: 0,
             max: 100,
-            gridLineWidth: 1
+            gridLineWidth: 1,
+            labels: {
+                style: {
+                    color: '#fdfdfd'
+                }
+            }
         },
 
         yAxis: {
             min: 0,
             max: 100,
-            gridLineWidth: 1
+            gridLineWidth: 1,
+            labels: {
+                style: {
+                    color: '#fdfdfd'
+                }
+            }
         },
 
+        legend: {
+            itemStyle: {
+                color: '#fdfdfd'
+            }
+        },
         tooltip: {
             formatter: function () {
                 if (this.series.type === 'vector') {

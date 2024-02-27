@@ -71,30 +71,27 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>Radius</td>
-                                    <td>In meters. Positive float number.</td>
-                                </tr>
-                                <tr>
-                                    <td>Turns amount</td>
-                                    <td>Positive integer number.
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td>Amperage</td>
-                                    <td>In ampere. Float number.
+                                    <td>In amperes. The sign of the amperage shows the direction of current:
+                                        plus on us, minus - from us. Float number.
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Points count</td>
-                                    <td>In seconds. Affects the graphic image accuracy. The more points, the
-                                        better the accuracy, but the lower the performance. Float number.
+                                    <td>Coordinates</td>
+                                    <td>Coordinates of currents (x, y) separated by spaces. Can be in [0; 100]. Float
+                                        numbers.
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>X dist</td>
-                                    <td>In meters. Affects the scale of the graph. Displays which area from X=0 is
-                                        displayed on the graph. The default values are selected by radius. The coils are
-                                        arranged at +- (X dist / 2). Positive float number.
+                                    <td>Vectors count</td>
+                                    <td>Number of vectors per column/row. WARNING: The more vectors, the more memory and
+                                        resources are needed to calculate the graph. Maximum value 150. Positive integer
+                                        number.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Vector length</td>
+                                    <td>In pixels. Positive integer number.
                                     </td>
                                 </tr>
                                 </tbody>
@@ -107,8 +104,13 @@
                                 parameters that were not in the technical task, but that are involved in the
                                 construction of the graphics (more fine-tuning)</p>
                             <br>
-                            <p>Explore the graph forms conveniently and efficiently using the menu in the top right
-                                corner in graph form.</p>
+                            <p>Use the checkboxes to select how many currents you want to represent. Set their current and
+                                coordinates {x, y}.
+                                <br>
+                                When you move the cursor on the vector you can find its starting point, its direction
+                                (the degree measure starts at 270 degrees and goes clockwise!) and the scalar.
+                                <br>
+                                "Heat map" of vectors allows faster and easier analysis of the graph</p>
                             <p>Legend allows to "disable" one of the plots by
                                 clicking.</p>
                             <br>
