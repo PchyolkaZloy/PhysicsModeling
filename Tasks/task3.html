@@ -51,8 +51,8 @@
 </nav>
 
 <div class="container-fluid" id="main">
-    <div class="row">
-        <div class="col-lg-2 container text-center" id="forms">
+    <div class="row" id="mainRow">
+        <div class="col-lg-3 container text-center" id="forms">
             <div id="descriptionOffCanvas">
                 <div class="offcanvas-content" id="description">
                     <div class="offcanvas-header" style="position: fixed;">
@@ -152,19 +152,89 @@
             </div>
 
             <form id="graphForm">
-                <div class="form-floating mb-2">
-                    <input class="form-control" id="radius" name="radius" placeholder="#" value="0.5"/>
-                    <label for="radius">Radius (m)</label>
+                <div class="row align-items-center">
+                    <div class="col-lg-1">
+                        <input class="form-check-input" type="checkbox" id="checkbox1" aria-label="..."
+                               checked disabled>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="amperage1" name="amperage" placeholder="#" value="1"/>
+                            <label for="amperage1">Amperage (A)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="coordinates1" name="coordinates" placeholder="#"
+                                   value="25 25"/>
+                            <label for="coordinates1">Coordinates (x, y)</label>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-floating mb-2">
-                    <input class="form-control" id="turnsAmount" name="turnsAmount" placeholder="#" value="10"/>
-                    <label for="turnsAmount">Turns amount</label>
+                <div class="row align-items-center">
+                    <div class="col-lg-1">
+                        <input class="form-check-input" type="checkbox" id="checkbox2" aria-label="..." checked>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="amperage2" name="amperage" placeholder="#" value="1"/>
+                            <label for="amperage2">Amperage (A)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="coordinates2" name="coordinates" placeholder="#"
+                                   value="25 25"/>
+                            <label for="coordinates2">Coordinates (x, y)</label>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-floating mb-2">
-                    <input class="form-control" id="amperage" name="amperage" placeholder="#" value="1"/>
-                    <label for="amperage">Amperage (A)</label>
+                <div class="row align-items-center">
+                    <div class="col-lg-1">
+                        <input class="form-check-input" type="checkbox" id="checkbox3" aria-label="..." checked>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="amperage3" name="amperage" placeholder="#" value="1"/>
+                            <label for="amperage3">Amperage (A)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="coordinates3" name="coordinates" placeholder="#"
+                                   value="25 25"/>
+                            <label for="coordinates3">Coordinates (x, y)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row align-items-center">
+                    <div class="col-lg-1">
+                        <input class="form-check-input" type="checkbox" id="checkbox4" aria-label="..." checked>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="amperage4" name="amperage" placeholder="#" value="1"/>
+                            <label for="amperage4">Amperage (A)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="coordinates4" name="coordinates" placeholder="#"
+                                   value="25 25"/>
+                            <label for="coordinates4">Coordinates (x, y)</label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -177,14 +247,15 @@
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
                             <div class="form-floating mb-2">
-                                <input class="form-control" id="steps" name="steps" placeholder="#"
-                                       value="10000"/>
-                                <label for="steps">Points count</label>
+                                <input class="form-control" id="vectorsCount" name="vectorsCount" placeholder="#"
+                                       value="75"/>
+                                <label for="vectorsCount">Vectors count</label>
                             </div>
 
                             <div class="form-floating">
-                                <input class="form-control" id="dist" name="dist" placeholder="#" value="0.5"/>
-                                <label for="dist">X dist (m)</label>
+                                <input class="form-control" id="vectorLength" name="vectorLength" placeholder="#"
+                                       value="10"/>
+                                <label for="vectorLength">Vector length</label>
                             </div>
                         </div>
                     </div>
@@ -194,11 +265,11 @@
                     Draw!
                 </button>
             </form>
-            <script src="../src/task2/forms.js"></script>
+            <script src="../src/task3/forms.js"></script>
         </div>
 
-        <div class="col-lg-10" id="graph">
-            <script src="../src/task3/math.js"></script>
+        <div class="col-lg-9" id="graph">
+            <!-- <script src="../src/task3/math.js"></script> -->
         </div>
     </div>
 </div>
