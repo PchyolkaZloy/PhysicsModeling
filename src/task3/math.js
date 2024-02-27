@@ -32,14 +32,14 @@ function normalizeAngleDegrees(angle) {
 }
 
 class Vector {
-    constructor(degree, length) {
-        this.degree = normalizeAngleRadian(degree);
+    constructor(radian, length) {
+        this.radian = normalizeAngleRadian(radian);
         this.length = length;
     }
 
     rotation90(amperage) {
-        let newAngle = amperage >= 0 ? this.degree + Math.PI / 2 : this.degree - Math.PI / 2;
-        this.degree = normalizeAngleRadian(newAngle)
+        let newAngle = amperage >= 0 ? this.radian + Math.PI / 2 : this.radian - Math.PI / 2;
+        this.radian = normalizeAngleRadian(newAngle)
     }
 
     sumWithOtherVectors(vectors) {
@@ -47,11 +47,11 @@ class Vector {
         let totalY = 0;
 
         for (let vector of vectors) {
-            totalX += Math.cos(vector.degree) * vector.length;
-            totalY += Math.sin(vector.degree) * vector.length;
+            totalX += Math.cos(vector.radian) * vector.length;
+            totalY += Math.sin(vector.radian) * vector.length;
         }
 
-        this.degree = normalizeAngleRadian(Math.atan2(totalY, totalX));
+        this.radian = normalizeAngleRadian(Math.atan2(totalY, totalX));
         this.length = Math.sqrt(totalX ** 2 + totalY ** 2);
     }
 }
@@ -148,7 +148,7 @@ function countAndDrawMagneticField(currents, vectorCountPerRow, vectorLength) {
         finalVector.sumWithOtherVectors(vectors)
 
         if (finalVector.length > 0) {
-            vectorData.push([point.x, point.y, finalVector.length, angleToLibAngle(finalVector.degree * (180 / Math.PI))])
+            vectorData.push([point.x, point.y, finalVector.length, angleToLibAngle(finalVector.radian * (180 / Math.PI))])
         }
     }
 
