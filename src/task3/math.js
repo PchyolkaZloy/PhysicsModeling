@@ -19,7 +19,7 @@ function normalizeAngleRadian(angle) {
     return angle;
 }
 
-function normalizeAngleDegrees(angle) {
+function normalizeAngleDegree(angle) {
     while (angle >= 360) {
         angle -= 360;
     }
@@ -76,7 +76,7 @@ function scalarB(amperage, dist) {
 }
 
 function angleToLibAngle(angle) {
-    return normalizeAngleDegrees(360 - (angle + 90));
+    return normalizeAngleDegree(360 - (angle + 90));
 }
 
 function generatePoints(n) {
@@ -128,8 +128,14 @@ function colorizeVectorByLength(maxMinLength, length) {
 }
 
 
-function countAndDrawMagneticField(currents, vectorCountPerRow, vectorLength) {
-    const pointsArray = generatePoints(vectorCountPerRow);
+function countAndDrawMagneticField(graphData) {
+
+    let currents = []
+    for (const data of graphData.currents) {
+        currents.push(new Current(data.amperage, new Point(data.coordinates[0], data.coordinates[1])));
+    }
+
+    const pointsArray = generatePoints(graphData.vectorsCount);
     let vectorData = []
 
     for (let point of pointsArray) {
@@ -212,7 +218,7 @@ function countAndDrawMagneticField(currents, vectorCountPerRow, vectorLength) {
 
         plotOptions: {
             series: {
-                turboThreshold: 10500,
+                turboThreshold: (graphData.vectorsCount + 1) ** 2,
                 states: {
                     inactive: {
                         opacity: 1
@@ -221,7 +227,7 @@ function countAndDrawMagneticField(currents, vectorCountPerRow, vectorLength) {
             },
             vector: {
                 rotationOrigin: "start",
-                vectorLength: vectorLength,
+                vectorLength: graphData.vectorLength,
             }
         },
 
@@ -248,10 +254,16 @@ function countAndDrawMagneticField(currents, vectorCountPerRow, vectorLength) {
     });
 }
 
-const currents = [
-    new Current(20, new Point(25, 25)),
-    new Current(-10, new Point(75, 25)),
 
-];
+const defaultGraphData = {
+    currents: [
+        {amperage: 1, coordinates: [25, 25]},
+        {amperage: 1, coordinates: [25, 75]},
+        {amperage: 1, coordinates: [75, 25]},
+        {amperage: 1, coordinates: [75, 75]},
+    ],
+    vectorsCount: 75,
+    vectorLength: 10,
+};
 
-countAndDrawMagneticField(currents, 100, 10)
+countAndDrawMagneticField(defaultGraphData)

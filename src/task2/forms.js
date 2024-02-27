@@ -44,8 +44,8 @@ document.getElementById("graphForm").addEventListener("submit", function (e) {
 });
 
 
-var radiusInput = document.getElementById('radius');
-var distInput = document.getElementById('dist');
+let radiusInput = document.getElementById('radius');
+let distInput = document.getElementById('dist');
 
 radiusInput.addEventListener('input', function () {
     if (!isNaN(this.value) && this.value > 0) {
