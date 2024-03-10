@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Physics | Task 2</title>
+    <title>Physics | Task 4</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/task2.css">
+    <link rel="stylesheet" href="../css/task4.css">
     <link rel="icon" href="../png/icon.png">
 
     <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
+
 <body>
+
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="../index.html">Physics modeling</a>
@@ -52,6 +54,7 @@
 <div class="container-fluid" id="main">
     <div class="row">
         <div class="col-lg-2 container text-center" id="forms">
+
             <div id="descriptionOffCanvas">
                 <div class="offcanvas-content" id="description">
                     <div class="offcanvas-header" style="position: fixed;">
@@ -69,31 +72,36 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>Radius</td>
-                                    <td>In meters. Positive float number.</td>
+                                    <td>Charge</td>
+                                    <td>In coulombs. Can be negative. Float number.</td>
                                 </tr>
                                 <tr>
-                                    <td>Turns amount</td>
-                                    <td>Positive integer number.
+                                    <td>Magnetic induction</td>
+                                    <td>Defined by a radius vector with coordinates (x, y, z) separated by spaces.
+                                        Coordinates are float numbers.
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Amperage</td>
-                                    <td>In ampere. Float number.
+                                    <td>Velocity of charge</td>
+                                    <td>Defined by a radius vector with coordinates (x, y, z) separated by spaces.
+                                        Coordinates are float numbers.
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Points count</td>
-                                    <td>In seconds. Affects the graphic image accuracy. The more points, the
-                                        better the accuracy, but the lower the performance. Float number.
+                                    <td>Flight time</td>
+                                    <td>In seconds. Affects the chart scale. More seconds - more charge
+                                        "flies" in the space on the graph. Float number.
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>X dist</td>
-                                    <td>In meters. Affects the scale of the graph. Displays which area from X=0 is
-                                        displayed on the graph. The default values are selected by radius. The coils are
-                                        arranged at +- (X dist / 2). Positive float number.
+                                    <td>Steps count</td>
+                                    <td>Number of steps for solving differential equations. The more steps, the
+                                        better the accuracy, but the lower the performance. Integer number.
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>Mass of charge</td>
+                                    <td>In kilograms. Real number.</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -107,7 +115,7 @@
                             <br>
                             <p>Explore the graph forms conveniently and efficiently using the menu in the top right
                                 corner in graph form.</p>
-                            <p>Legend allows to "disable" one of the plots by
+                            <p>Legend allows to "disable" one of the plots (charge motion or magnetic induction) by
                                 clicking.</p>
                             <br>
                             <p> If you try to enter incorrect data, this field will return to the default value</p>
@@ -124,12 +132,13 @@
 
                             <div class="collapse" id="imageCollapse">
                                 <div class="card card-body">
-                                    <img src="../png/task2.png" alt="Here was a picture of this task" class="img-fluid">
+                                    <img src="../png/task1.png" alt="Here was a picture of this task" class="img-fluid">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <div class="d-flex justify-content-center align-items-center">
                     <button class="btn btn-primary d-none d-lg-block" type="button" data-bs-toggle="offcanvas"
@@ -152,18 +161,18 @@
 
             <form id="graphForm">
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="radius" name="radius" placeholder="#" value="0.5"/>
-                    <label for="radius">Radius (m)</label>
+                    <input class="form-control" id="charge" name="charge" value="1" placeholder="#">
+                    <label for="charge">Charge (Coulomb)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="turnsAmount" name="turnsAmount" placeholder="#" value="10"/>
-                    <label for="turnsAmount">Turns amount</label>
+                    <input class="form-control" id="induction" name="induction" value="1 0 0" placeholder="#">
+                    <label for="induction">Magnetic induction (vector)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="amperage" name="amperage" placeholder="#" value="1"/>
-                    <label for="amperage">Amperage (A)</label>
+                    <input class="form-control" id="velocity" name="velocity" value="1 1 0" placeholder="#">
+                    <label for="velocity">Velocity (vector)</label>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -173,34 +182,42 @@
                             Optional Settings
                         </button>
                     </h2>
+
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
                             <div class="form-floating mb-2">
-                                <input class="form-control" id="steps" name="steps" placeholder="#"
-                                       value="10000"/>
-                                <label for="steps">Points count</label>
+                                <input class="form-control" id="time" name="time" value="50" placeholder="#">
+                                <label for="time">Flight time (sec)</label>
+                            </div>
+
+                            <div class="form-floating mb-2">
+                                <input class="form-control" id="steps" name="steps" value="100000"
+                                       placeholder="#">
+                                <label for="steps">Steps count</label>
                             </div>
 
                             <div class="form-floating">
-                                <input class="form-control" id="dist" name="dist" placeholder="#" value="0.5"/>
-                                <label for="dist">X dist (m)</label>
+                                <input class="form-control" id="mass" name="mass" value="1" placeholder="#">
+                                <label for="mass">Mass (kg)</label>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <button id="drawButton" data-mdb-ripple-init type="submit" class="btn btn-primary">
+
+                <button data-mdb-ripple-init type="submit" class="btn btn-primary" style="margin-top: 20px;">
                     Draw!
                 </button>
+                <script src="../src/task4/forms.js"></script>
             </form>
-            <script src="../src/task2/forms.js"></script>
         </div>
 
         <div class="col-lg-10" id="graph">
-            <script src="../src/task2/graph.js"></script>
+            <script src="../src/task4/graph.js"></script>
         </div>
     </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -209,4 +226,3 @@
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
 </body>
-</html>
