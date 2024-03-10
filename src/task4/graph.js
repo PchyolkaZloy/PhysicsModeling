@@ -60,6 +60,7 @@ function drawTwoGraphsTogether(emfData, amperageData, timeData) {
             }
         },
         yaxis: {
+            showspikes: true,
             title: {
                 text: '$\\text{EMF } E, V;  \\text{ Induced current } \\frac{V}{\\Omega}, В$',
                 font: {
@@ -68,6 +69,8 @@ function drawTwoGraphsTogether(emfData, amperageData, timeData) {
             }
         },
         xaxis: {
+            showspikes: true,
+            fixedrange: true,
             title: {
                 text: '$\\text{Time } t, sec$',
                 font: {
@@ -75,11 +78,13 @@ function drawTwoGraphsTogether(emfData, amperageData, timeData) {
                 }
             }
         },
+
         margin: {
             l: 85,
-            r: 50,
+            r: 25,
             t: 85
         },
+
         showlegend: true,
         legend: {
             font: {
@@ -128,22 +133,37 @@ function drawTwoGraphsSeparately(emfData, amperageData, timeData) {
             columns: 1,
             pattern: 'independent',
         },
+
         title: {
             text: '$\\text{EMF } E(t) \\text{ and Induced current } I(t)$'
         },
+
         xaxis: {
+            showspikes: true,
+            fixedrange: true,
             title: '$\\text{Time } t, sec$',
         },
         yaxis: {
+            showspikes: true,
             title: '$\\text{EMF } E, V$'
         },
 
         xaxis2: {
+            showspikes: true,
+            fixedrange: true,
             title: '$\\text{Time } t, sec$',
         },
         yaxis2: {
+            showspikes: true,
             title: '$\\text{Induced current } I, A$'
         },
+
+        margin: {
+            l: 65,
+            r: 25,
+            t: 85
+        },
+
         legend: {
             font: {
                 family: 'Arial, serif',
@@ -186,8 +206,8 @@ const defaultValues = {
     rotationFrequency: 1000,
     resistance: 5,
     stepCount: 10000,
-    endTime: 0.01,
-    isTogether: true,
+    endTime: 0.001,
+    isTogether: false,
 };
 
 drawGraphs(
