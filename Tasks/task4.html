@@ -132,7 +132,7 @@
 
                             <div class="collapse" id="imageCollapse">
                                 <div class="card card-body">
-                                    <img src="../png/task1.png" alt="Here was a picture of this task" class="img-fluid">
+                                    <img src="../png/task4.png" alt="Here was a picture of this task" class="img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -160,19 +160,28 @@
             </div>
 
             <form id="graphForm">
+
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="charge" name="charge" value="1" placeholder="#">
-                    <label for="charge">Charge (Coulomb)</label>
+                    <input class="form-control" id="induction" name="induction" value="1" placeholder="#">
+                    <label for="induction">Magnetic induction (T)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="induction" name="induction" value="1 0 0" placeholder="#">
-                    <label for="induction">Magnetic induction (vector)</label>
+                    <input class="form-control" id="rotationFrequency" name="rotationFrequency"
+                           value="1" placeholder="#">
+                    <label for="rotationFrequency">Rotation frequency (Hz)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="velocity" name="velocity" value="1 1 0" placeholder="#">
-                    <label for="velocity">Velocity (vector)</label>
+                    <input class="form-control" id="resistance" name="resistance" value="5" placeholder="#">
+                    <label for="resistance">Resistance (ohm)</label>
+                </div>
+
+                <div class="form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" id="checkbox" value="" checked>
+                    <label class="form-check-input-label" for="checkbox">
+                        Draw in one plot
+                    </label>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -183,22 +192,23 @@
                         </button>
                     </h2>
 
+
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
                             <div class="form-floating mb-2">
-                                <input class="form-control" id="time" name="time" value="50" placeholder="#">
-                                <label for="time">Flight time (sec)</label>
+                                <input class="form-control" id="area" name="area" value="1" placeholder="#">
+                                <label for="area">Сontour area (m<sup>2</sup>)</label>
                             </div>
 
                             <div class="form-floating mb-2">
-                                <input class="form-control" id="steps" name="steps" value="100000"
-                                       placeholder="#">
-                                <label for="steps">Steps count</label>
+                                <input class="form-control" id="endTime" name="endTime" value="10" placeholder="#">
+                                <label for="endTime">End time (sec)</label>
                             </div>
 
                             <div class="form-floating">
-                                <input class="form-control" id="mass" name="mass" value="1" placeholder="#">
-                                <label for="mass">Mass (kg)</label>
+                                <input class="form-control" id="stepCount" name="stepCount" value="10000"
+                                       placeholder="#">
+                                <label for="stepCount">Steps count</label>
                             </div>
                         </div>
                     </div>

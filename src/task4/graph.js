@@ -203,11 +203,11 @@ function drawGraphs(magneticField, area, rotationFrequency, resistance, stepCoun
 const defaultValues = {
     magneticField: 1,
     area: 1,
-    rotationFrequency: 1000,
+    rotationFrequency: 1,
     resistance: 5,
     stepCount: 10000,
-    endTime: 0.001,
-    isTogether: false,
+    endTime: 10,
+    isTogether: true,
 };
 
 drawGraphs(
