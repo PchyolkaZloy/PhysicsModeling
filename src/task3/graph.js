@@ -1,4 +1,4 @@
-const coeffK = (1.256637 * Math.PI * Math.pow(10, -6)) / 2 * Math.PI
+const coeffK = (1.256637 * Math.pow(10, -6)) / 2 * Math.PI
 
 class Point {
     constructor(x, y) {
