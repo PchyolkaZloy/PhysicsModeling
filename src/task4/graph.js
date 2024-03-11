@@ -6,8 +6,8 @@ function frequencyToAngleSpeed(rotationFrequency) {
     return 2 * Math.PI * rotationFrequency;
 }
 
-function countInduction(magneticField, area, angleSpeed, time) {
-    return magneticField * area * angleSpeed * Math.sin(angleSpeed * time);
+function countInduction(magneticInduction, area, angleSpeed, time) {
+    return magneticInduction * area * angleSpeed * Math.sin(angleSpeed * time);
 }
 
 function countAmperage(emf, resistance) {
@@ -15,7 +15,7 @@ function countAmperage(emf, resistance) {
 }
 
 
-function countDataForGraphs(magneticField, area, rotationFrequency, resistance, stepCount, endTime) {
+function countDataForGraphs(magneticInduction, area, rotationFrequency, resistance, stepCount, endTime) {
     const angleSpeed = frequencyToAngleSpeed(rotationFrequency);
     const step = endTime / stepCount;
 
@@ -24,7 +24,7 @@ function countDataForGraphs(magneticField, area, rotationFrequency, resistance, 
     let timeData = [];
 
     for (let time = 0; time <= endTime; time += step) {
-        emfData.push(countInduction(magneticField, area, angleSpeed, time));
+        emfData.push(countInduction(magneticInduction, area, angleSpeed, time));
         amperageData.push(countAmperage(emfData[emfData.length - 1], resistance));
         timeData.push(time);
     }
@@ -186,14 +186,20 @@ function drawTwoGraphsSeparately(emfData, amperageData, timeData) {
     Plotly.newPlot('graph', [emfGraphData, amperageGraphData], layout, config);
 }
 
-function drawGraphs(magneticField, area, rotationFrequency, resistance, stepCount, endTime, isTogether) {
+function drawGraphs(graphData) {
     const {
         emfData,
         amperageData,
         timeData
-    } = countDataForGraphs(magneticField, area, rotationFrequency, resistance, stepCount, endTime);
+    } = countDataForGraphs(
+        graphData.magneticInduction,
+        graphData.area,
+        graphData.rotationFrequency,
+        graphData.resistance,
+        graphData.stepCount,
+        graphData.endTime);
 
-    if (isTogether) {
+    if (graphData.isTogether) {
         drawTwoGraphsTogether(emfData, amperageData, timeData);
     } else {
         drawTwoGraphsSeparately(emfData, amperageData, timeData);
@@ -201,7 +207,7 @@ function drawGraphs(magneticField, area, rotationFrequency, resistance, stepCoun
 }
 
 const defaultValues = {
-    magneticField: 1,
+    magneticInduction: 1,
     area: 1,
     rotationFrequency: 1,
     resistance: 5,
@@ -210,12 +216,4 @@ const defaultValues = {
     isTogether: true,
 };
 
-drawGraphs(
-    defaultValues.magneticField,
-    defaultValues.area,
-    defaultValues.rotationFrequency,
-    defaultValues.resistance,
-    defaultValues.stepCount,
-    defaultValues.endTime,
-    defaultValues.isTogether
-);
+drawGraphs(defaultValues);
