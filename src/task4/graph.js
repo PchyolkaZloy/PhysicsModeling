@@ -62,7 +62,7 @@ function drawTwoGraphsTogether(emfData, amperageData, timeData) {
         yaxis: {
             showspikes: true,
             title: {
-                text: '$\\text{EMF } E, V;  \\text{ Induced current } \\frac{V}{\\Omega}, В$',
+                text: '$\\text{EMF } E, V;  \\text{ Induced current } \\frac{V}{\\Omega}$',
                 font: {
                     size: 20
                 }
