@@ -74,6 +74,7 @@
 }
 
 #descriptionMainText p {
+    text-align: left;
     margin-bottom: 10px;
 }
 
@@ -81,3 +82,9 @@
     background-color: #0d6dfb;
     border-radius: 5px;
 }
+
+.table td:nth-child(2) {
+    text-align: left;
+    vertical-align: middle;
+}
+
