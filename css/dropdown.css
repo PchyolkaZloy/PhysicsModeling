@@ -1,0 +1,13 @@
+.dropdown-menu {
+    min-width: 20vw;
+}
+
+.dropdown-item {
+    border-radius: 5px;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    color: #212529;
+    background-color: #fdfdfd;
+}
