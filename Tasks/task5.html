@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Physics | Task 5</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/task5.css">
+    <link rel="icon" href="../png/icon.png">
+
+    <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">Physics modeling</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Tasks
+                    </a>
+                    <div class="dropdown-menu dropdown" data-bs-theme="dark">
+                        <div class="container" id="dropdownContainer">
+                            <div class="row">
+                                <div class="col-4 md-2">
+                                    <a class="dropdown-item" href="#">Task 1</a>
+                                    <a class="dropdown-item" href="#">Task 2</a>
+                                    <a class="dropdown-item" href="#">Task 3</a>
+                                    <a class="dropdown-item" href="#">Task 4</a>
+                                    <a class="dropdown-item active" href="#">Task 5</a>
+                                </div>
+                                <div class="col-4 md-2">
+                                    <a class="dropdown-item disabled" href="#">Task 6</a>
+                                    <a class="dropdown-item disabled" href="#">Task 7</a>
+                                    <a class="dropdown-item disabled" href="#">Task 8</a>
+                                    <a class="dropdown-item disabled" href="#">Task 9</a>
+                                    <a class="dropdown-item disabled" href="#">Task 10</a>
+                                </div>
+                                <div class="col-4 md-2">
+                                    <a class="dropdown-item disabled" href="#">Task 11</a>
+                                    <a class="dropdown-item disabled" href="#">Task 12</a>
+                                    <a class="dropdown-item disabled" href="#">Task 13</a>
+                                    <a class="dropdown-item disabled" href="#">Task 14</a>
+                                    <a class="dropdown-item disabled" href="#">Task 15</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="https://t.me/psevdovich" target="_blank">Author</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/PchyolkaZloy/PhysicsModeling"
+                       target="_blank">GitHub</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid" id="main">
+    <div class="row" id="mainRow">
+        <div class="col-lg-2 container text-center" id="forms">
+
+            <div id="descriptionOffCanvas">
+                <div class="offcanvas-content" id="description">
+                    <div class="offcanvas-header" style="position: fixed;">
+                        <button type="button" class="btn-close" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="table-responsive">
+                            <h5 style="font-weight: bold;">Input parameters</h5>
+                            <table class="table table-striped table-responsive table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Form</th>
+                                    <th scope="col">Description</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td>Magnetic Induction</td>
+                                    <td>In tesla. Positive float number.</td>
+                                </tr>
+                                <tr>
+                                    <td>Rotation frequency</td>
+                                    <td>In hertz. Positive float number.</td>
+                                </tr>
+                                <tr>
+                                    <td>Resistance</td>
+                                    <td>In ohm. Positive float number.</td>
+                                </tr>
+                                <tr>
+                                    <td>Contour area</td>
+                                    <td>In square meters. Positive float number.</td>
+                                </tr>
+                                <tr>
+                                    <td>End time</td>
+                                    <td>In seconds. Affects the graph scale. Positive float number.</td>
+                                </tr>
+                                <tr>
+                                    <td>Steps count</td>
+                                    <td>Number of points to count function values in them. The more steps, the
+                                        better the accuracy, but the lower the performance. Positive integer number.
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div id="descriptionMainText">
+                            <p>Main forms are designed for the technical task of modeling.</p>
+                            <p>Optional settings are available in the form of a drop-down menu. They contain
+                                parameters that were not in the technical task, but that are involved in the
+                                construction of the graphics (more fine-tuning)</p>
+                            <br>
+                            <p>Use checkbox to choose to draw graphs on one canvas or separately</p>
+                            <p>Explore the graph forms conveniently and efficiently using the menu in the top right
+                                corner in graph form.</p>
+                            <p>Legend allows to "disable" one of the plots (EMF or induced current) by clicking.</p>
+                            <br>
+                            <p> If you try to enter incorrect data, this field will return to the default value</p>
+                        </div>
+
+                        <div id="imageDescription">
+                            <p class="d-inline-flex gap-1">
+                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#imageCollapse" aria-expanded="false"
+                                        aria-controls="imageCollapse" style="margin-top: 20px;">
+                                    Image from lecture (RUS)
+                                </button>
+                            </p>
+
+                            <div class="collapse" id="imageCollapse">
+                                <div class="card card-body">
+                                    <img src="../png/task5.png" alt="Here was a picture of this task" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <button class="btn btn-primary d-none d-lg-block" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#descriptionDesktop" aria-controls="descriptionDesktop">Description
+                    </button>
+                </div>
+                <div class="offcanvas offcanvas-end d-none d-lg-block" data-bs-scroll="true" data-bs-backdrop="false"
+                     tabindex="-1" id="descriptionDesktop" aria-labelledby="descriptionDesktopLabel">
+                </div>
+
+                <button class="btn btn-primary d-lg-none" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#descriptionMobile" aria-controls="descriptionMobile">Description
+                </button>
+
+                <div class="offcanvas offcanvas-bottom d-lg-none" data-bs-scroll="true" data-bs-backdrop="false"
+                     tabindex="-1" id="descriptionMobile" aria-labelledby="descriptionMobileLabel">
+                </div>
+                <script src="../src/offcanvas.js"></script>
+            </div>
+
+            <form id="graphForm">
+
+                <div class="form-floating mb-2">
+                    <input class="form-control" id="induction" name="induction" value="1" placeholder="#">
+                    <label for="induction">Magnetic induction (T)</label>
+                </div>
+
+                <div class="form-floating mb-2">
+                    <input class="form-control" id="rotationFrequency" name="rotationFrequency"
+                           value="1" placeholder="#">
+                    <label for="rotationFrequency">Rotation frequency (Hz)</label>
+                </div>
+
+                <div class="form-floating mb-2">
+                    <input class="form-control" id="resistance" name="resistance" value="5" placeholder="#">
+                    <label for="resistance">Resistance (ohm)</label>
+                </div>
+
+                <div class="form-switch">
+                    <input class="form-check-input" type="checkbox" id="checkbox" value="" checked>
+                    <label class="form-check-input-label" for="checkbox">
+                        Draw in one plot
+                    </label>
+                </div>
+
+                <div class="accordion" id="accord">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-controls="collapseOne">
+                            Optional Settings
+                        </button>
+                    </h2>
+
+
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
+                        <div class="accordion-body">
+                            <div class="form-floating mb-2">
+                                <input class="form-control" id="area" name="area" value="1" placeholder="#">
+                                <label for="area">Сontour area (m<sup>2</sup>)</label>
+                            </div>
+
+                            <div class="form-floating mb-2">
+                                <input class="form-control" id="endTime" name="endTime" value="10" placeholder="#">
+                                <label for="endTime">End time (sec)</label>
+                            </div>
+
+                            <div class="form-floating">
+                                <input class="form-control" id="stepCount" name="stepCount" value="10000"
+                                       placeholder="#">
+                                <label for="stepCount">Steps count</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <button data-mdb-ripple-init type="submit" class="btn btn-primary" style="margin-top: 20px;">
+                    Draw!
+                </button>
+                <script src="../src/task4/forms.js"></script>
+            </form>
+        </div>
+
+        <div class="col-lg-10" id="graph">
+            <script src="../src/task4/graph.js"></script>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+</body>
