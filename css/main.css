@@ -5,11 +5,11 @@
 }
 
 #mainRow {
-    width: 92vw;
+    width: 95vw;
 }
 
 #graph {
-    height: 85vh;
+    height: 90vh;
 }
 
 #forms {
@@ -39,4 +39,8 @@
 
 #graphForm {
     margin-top: 20px;
+}
+
+label {
+    font-style: italic;
 }
