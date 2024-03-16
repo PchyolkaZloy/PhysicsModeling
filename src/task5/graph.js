@@ -6,11 +6,11 @@ https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D0%B3%D0%BD%D0%B8%D1%82%D0%BD%D0%B0%D
 const lightSpeedSquared = 299792458 ** 2;
 
 
-function magneticInductionAmplitude(radialCoordinate, radius, diameter, voltageAmplitude, angularVelocity) {
+function magneticInductionAmplitude(radialCoordinate, radius, distance, voltageAmplitude, angularVelocity) {
     if (radialCoordinate < radius) {
-        return (radialCoordinate * voltageAmplitude * angularVelocity) / (2 * lightSpeedSquared * diameter);
+        return (radialCoordinate * voltageAmplitude * angularVelocity) / (2 * lightSpeedSquared * distance);
     } else {
-        return (radius ** 2 * voltageAmplitude * angularVelocity) / (2 * radialCoordinate * lightSpeedSquared * diameter);
+        return (radius ** 2 * voltageAmplitude * angularVelocity) / (2 * radialCoordinate * lightSpeedSquared * distance);
     }
 }
 
@@ -20,7 +20,7 @@ function magneticInduction(magneticInductionAmplitude, angularVelocity, time) {
 }
 
 
-function countMagneticInductionAmplitudeData(radius, diameter, voltageAmplitude, angularVelocity, stepCount, endRadialCoordinate) {
+function countMagneticInductionAmplitudeData(radius, distance, voltageAmplitude, angularVelocity, stepCount, endRadialCoordinate) {
     const step = endRadialCoordinate / stepCount;
 
     let radialCoordinatesData = [];
@@ -28,7 +28,7 @@ function countMagneticInductionAmplitudeData(radius, diameter, voltageAmplitude,
 
     for (let coordinate = 0; coordinate <= endRadialCoordinate; coordinate += step) {
         magneticInductionAmplitudeData.push(
-            magneticInductionAmplitude(coordinate, radius, diameter, voltageAmplitude, angularVelocity))
+            magneticInductionAmplitude(coordinate, radius, distance, voltageAmplitude, angularVelocity))
         radialCoordinatesData.push(coordinate);
     }
 
@@ -36,9 +36,9 @@ function countMagneticInductionAmplitudeData(radius, diameter, voltageAmplitude,
 }
 
 
-function countMagneticInductionDataForRadialCoordinate(radialCoordinate, radius, diameter, voltageAmplitude, angularVelocity, stepCount, endTime) {
+function countMagneticInductionDataForRadialCoordinate(radialCoordinate, radius, distance, voltageAmplitude, angularVelocity, stepCount, endTime) {
     const step = endTime / stepCount;
-    const magneticInductionAmplitudeValue = magneticInductionAmplitude(radialCoordinate, radius, diameter, voltageAmplitude, angularVelocity);
+    const magneticInductionAmplitudeValue = magneticInductionAmplitude(radialCoordinate, radius, distance, voltageAmplitude, angularVelocity);
 
     let timeData = [];
     let magneticInductionData = [];
@@ -58,7 +58,7 @@ function drawGraphs(graphData) {
         radialCoordinatesData
     } = countMagneticInductionAmplitudeData(
         graphData.radius,
-        graphData.diameter,
+        graphData.distance,
         graphData.voltageAmplitude,
         graphData.angularVelocity,
         graphData.stepCount,
@@ -71,7 +71,7 @@ function drawGraphs(graphData) {
     } = countMagneticInductionDataForRadialCoordinate(
         graphData.radialCoordinate,
         graphData.radius,
-        graphData.diameter,
+        graphData.distance,
         graphData.voltageAmplitude,
         graphData.angularVelocity,
         graphData.stepCount,
@@ -82,7 +82,6 @@ function drawGraphs(graphData) {
         x: radialCoordinatesData,
         y: magneticInductionAmplitudeData,
         mode: 'lines',
-        type: 'scatter',
         name: "$B_0(r)$",
         hovertemplate: '<b>B_0(r)</b>: %{y}<extra></extra>'
     };
@@ -91,7 +90,6 @@ function drawGraphs(graphData) {
         x: timeData,
         y: magneticInductionData,
         mode: 'lines',
-        type: 'scatter',
         name: "$B(t)$",
         hovertemplate: '<b>B(t)</b>: %{y}<extra></extra>'
     };
@@ -113,7 +111,6 @@ function drawGraphs(graphData) {
         },
         xaxis: {
             showspikes: true,
-            fixedrange: true,
             title: '$\\text{Radial coordinate } r, m$',
         },
         yaxis: {
@@ -123,7 +120,6 @@ function drawGraphs(graphData) {
 
         xaxis2: {
             showspikes: true,
-            fixedrange: true,
             title: '$\\text{Time } t, sec$',
         },
         yaxis2: {
@@ -152,7 +148,7 @@ function drawGraphs(graphData) {
 
 const defaultGraphData = {
     radius: 0.03,
-    diameter: 0.005,
+    distance: 0.005,
     voltageAmplitude: 150,
     angularVelocity: 120 * Math.PI,
     radialCoordinate: 0.02,

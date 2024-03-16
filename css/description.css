@@ -45,3 +45,7 @@
     width: auto;
     height: auto;
 }
+
+.offcanvas-header{
+    position: fixed;
+}

@@ -78,10 +78,9 @@
 <div class="container-fluid" id="main">
     <div class="row" id="mainRow">
         <div class="col-lg-2 container text-center" id="forms">
-
             <div id="descriptionOffCanvas">
                 <div class="offcanvas-content" id="description">
-                    <div class="offcanvas-header" style="position: fixed;">
+                    <div class="offcanvas-header">
                         <button type="button" class="btn-close" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body">
@@ -97,30 +96,42 @@
 
                                 <tbody>
                                 <tr>
-                                    <td>Magnetic Induction</td>
-                                    <td>In tesla. Positive float number.</td>
+                                    <td>
+                                        R<sub>0</sub>
+                                    </td>
+                                    <td>Plate radius. In meters. Positive float number.</td>
                                 </tr>
                                 <tr>
-                                    <td>Rotation frequency</td>
-                                    <td>In hertz. Positive float number.</td>
+                                    <td>d</td>
+                                    <td>Distance between the plates. In meters. Positive float number.</td>
                                 </tr>
                                 <tr>
-                                    <td>Resistance</td>
-                                    <td>In ohm. Positive float number.</td>
+                                    <td>U<sub>0</sub></td>
+                                    <td>Voltage amplitude. In volts. Positive float number.</td>
                                 </tr>
                                 <tr>
-                                    <td>Contour area</td>
-                                    <td>In square meters. Positive float number.</td>
+                                    <td>&omega;</td>
+                                    <td>Angular velocity. In 1/radian. Positive float number.</td>
                                 </tr>
                                 <tr>
-                                    <td>End time</td>
-                                    <td>In seconds. Affects the graph scale. Positive float number.</td>
+                                    <td>r</td>
+                                    <td>Radial coordinate r for second graph. In meters. Positive float number.
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Steps count</td>
-                                    <td>Number of points to count function values in them. The more steps, the
+                                    <td>Number of points to count functions values in them. The more steps, the
                                         better the accuracy, but the lower the performance. Positive integer number.
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>End r</td>
+                                    <td>In meters. Affects the first graph scale. Positive float number.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>End time</td>
+                                    <td>In seconds. Affects the second graph scale. Positive float number.</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -132,12 +143,10 @@
                                 parameters that were not in the technical task, but that are involved in the
                                 construction of the graphics (more fine-tuning)</p>
                             <br>
-                            <p>Use checkbox to choose to draw graphs on one canvas or separately</p>
                             <p>Explore the graph forms conveniently and efficiently using the menu in the top right
                                 corner in graph form.</p>
-                            <p>Legend allows to "disable" one of the plots (EMF or induced current) by clicking.</p>
-                            <br>
-                            <p> If you try to enter incorrect data, this field will return to the default value</p>
+                            <p> If you try to enter incorrect data, this field will return to the default value. Integer
+                                types are given with integer type even if a real number is entered</p>
                         </div>
 
                         <div id="imageDescription">
@@ -158,7 +167,6 @@
                     </div>
                 </div>
 
-
                 <div class="d-flex justify-content-center align-items-center">
                     <button class="btn btn-primary d-none d-lg-block" type="button" data-bs-toggle="offcanvas"
                             data-bs-target="#descriptionDesktop" aria-controls="descriptionDesktop">Description
@@ -171,7 +179,6 @@
                 <button class="btn btn-primary d-lg-none" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#descriptionMobile" aria-controls="descriptionMobile">Description
                 </button>
-
                 <div class="offcanvas offcanvas-bottom d-lg-none" data-bs-scroll="true" data-bs-backdrop="false"
                      tabindex="-1" id="descriptionMobile" aria-labelledby="descriptionMobileLabel">
                 </div>
@@ -189,9 +196,9 @@
 
                     <div class="col-6">
                         <div class="form-floating mb-2">
-                            <input class="form-control" id="diameter" name="diameter"
+                            <input class="form-control" id="distance" name="distance"
                                    value="0.005" placeholder="#">
-                            <label for="diameter">d (m)</label>
+                            <label for="distance">d (m)</label>
                         </div>
                     </div>
                 </div>
@@ -234,7 +241,7 @@
                                 <div class="form-floating mb-2">
                                     <input class="form-control" id="radialCoordinate" name="radialCoordinate"
                                            value="0.02" placeholder="#">
-                                    <label for="radialCoordinate">Coord r (m)</label>
+                                    <label for="radialCoordinate">r (m)</label>
                                 </div>
                             </div>
 

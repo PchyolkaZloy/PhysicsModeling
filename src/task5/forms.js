@@ -20,10 +20,10 @@ function customParseInteger(element, defaultValue) {
 function getData() {
     return {
         radius: customParseFloat(document.getElementById("radius"), 0.03),
-        diameter: customParseFloat(document.getElementById("diameter"), 0.005),
+        distance: customParseFloat(document.getElementById("distance"), 0.005),
         voltageAmplitude: customParseFloat(document.getElementById("voltage"), 150),
         angularVelocity: customParseFloat(document.getElementById("angularVelocity"), 376.9911),
-        radialCoordinate : customParseFloat(document.getElementById("radialCoordinate"), 0.02),
+        radialCoordinate: customParseFloat(document.getElementById("radialCoordinate"), 0.02),
         endRadialCoordinate: customParseFloat(document.getElementById("endRadialCoordinate"), 0.2),
         endTime: customParseFloat(document.getElementById("endTime"), 0.1),
         stepCount: customParseInteger(document.getElementById("stepCount"), 10000),
