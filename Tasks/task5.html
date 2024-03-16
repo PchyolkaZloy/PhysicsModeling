@@ -182,15 +182,15 @@
                 <div class="row align-items-center">
                     <div class="col-6">
                         <div class="form-floating mb-2">
-                            <input class="form-control" id="radius" name="radius" value="1" placeholder="#">
-                            <label for="radius" style="font-style:italic;">R<sub>0</sub> (m)</label>
+                            <input class="form-control" id="radius" name="radius" value="0.03" placeholder="#">
+                            <label for="radius">R<sub>0</sub> (m)</label>
                         </div>
                     </div>
 
                     <div class="col-6">
                         <div class="form-floating mb-2">
                             <input class="form-control" id="diameter" name="diameter"
-                                   value="1" placeholder="#">
+                                   value="0.005" placeholder="#">
                             <label for="diameter">d (m)</label>
                         </div>
                     </div>
@@ -199,7 +199,7 @@
                 <div class="row align-items-center">
                     <div class="col-6">
                         <div class="form-floating mb-2">
-                            <input class="form-control" id="voltage" name="voltage" value="1" placeholder="#">
+                            <input class="form-control" id="voltage" name="voltage" value="150" placeholder="#">
                             <label for="voltage">U<sub>0</sub> (V)</label>
                         </div>
                     </div>
@@ -207,7 +207,7 @@
                     <div class="col-6">
                         <div class="form-floating mb-2">
                             <input class="form-control" id="angularVelocity" name="angularVelocity"
-                                   value="1" placeholder="#">
+                                   value="376.9911" placeholder="#">
                             <label for="angularVelocity">&omega; (1/rad)</label>
                         </div>
                     </div>
@@ -222,29 +222,28 @@
                     </h2>
 
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
-
                         <div class="row align-items-center" style="margin-top: 20px">
                             <div class="col-6">
                                 <div class="form-floating mb-2">
-                                    <input class="form-control" id="radialCoordinate" name="radialCoordinate" value="1"
+                                    <input class="form-control" id="stepCount" name="stepCount" value="10000"
                                            placeholder="#">
+                                    <label for="stepCount">Steps count</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-floating mb-2">
+                                    <input class="form-control" id="radialCoordinate" name="radialCoordinate"
+                                           value="0.02" placeholder="#">
                                     <label for="radialCoordinate">Coord r (m)</label>
                                 </div>
                             </div>
 
-                            <div class="col-6">
-                                <div class="form-floating mb-2">
-                                    <input class="form-control" id="stepCount" name="stepCount"
-                                           value="1" placeholder="#">
-                                    <label for="stepCount">Steps count</label>
-                                </div>
-                            </div>
                         </div>
                         <div class="row align-items-center">
                             <div class="col-6">
                                 <div class="form-floating mb-2">
                                     <input class="form-control" id="endRadialCoordinate" name="endRadialCoordinate"
-                                           value="1" placeholder="#">
+                                           value="0.2" placeholder="#">
                                     <label for="endRadialCoordinate">End r (m)</label>
                                 </div>
                             </div>
@@ -252,7 +251,7 @@
                             <div class="col-6">
                                 <div class="form-floating mb-2">
                                     <input class="form-control" id="endTime" name="endTime"
-                                           value="1" placeholder="#">
+                                           value="0.1" placeholder="#">
                                     <label for="endTime">End time (s)</label>
                                 </div>
                             </div>
