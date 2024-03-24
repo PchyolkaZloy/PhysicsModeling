@@ -26,17 +26,11 @@ function countChargeAtTime(initialCapacitanceCharge, attenuationFactor, cyclicFr
     return initialCapacitanceCharge * Math.exp(-attenuationFactor * time) * Math.cos(cyclicFrequency * time);
 }
 
-function countVoltageAtTime(initialCapacitanceCharge, capacitance, attenuationFactor, cyclicFrequency, time) {
-    return initialCapacitanceCharge / capacitance * Math.exp(-attenuationFactor * time) * Math.cos(cyclicFrequency * time);
-}
-
 function countAmperageAtTime(initialCapacitanceCharge, attenuationFactor, cyclicFrequency, naturalFrequency, time) {
-    const phi = Math.acos(-attenuationFactor / naturalFrequency);
-
-    return naturalFrequency * initialCapacitanceCharge * Math.exp(-attenuationFactor * time)
-        * Math.cos(cyclicFrequency * time + phi);
+    return initialCapacitanceCharge * Math.exp(-attenuationFactor * time) * (
+        -attenuationFactor * Math.cos(cyclicFrequency * time) - cyclicFrequency * Math.sin(cyclicFrequency * time)
+    );
 }
-
 
 function countGraphData(inductance, resistance, capacitance, initialCapacitanceCharge, endTime, stepCount) {
     const step = endTime / stepCount;
@@ -52,7 +46,7 @@ function countGraphData(inductance, resistance, capacitance, initialCapacitanceC
 
     for (let time = 0; time <= endTime; time += step) {
         chargeData.push(countChargeAtTime(initialCapacitanceCharge, attenuationFactor, cyclicFrequency, time));
-        voltageData.push(countVoltageAtTime(initialCapacitanceCharge, capacitance, attenuationFactor, cyclicFrequency, time));
+        voltageData.push(chargeData[chargeData.length - 1] / capacitance);
         amperageData.push(countAmperageAtTime(initialCapacitanceCharge, attenuationFactor, cyclicFrequency, naturalFrequency, time));
 
         timeData.push(time);
@@ -76,7 +70,6 @@ function drawGraphs(graphData) {
         graphData.endTime,
         graphData.stepCount
     );
-
 
     const chargeGraphData = {
         x: timeData,

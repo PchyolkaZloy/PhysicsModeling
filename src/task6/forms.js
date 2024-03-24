@@ -47,9 +47,9 @@ function getData() {
     };
 
     if (!checkResistanceToCriticalValue(graphData.resistance, graphData.inductance, graphData.capacitance)) {
-        alert("The circuit resistance is greater than the critical value. " +
+        alert("The circuit resistance is greater than the critical resistance value. " +
             "The oscillation process passes into the aperiodic discharge of the capacitor. " +
-            "Setting resistance, inductance and capacitance to default values...");
+            "Setting resistance, inductance and capacitance to default values.");
 
         document.getElementById("resistance").value = graphData.resistance = defaultGraphData.resistance;
         document.getElementById("inductance").value = graphData.inductance = defaultGraphData.inductance;
