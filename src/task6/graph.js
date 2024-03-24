@@ -30,13 +30,13 @@ function countVoltageAtTime(initialCapacitanceCharge, capacitance, attenuationFa
     return initialCapacitanceCharge / capacitance * Math.exp(-attenuationFactor * time) * Math.cos(cyclicFrequency * time);
 }
 
-function countAmperageNative(initialCapacitanceCharge, attenuationFactor, cyclicFrequency, naturalFrequency, time) {
-    return naturalFrequency * initialCapacitanceCharge * Math.exp(-attenuationFactor * time) *
-        (
-            -attenuationFactor / (Math.sqrt(cyclicFrequency ** 2 + attenuationFactor ** 2)) * Math.cos(cyclicFrequency * time)
-            - cyclicFrequency / (Math.sqrt(cyclicFrequency ** 2 + attenuationFactor ** 2)) * Math.sin(cyclicFrequency * time)
-        );
+function countAmperageAtTime(initialCapacitanceCharge, attenuationFactor, cyclicFrequency, naturalFrequency, time) {
+    const phi = Math.acos(-attenuationFactor / naturalFrequency);
+
+    return naturalFrequency * initialCapacitanceCharge * Math.exp(-attenuationFactor * time)
+        * Math.cos(cyclicFrequency * time + phi);
 }
+
 
 function countGraphData(inductance, resistance, capacitance, initialCapacitanceCharge, endTime, stepCount) {
     const step = endTime / stepCount;
@@ -53,7 +53,7 @@ function countGraphData(inductance, resistance, capacitance, initialCapacitanceC
     for (let time = 0; time <= endTime; time += step) {
         chargeData.push(countChargeAtTime(initialCapacitanceCharge, attenuationFactor, cyclicFrequency, time));
         voltageData.push(countVoltageAtTime(initialCapacitanceCharge, capacitance, attenuationFactor, cyclicFrequency, time));
-        amperageData.push(countAmperageNative(initialCapacitanceCharge, attenuationFactor, cyclicFrequency, naturalFrequency, time));
+        amperageData.push(countAmperageAtTime(initialCapacitanceCharge, attenuationFactor, cyclicFrequency, naturalFrequency, time));
 
         timeData.push(time);
     }
@@ -120,7 +120,7 @@ function drawGraphs(graphData) {
             title: '$\\text{Time } t, sec$',
         },
         yaxis: {
-            exponentformat: 'e',
+            exponentformat: 'power',
             showspikes: true,
             title: '$\\text{Charge } q, C$'
         },
@@ -130,7 +130,7 @@ function drawGraphs(graphData) {
             title: '$\\text{Time } t, sec$',
         },
         yaxis2: {
-            exponentformat: 'e',
+            exponentformat: 'power',
             showspikes: true,
             title: '$\\text{Voltage } V, volt$'
         },
@@ -140,7 +140,7 @@ function drawGraphs(graphData) {
             title: '$\\text{Time } t, sec$',
         },
         yaxis3: {
-            exponentformat: 'e',
+            exponentformat: 'power',
             showspikes: true,
             title: '$\\text{Amperage } I, A$'
         },
