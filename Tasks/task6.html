@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Physics | Task 1</title>
+    <title>Physics | Task 6</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/description.css">
     <link rel="stylesheet" href="../css/dropdown.css">
@@ -38,14 +39,14 @@
                         <div class="container" id="dropdownContainer">
                             <div class="row">
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item active" href="task1.html">Task 1</a>
+                                    <a class="dropdown-item" href="task1.html">Task 1</a>
                                     <a class="dropdown-item" href="task2.html">Task 2</a>
                                     <a class="dropdown-item" href="task3.html">Task 3</a>
                                     <a class="dropdown-item" href="task4.html">Task 4</a>
                                     <a class="dropdown-item" href="task5.html">Task 5</a>
                                 </div>
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item" href="task6.html">Task 6</a>
+                                    <a class="dropdown-item active" href="task6.html">Task 6</a>
                                     <a class="dropdown-item disabled" href="#">Task 7</a>
                                     <a class="dropdown-item disabled" href="#">Task 8</a>
                                     <a class="dropdown-item disabled" href="#">Task 9</a>
@@ -78,7 +79,6 @@
 <div class="container-fluid" id="main">
     <div class="row" id="mainRow">
         <div class="col-lg-2 container text-center" id="forms">
-
             <div id="descriptionOffCanvas">
                 <div class="offcanvas-content" id="description">
                     <div class="offcanvas-header">
@@ -94,38 +94,45 @@
                                     <th scope="col">Description</th>
                                 </tr>
                                 </thead>
+
                                 <tbody>
                                 <tr>
-                                    <td>Charge</td>
-                                    <td>In coulombs. Can be negative. Float number.</td>
-                                </tr>
-                                <tr>
-                                    <td>Magnetic induction</td>
-                                    <td>Defined by a radius vector with coordinates (x, y, z) separated by spaces.
-                                        Coordinates are float numbers.
+                                    <td>
+                                        R<sub>0</sub>
                                     </td>
+                                    <td>Plate radius. In meters. Positive float number.</td>
                                 </tr>
                                 <tr>
-                                    <td>Velocity of charge</td>
-                                    <td>Defined by a radius vector with coordinates (x, y, z) separated by spaces.
-                                        Coordinates are float numbers.
-                                    </td>
+                                    <td>d</td>
+                                    <td>Distance between the plates. In meters. Positive float number.</td>
                                 </tr>
                                 <tr>
-                                    <td>Flight time</td>
-                                    <td>In seconds. Affects the chart scale. More seconds - more charge
-                                        "flies" in the space on the graph. Float number.
+                                    <td>U<sub>0</sub></td>
+                                    <td>Voltage amplitude. In volts. Positive float number.</td>
+                                </tr>
+                                <tr>
+                                    <td>&omega;</td>
+                                    <td>Angular velocity. In 1/radian. Positive float number.</td>
+                                </tr>
+                                <tr>
+                                    <td>r</td>
+                                    <td>Radial coordinate r for second graph. In meters. Positive float number.
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>Steps count</td>
-                                    <td>Number of steps for solving differential equations. The more steps, the
-                                        better the accuracy, but the lower the performance. Integer number.
+                                    <td>Number of points to count functions values in them. The more steps, the
+                                        better the accuracy, but the lower the performance. Positive integer number.
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Mass of charge</td>
-                                    <td>In kilograms. Real number.</td>
+                                    <td>End r</td>
+                                    <td>In meters. Affects the first graph scale. Positive float number.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>End time</td>
+                                    <td>In seconds. Affects the second graph scale. Positive float number.</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -139,10 +146,8 @@
                             <br>
                             <p>Explore the graph forms conveniently and efficiently using the menu in the top right
                                 corner in graph form.</p>
-                            <p>Legend allows to "disable" one of the plots (charge motion or magnetic induction) by
-                                clicking.</p>
-                            <br>
-                            <p> If you try to enter incorrect data, this field will return to the default value</p>
+                            <p> If you try to enter incorrect data, this field will return to the default value. Integer
+                                types are given with integer type even if a real number is entered</p>
                         </div>
 
                         <div id="imageDescription">
@@ -156,13 +161,12 @@
 
                             <div class="collapse" id="imageCollapse">
                                 <div class="card card-body">
-                                    <img src="../png/task1.png" alt="Here was a picture of this task" class="img-fluid">
+                                    <img src="../png/task6.png" alt="Here was a picture of this task" class="img-fluid">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
 
                 <div class="d-flex justify-content-center align-items-center">
                     <button class="btn btn-primary d-none d-lg-block" type="button" data-bs-toggle="offcanvas"
@@ -176,7 +180,6 @@
                 <button class="btn btn-primary d-lg-none" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#descriptionMobile" aria-controls="descriptionMobile">Description
                 </button>
-
                 <div class="offcanvas offcanvas-bottom d-lg-none" data-bs-scroll="true" data-bs-backdrop="false"
                      tabindex="-1" id="descriptionMobile" aria-labelledby="descriptionMobileLabel">
                 </div>
@@ -184,19 +187,20 @@
             </div>
 
             <form id="graphForm">
+
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="charge" name="charge" value="1" placeholder="#">
-                    <label for="charge">Charge (Coulomb)</label>
+                    <input class="form-control" id="inductance" name="inductance" value="1" placeholder="#">
+                    <label for="inductance">Inductance (H)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="induction" name="induction" value="1 0 0" placeholder="#">
-                    <label for="induction">Magnetic induction (vector)</label>
+                    <input class="form-control" id="resistance" name="resistance" value="1" placeholder="#">
+                    <label for="resistance">Resistance (ohm)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="velocity" name="velocity" value="1 1 0" placeholder="#">
-                    <label for="velocity">Velocity (vector)</label>
+                    <input class="form-control" id="capacitance" name="capacitance" value="0.001" placeholder="#">
+                    <label for="capacitance">Capacitance (F)</label>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -210,19 +214,19 @@
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
                             <div class="form-floating mb-2">
-                                <input class="form-control" id="time" name="time" value="50" placeholder="#">
-                                <label for="time">Flight time (sec)</label>
+                                <input class="form-control" id="initialCapacitanceCharge" name="initialCapacitanceCharge" value="1" placeholder="#">
+                                <label for="initialCapacitanceCharge">Initial Charge (C)</label>
                             </div>
 
                             <div class="form-floating mb-2">
-                                <input class="form-control" id="steps" name="steps" value="100000"
-                                       placeholder="#">
-                                <label for="steps">Steps count</label>
+                                <input class="form-control" id="endTime" name="endTime" value="10" placeholder="#">
+                                <label for="endTime">End time (sec)</label>
                             </div>
 
                             <div class="form-floating">
-                                <input class="form-control" id="mass" name="mass" value="1" placeholder="#">
-                                <label for="mass">Mass (kg)</label>
+                                <input class="form-control" id="stepCount" name="stepCount" value="10000"
+                                       placeholder="#">
+                                <label for="stepCount">Steps count</label>
                             </div>
                         </div>
                     </div>
@@ -232,12 +236,12 @@
                 <button data-mdb-ripple-init type="submit" class="btn btn-primary" id="drawButton">
                     Draw!
                 </button>
-                <script src="../src/task1/forms.js"></script>
+                <script src="../src/task6/forms.js"></script>
             </form>
         </div>
 
         <div class="col-lg-10" id="graph">
-            <script src="../src/task1/graph.js"></script>
+            <script src="../src/task6/graph.js"></script>
         </div>
     </div>
 </div>
