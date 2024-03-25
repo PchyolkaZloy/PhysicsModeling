@@ -36,7 +36,7 @@ function getData() {
         stepCount: 10000
     };
 
-    let graphData = {
+    return {
         inductance: customParseFloatGreaterZero(document.getElementById("inductance"), defaultGraphData.inductance),
         resistance: customParseFloat(document.getElementById("resistance"), defaultGraphData.resistance),
         capacitance: customParseFloatGreaterZero(document.getElementById("capacitance"), defaultGraphData.capacitance),
@@ -45,18 +45,6 @@ function getData() {
         endTime: customParseFloat(document.getElementById("endTime"), defaultGraphData.endTime),
         stepCount: customParseInteger(document.getElementById("stepCount"), defaultGraphData.stepCount),
     };
-
-    if (!checkResistanceToCriticalValue(graphData.resistance, graphData.inductance, graphData.capacitance)) {
-        alert("The circuit resistance is greater than the critical resistance value. " +
-            "The oscillation process passes into the aperiodic discharge of the capacitor. " +
-            "Setting resistance, inductance and capacitance to default values.");
-
-        document.getElementById("resistance").value = graphData.resistance = defaultGraphData.resistance;
-        document.getElementById("inductance").value = graphData.inductance = defaultGraphData.inductance;
-        document.getElementById("capacitance").value = graphData.capacitance = defaultGraphData.capacitance;
-    }
-
-    return graphData;
 }
 
 
