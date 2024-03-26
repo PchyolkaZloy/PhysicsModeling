@@ -40,7 +40,7 @@ function countCharge(inductance, resistance, capacitance, initialCharge, time) {
     if (resistance > criticalResistance) {
         return (initialCharge * (p2 * Math.exp(p1 * time) - p1 * Math.exp(p2 * time))) / (p2 - p1);
     } else if (resistance === criticalResistance) {
-        return -(initialCharge * Math.exp(-attenuationFactor * time) * (-attenuationFactor * time - 1)) / attenuationFactor;
+        return initialCharge * Math.exp(-attenuationFactor * time) * (1 + attenuationFactor * time);
     }
 
     return initialCharge * Math.exp(-attenuationFactor * time) * Math.cos(cyclicFrequency * time);
