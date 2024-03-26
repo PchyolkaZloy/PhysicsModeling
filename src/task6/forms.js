@@ -31,7 +31,7 @@ function getData() {
         inductance: 1,
         resistance: 1,
         capacitance: 0.001,
-        initialCapacitanceCharge: 1,
+        initialCharge: 1,
         endTime: 10,
         stepCount: 10000
     };
@@ -40,8 +40,8 @@ function getData() {
         inductance: customParseFloatGreaterZero(document.getElementById("inductance"), defaultGraphData.inductance),
         resistance: customParseFloat(document.getElementById("resistance"), defaultGraphData.resistance),
         capacitance: customParseFloatGreaterZero(document.getElementById("capacitance"), defaultGraphData.capacitance),
-        initialCapacitanceCharge: customParseInteger(
-            document.getElementById("initialCapacitanceCharge"), defaultGraphData.initialCapacitanceCharge),
+        initialCharge: customParseInteger(
+            document.getElementById("initialCharge"), defaultGraphData.initialCharge),
         endTime: customParseFloat(document.getElementById("endTime"), defaultGraphData.endTime),
         stepCount: customParseInteger(document.getElementById("stepCount"), defaultGraphData.stepCount),
     };
