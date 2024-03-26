@@ -46,16 +46,6 @@ function countCharge(inductance, resistance, capacitance, initialCharge, time) {
     return initialCharge * Math.exp(-attenuationFactor * time) * Math.cos(cyclicFrequency * time);
 }
 
-function countVoltage(inductance, resistance, capacitance, initialCharge, time, chargeData) {
-    if (resistance > criticalResistance) {
-        return (initialCharge * (p2 * Math.exp(p1 * time) - p1 * Math.exp(p2 * time))) / (capacitance * (p2 - p1));
-    } else if (resistance === criticalResistance) {
-        return (initialCharge * (1 + attenuationFactor * time) * Math.exp(-attenuationFactor * time)) / capacitance;
-    }
-
-    return chargeData[chargeData.length - 1] / capacitance;
-}
-
 function countAmperage(inductance, resistance, capacitance, initialCharge, time) {
     if (resistance > criticalResistance) {
         return (p1 * p2 * initialCharge * (Math.exp(p1 * time) - Math.exp(p2 * time))) / (p2 - p1);
@@ -87,7 +77,7 @@ function countGraphData(inductance, resistance, capacitance, initialCharge, endT
 
     for (let time = 0; time <= endTime; time += step) {
         chargeData.push(countCharge(inductance, resistance, capacitance, initialCharge, time));
-        voltageData.push(countVoltage(inductance, resistance, capacitance, initialCharge, time, chargeData));
+        voltageData.push(chargeData[chargeData.length - 1] / capacitance);
         amperageData.push(countAmperage(inductance, resistance, capacitance, initialCharge, time));
 
         timeData.push(time);
