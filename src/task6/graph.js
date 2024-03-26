@@ -125,22 +125,20 @@ function drawGraphs(graphData) {
         y: voltageData,
         mode: 'lines',
         name: "$V(t)$",
-        hovertemplate: '<b>V(t)</b>: %{y}<extra></extra>'
+        hovertemplate: '<b>V(t)</b>: %{y}<extra></extra>',
+        xaxis: 'x2',
+        yaxis: 'y2',
     };
-
-    voltageGraphData.xaxis = 'x2';
-    voltageGraphData.yaxis = 'y2';
 
     const amperageGraphData = {
         x: timeData,
         y: amperageData,
         mode: 'lines',
         name: "$I(t)$",
-        hovertemplate: '<b>I(t)</b>: %{y}<extra></extra>'
+        hovertemplate: '<b>I(t)</b>: %{y}<extra></extra>',
+        xaxis: 'x3',
+        yaxis: 'y3',
     };
-
-    amperageGraphData.xaxis = 'x3';
-    amperageGraphData.yaxis = 'y3';
 
     const layout = {
         grid: {
@@ -199,6 +197,115 @@ function drawGraphs(graphData) {
     };
 
     Plotly.newPlot('graph', [chargeGraphData, voltageGraphData, amperageGraphData], layout, config);
+}
+
+function drawPhasePortrait(graphData) {
+    const {
+        chargeData,
+        amperageData,
+        timeData,
+    } = countGraphData(
+        graphData.inductance,
+        graphData.resistance,
+        graphData.capacitance,
+        graphData.initialCharge,
+        graphData.endTime,
+        graphData.stepCount
+    );
+
+    const chargeGraphData = {
+        x: timeData,
+        y: chargeData,
+        mode: 'lines',
+        name: "$q(t)$",
+        hovertemplate: '<b>q(t)</b>: %{y}<extra></extra>',
+        xaxis: 'x',
+        yaxis: 'y',
+    };
+
+    const amperageGraphData = {
+        x: timeData,
+        y: amperageData,
+        mode: 'lines',
+        name: "$I(t)$",
+        hovertemplate: '<b>I(t)</b>: %{y}<extra></extra>',
+        xaxis: 'x2',
+        yaxis: 'y2'
+    };
+
+    const phasePortraitGraphData = {
+        x: chargeData,
+        y: amperageData,
+        mode: 'lines',
+        hovertemplate: '<b>I(q)</b>: %{y}<extra></extra>',
+        xaxis: 'x3',
+        yaxis: 'y3',
+    };
+
+
+    const layout = {
+        grid: {
+            rows: 3,
+            columns: 1,
+            pattern: 'independent',
+        },
+
+        xaxis: {
+            domain: [0, 0.43],
+            exponentformat: 'power',
+            showspikes: true,
+            title: '$\\text{Time } t, sec$',
+        },
+        yaxis: {
+            domain: [0.55, 1],
+            exponentformat: 'power',
+            showspikes: true,
+            title: '$\\text{Charge } q, C$'
+        },
+
+        xaxis2: {
+            domain: [0, 0.43],
+            exponentformat: 'power',
+            showspikes: true,
+            title: '$\\text{Time } t, sec$',
+        },
+        yaxis2: {
+            domain: [0, 0.45],
+            exponentformat: 'power',
+            showspikes: true,
+            title: '$\\text{Amperage } I, A$'
+        },
+
+        xaxis3: {
+            domain: [0.5, 1],
+            exponentformat: 'power',
+            showspikes: true,
+            title: '$\\text{Charge } q, C$'
+        },
+        yaxis3: {
+            domain: [0, 1],
+            exponentformat: 'power',
+            showspikes: true,
+            title: '$\\text{Amperage } I, A$'
+        },
+
+        margin: {
+            l: 65,
+            r: 25,
+            t: 25,
+        },
+
+        showlegend: false,
+    };
+
+    const config = {
+        scrollZoom: true,
+        displayModeBar: true,
+        displaylogo: false,
+        responsive: true,
+    };
+
+    Plotly.newPlot('graph', [chargeGraphData, amperageGraphData, phasePortraitGraphData], layout, config);
 }
 
 function drawDefaultGraph() {

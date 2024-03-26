@@ -50,5 +50,10 @@ function getData() {
 
 document.getElementById("graphForm").addEventListener("submit", function (e) {
     e.preventDefault();
-    drawGraphs(getData());
+
+    if (document.getElementById("checkbox").checked) {
+        drawPhasePortrait(getData());
+    } else {
+        drawGraphs(getData());
+    }
 });
