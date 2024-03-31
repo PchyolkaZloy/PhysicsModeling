@@ -180,25 +180,18 @@
             <form id="graphForm">
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="inductance" name="inductance" value="1" placeholder="#">
-                    <label for="inductance">Inductance (H)</label>
+                    <input class="form-control" id="frequency1" name="frequency1" value="10" placeholder="#">
+                    <label for="frequency1">Frequency 1 (Hz)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="resistance" name="resistance" value="1" placeholder="#">
-                    <label for="resistance">Resistance (ohm)</label>
+                    <input class="form-control" id="frequency2" name="frequency2" value="9" placeholder="#">
+                    <label for="frequency2">Frequency 2 (Hz)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="capacitance" name="capacitance" value="0.001" placeholder="#">
-                    <label for="capacitance">Capacitance (F)</label>
-                </div>
-
-                <div class="form-switch">
-                    <input class="form-check-input" type="checkbox" id="checkbox" value="">
-                    <label class="form-check-input-label" for="checkbox" style="font-style: normal">
-                        Draw phase portrait
-                    </label>
+                    <input class="form-control" id="amplitude" name="amplitude" value="1" placeholder="#">
+                    <label for="amplitude">Amplitude</label>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -211,12 +204,6 @@
 
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
-                            <div class="form-floating mb-2">
-                                <input class="form-control" id="initialCharge" name="initialCharge" value="1"
-                                       placeholder="#">
-                                <label for="initialCharge">Initial Charge (C)</label>
-                            </div>
-
                             <div class="form-floating mb-2">
                                 <input class="form-control" id="endTime" name="endTime" value="10" placeholder="#">
                                 <label for="endTime">End time (sec)</label>
