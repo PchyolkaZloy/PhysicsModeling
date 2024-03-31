@@ -16,7 +16,7 @@ function checkDiffFrequencies(firstFrequency, secondFrequency) {
     return diff < firstFrequency && diff < secondFrequency;
 }
 
-function countGraphData(firstFreq, secondFreq, amplitude,endTime, stepCount) {
+function countGraphData(firstFreq, secondFreq, amplitude, endTime, stepCount) {
     const step = endTime / stepCount;
 
     let fluctuationSumData = [];
@@ -60,6 +60,7 @@ function drawGraph(graphData) {
         x: timeData,
         y: fluctuationSumAmplData,
         mode: 'lines',
+        name: "$\\text{beat amplitude}$",
         line: {
             color: 'blue',
         },
@@ -70,6 +71,7 @@ function drawGraph(graphData) {
         x: timeData,
         y: fluctuationSumAmplData.map(ampl => -ampl),
         mode: 'lines',
+        name: "$\\text{beat amplitude}$",
         line: {
             color: 'blue',
         },
@@ -77,6 +79,10 @@ function drawGraph(graphData) {
     };
 
     const layout = {
+        title: {
+            text: `$\\text{Beat (addition) of oscillations}$`,
+        },
+
         xaxis: {
             exponentformat: 'power',
             showspikes: true,
@@ -89,14 +95,25 @@ function drawGraph(graphData) {
         },
 
         margin: {
-            l: 65,
+            l: 35,
             r: 25,
             t: 25,
+            b: 50,
         },
 
-        showlegend: false,
-    };
+        showlegend: true,
+        legend: {
+            font: {
+                family: 'Arial, serif',
+                size: 16,
+                color: 'black',
+            },
+            x: 1,
+            xanchor: 'right',
+            y: 0,
+        },
 
+    };
 
     const config = {
         scrollZoom: true,
@@ -118,9 +135,9 @@ function drawGraph(graphData) {
 function drawDefaultGraph() {
     const defaultGraphData = {
         firstFrequency: 10,
-        secondFrequency: 9,
-        amplitude: 10,
-        endTime : 20,
+        secondFrequency: 8,
+        amplitude: 1,
+        endTime: 10,
         stepCount: 10000
     };
 

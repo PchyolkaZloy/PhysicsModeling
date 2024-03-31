@@ -98,21 +98,17 @@
                                 <tbody>
                                 <tr>
                                     <td>
-                                        Inductance
+                                        Frequency 1
                                     </td>
-                                    <td>In henry. Positive float number greater than 0.</td>
+                                    <td>In hertz. Positive float number greater than 0.</td>
                                 </tr>
                                 <tr>
-                                    <td>Resistance</td>
-                                    <td>In ohms. Positive float number.</td>
+                                    <td>Frequency 2</td>
+                                    <td>In hertz. Positive float number greater than 0.</td>
                                 </tr>
                                 <tr>
-                                    <td>Capacitance</td>
-                                    <td>In farads. Positive float number greater than 0.</td>
-                                </tr>
-                                <tr>
-                                    <td>Initial Charge q<sub>0</sub></td>
-                                    <td>In coulombs. Positive float number.</td>
+                                    <td>Amplitude</td>
+                                    <td>Positive float number greater than 0.</td>
                                 </tr>
                                 <tr>
                                     <td>Steps count</td>
@@ -122,7 +118,7 @@
                                 </tr>
                                 <tr>
                                     <td>End time</td>
-                                    <td>In seconds. Affects the graphs scales. Positive float number.</td>
+                                    <td>In seconds. Affects the graph scale. Positive float number.</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -134,9 +130,10 @@
                                 parameters that were not in the technical task, but that are involved in the
                                 construction of the graphics (more fine-tuning)</p>
                             <br>
-                            <p>Use checkbox to choose to draw charge phase portrait</p>
                             <p>Explore the graphs conveniently and efficiently using the menu in the top right
-                                corner in plot form.</p>
+                            corner in plot form. Legend allows to "disable" one of the plots by
+                                clicking.</p>
+                            <br>
                             <p> If you try to enter incorrect data, this field will return to the default value. Integer
                                 types are given with integer type even if a real number is entered</p>
                         </div>
@@ -185,7 +182,7 @@
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="frequency2" name="frequency2" value="9" placeholder="#">
+                    <input class="form-control" id="frequency2" name="frequency2" value="8" placeholder="#">
                     <label for="frequency2">Frequency 2 (Hz)</label>
                 </div>
 
@@ -222,7 +219,7 @@
                 <button data-mdb-ripple-init type="submit" class="btn btn-primary" id="drawButton">
                     Draw!
                 </button>
-                <script src="../src/task6/forms.js"></script>
+                <script src="../src/task7/forms.js"></script>
             </form>
         </div>
 
