@@ -3,47 +3,50 @@ https://scask.ru/c_book_s_phis1.php?id=59
 https://en.wikipedia.org/wiki/Beat_(acoustics)
  */
 
-function countFluctuationSumAmplitude(amplitude, dw, time) {
-    return 2 * amplitude * Math.cos(dw * time / 2);
+function countFluctuationSumAmplitude(firstFreq, secondFreq, amplitude, time) {
+    return 2 * amplitude * Math.cos((firstFreq - secondFreq) * time / 2);
 }
 
-function countFluctuationSum(frequency, dw, amplitude, time) {
-    return 2 * amplitude * Math.cos((frequency + dw / 2) * time) * Math.cos(dw * time / 2);
+function countFluctuationSum(firstFreq, secondFreq, amplitude, fluctuationAmplitude, time) {
+    return fluctuationAmplitude * Math.cos((firstFreq + secondFreq) * time / 2);
 }
 
+function checkDiffFrequencies(firstFrequency, secondFrequency) {
+    const diff = Math.abs(firstFrequency - secondFrequency);
+    return diff < firstFrequency && diff < secondFrequency;
+}
 
-function countGraphData(frequency, dw, amplitude, endTime, stepCount) {
+function countGraphData(firstFreq, secondFreq, amplitude,endTime, stepCount) {
     const step = endTime / stepCount;
 
     let fluctuationSumData = [];
-    let fluctuationSumAmplitudeData = [];
+    let fluctuationSumAmplData = [];
     let timeData = [];
 
     for (let time = 0; time <= endTime; time += step) {
-        fluctuationSumData.push(countFluctuationSum(frequency, dw, amplitude, time));
-        fluctuationSumAmplitudeData.push(countFluctuationSumAmplitude(amplitude, dw, time));
+        fluctuationSumAmplData.push(countFluctuationSumAmplitude(firstFreq, secondFreq, amplitude, time));
+        fluctuationSumData.push(countFluctuationSum(
+            firstFreq, secondFreq, amplitude, fluctuationSumAmplData[fluctuationSumAmplData.length - 1], time));
 
         timeData.push(time);
     }
 
-    return {fluctuationSumData, fluctuationSumAmplitudeData, timeData};
+    return {fluctuationSumData, fluctuationSumAmplData, timeData};
 }
 
 
 function drawGraph(graphData) {
     const {
         fluctuationSumData,
-        fluctuationSumAmplitudeData,
+        fluctuationSumAmplData,
         timeData
     } = countGraphData(
-        graphData.frequency,
-        graphData.dw,
+        graphData.firstFrequency,
+        graphData.secondFrequency,
         graphData.amplitude,
         graphData.endTime,
         graphData.stepCount
     );
-
-    const fluctuationSumAmplitudeMinusData = fluctuationSumAmplitudeData.map(ampl => -ampl);
 
     const fluctuationSumGraphData = {
         x: timeData,
@@ -55,7 +58,7 @@ function drawGraph(graphData) {
 
     const fluctuationSumAmplitudePlusGraphData = {
         x: timeData,
-        y: fluctuationSumAmplitudeData,
+        y: fluctuationSumAmplData,
         mode: 'lines',
         line: {
             color: 'blue',
@@ -65,7 +68,7 @@ function drawGraph(graphData) {
 
     const fluctuationSumAmplitudeMinusGraphData = {
         x: timeData,
-        y: fluctuationSumAmplitudeMinusData,
+        y: fluctuationSumAmplData.map(ampl => -ampl),
         mode: 'lines',
         line: {
             color: 'blue',
@@ -103,17 +106,21 @@ function drawGraph(graphData) {
     };
 
     Plotly.newPlot('graph',
-        [fluctuationSumGraphData, ],
+        [
+            fluctuationSumGraphData,
+            fluctuationSumAmplitudePlusGraphData,
+            fluctuationSumAmplitudeMinusGraphData
+        ],
         layout, config);
 }
 
 
 function drawDefaultGraph() {
     const defaultGraphData = {
-        frequency: 1,
-        dw: 10,
-        amplitude: 1,
-        endTime: 10,
+        firstFrequency: 10,
+        secondFrequency: 9,
+        amplitude: 10,
+        endTime : 20,
         stepCount: 10000
     };
 
