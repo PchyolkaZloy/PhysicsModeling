@@ -98,12 +98,8 @@
                                 <tbody>
                                 <tr>
                                     <td>
-                                        Frequency 1
+                                        Frequency
                                     </td>
-                                    <td>In hertz. Positive float number greater than 0.</td>
-                                </tr>
-                                <tr>
-                                    <td>Frequency 2</td>
                                     <td>In hertz. Positive float number greater than 0.</td>
                                 </tr>
                                 <tr>
@@ -111,14 +107,15 @@
                                     <td>Positive float number greater than 0.</td>
                                 </tr>
                                 <tr>
-                                    <td>Steps count</td>
-                                    <td>Number of points to count functions values in them. The more steps, the
-                                        better the accuracy, but the lower the performance. Positive integer number.
-                                    </td>
+                                    <td>Phase</td>
+                                    <td>In radians. Float number.</td>
                                 </tr>
                                 <tr>
-                                    <td>End time</td>
-                                    <td>In seconds. Affects the graph scale. Positive float number.</td>
+                                    <td>Steps count</td>
+                                    <td>Number of points to count functions values in them. The more steps, the
+                                        better the accuracy, but the lower the performance. Maximum: 100000. Positive
+                                        integer number.
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -131,9 +128,11 @@
                                 construction of the graphics (more fine-tuning)</p>
                             <br>
                             <p>Explore the graphs conveniently and efficiently using the menu in the top right
-                                corner in plot form. Legend allows to "disable" one of the plots by
-                                clicking.</p>
+                                corner in plot form.
+                                Click at "Play" the bottom of chart to see the animation. "Pause" - stop animation.
+                                Also with the help of slidebar you can see individual frames at intervals.</p>
                             <br>
+
                             <p> If you try to enter incorrect data, this field will return to the default value. Integer
                                 types are given with integer type even if a real number is entered</p>
                         </div>
@@ -149,7 +148,8 @@
 
                             <div class="collapse" id="imageCollapse">
                                 <div class="card card-body">
-                                    <img src="../png/task7.png" alt="Here was a picture of this task" class="img-fluid">
+                                    <img src="../png/task7_2.png" alt="Here was a picture of this task"
+                                         class="img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -192,13 +192,13 @@
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="phase" name="phase" value="0" placeholder="#">
-                    <label for="phase">Phase (rad)</label>
+                    <input class="form-control" id="amplitude2" name="amplitude2" value="1" placeholder="#">
+                    <label for="amplitude2">Amplitude 2</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="amplitude2" name="amplitude2" value="1" placeholder="#">
-                    <label for="amplitude2">Amplitude 2</label>
+                    <input class="form-control" id="phase" name="phase" value="0" placeholder="#">
+                    <label for="phase">Phase (rad)</label>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -212,7 +212,7 @@
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
                             <div class="form-floating">
-                                <input class="form-control" id="stepCount" name="stepCount" value="10000"
+                                <input class="form-control" id="stepCount" name="stepCount" value="50000"
                                        placeholder="#">
                                 <label for="stepCount">Steps count</label>
                             </div>

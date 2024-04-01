@@ -27,30 +27,29 @@ function customParseInteger(element, defaultValue) {
 
 function getData() {
     const defaultGraphData = {
-        firstFrequency: 10,
-        secondFrequency: 8,
-        amplitude: 1,
-        endTime: 10,
-        stepCount: 10000
+        firstAmplitude: 1,
+        secondAmplitude: 1,
+        firstFrequency: 2,
+        secondFrequency: 3,
+        phase: 0,
+        stepCount: 50000,
     };
 
     let graphData = {
-        firstFrequency: customParseFloatGreaterZero(document.getElementById("frequency1"), defaultGraphData.inductance),
-        secondFrequency: customParseFloatGreaterZero(document.getElementById("frequency2"), defaultGraphData.resistance),
-        amplitude: customParseFloatGreaterZero(document.getElementById("amplitude"), defaultGraphData.capacitance),
-        endTime: customParseFloatGreaterZero(document.getElementById("endTime"), defaultGraphData.endTime),
+        firstAmplitude: customParseFloatGreaterZero(document.getElementById("amplitude1"), defaultGraphData.firstAmplitude),
+        secondAmplitude: customParseFloatGreaterZero(document.getElementById("amplitude2"), defaultGraphData.secondAmplitude),
+        firstFrequency: customParseFloatGreaterZero(document.getElementById("frequency1"), defaultGraphData.firstFrequency),
+        secondFrequency: customParseFloatGreaterZero(document.getElementById("frequency2"), defaultGraphData.secondFrequency),
+        phase: customParseFloat(document.getElementById("phase"), defaultGraphData.phase),
         stepCount: customParseInteger(document.getElementById("stepCount"), defaultGraphData.stepCount),
     };
 
-    if (!checkDiffFrequencies(graphData.firstFrequency, graphData.secondFrequency)) {
-        alert("Oscillations should be with slightly different but close frequencies" +
-            " (Their difference have not be more than one of them). Setting to default values.");
+    const maxAccuracy = 100000;
+    if (graphData.stepCount > maxAccuracy) {
+        alert("Max step count is 100000. Setting to default value.");
 
-        document.getElementById("frequency1").value = defaultGraphData.firstFrequency;
-        document.getElementById("frequency2").value = defaultGraphData.secondFrequency;
-
-        graphData.firstFrequency = defaultGraphData.firstFrequency;
-        graphData.secondFrequency = defaultGraphData.secondFrequency;
+        document.getElementById("stepCount").value = defaultGraphData.stepCount;
+        graphData.stepCount = defaultGraphData.stepCount;
     }
 
     return graphData;

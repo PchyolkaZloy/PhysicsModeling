@@ -35,9 +35,9 @@ function getData() {
     };
 
     let graphData = {
-        firstFrequency: customParseFloatGreaterZero(document.getElementById("frequency1"), defaultGraphData.inductance),
-        secondFrequency: customParseFloatGreaterZero(document.getElementById("frequency2"), defaultGraphData.resistance),
-        amplitude: customParseFloatGreaterZero(document.getElementById("amplitude"), defaultGraphData.capacitance),
+        firstFrequency: customParseFloatGreaterZero(document.getElementById("frequency1"), defaultGraphData.firstFrequency),
+        secondFrequency: customParseFloatGreaterZero(document.getElementById("frequency2"), defaultGraphData.secondFrequency),
+        amplitude: customParseFloatGreaterZero(document.getElementById("amplitude"), defaultGraphData.amplitude),
         endTime: customParseFloatGreaterZero(document.getElementById("endTime"), defaultGraphData.endTime),
         stepCount: customParseInteger(document.getElementById("stepCount"), defaultGraphData.stepCount),
     };

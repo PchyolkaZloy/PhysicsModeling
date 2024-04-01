@@ -22,7 +22,7 @@ function countYCoord(amplitude, b, time) {
 }
 
 function makeSliderStepsAndFrames(xGraphData, yGraphData) {
-    const drawTime = 5; // seconds
+    const drawTime = 5; // in seconds
     let frameStep = Math.trunc(xGraphData.length / (drawTime * 60));
 
     let sliderStepsData = [];
