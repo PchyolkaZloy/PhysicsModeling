@@ -1,10 +1,20 @@
-.dropdown-menu {
+.outer-dropdown-menu {
     min-width: 350px;
 }
 
 .dropdown-item {
     border-radius: 5px;
     text-align: center;
+}
+
+.inner-dropdown-menu.dropdown-item {
+    background-color: #212529;
+    color: #dde1e5;
+}
+
+.inner-dropdown-menu.dropdown-item.active {
+    background-color: #fdfdfd;
+    color: #212529;
 }
 
 .dropdown-item.active,

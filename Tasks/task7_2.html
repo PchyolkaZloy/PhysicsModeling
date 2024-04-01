@@ -35,7 +35,8 @@
                        id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Tasks
                     </a>
-                    <div class="dropdown-menu dropdown" data-bs-theme="dark">
+
+                    <div class="dropdown-menu outer-dropdown-menu" data-bs-theme="dark">
                         <div class="container" id="dropdownContainer">
                             <div class="row">
                                 <div class="col-4 md-2">
@@ -47,7 +48,17 @@
                                 </div>
                                 <div class="col-4 md-2">
                                     <a class="dropdown-item" href="task6.html">Task 6</a>
-                                    <a class="dropdown-item active" href="task7_2.html">Task 7</a>
+
+                                    <a class="nav-link dropdown-item dropdown-toggle inner-dropdown-menu active" href="#"
+                                       role="button"
+                                       data-bs-toggle="dropdown" aria-expanded="false">
+                                        Task 7
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="task7_1.html">Beat</a>
+                                        <a class="dropdown-item active" href="task7_2.html">Lissajous curve</a>
+                                    </div>
+
                                     <a class="dropdown-item disabled" href="#">Task 8</a>
                                     <a class="dropdown-item disabled" href="#">Task 9</a>
                                     <a class="dropdown-item disabled" href="#">Task 10</a>
@@ -62,7 +73,7 @@
                             </div>
                         </div>
                     </div>
-                </li>
+                    <script src="../src/dropdown.js"></script></li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="https://t.me/psevdovich" target="_blank">Author</a>
@@ -224,12 +235,12 @@
                 <button data-mdb-ripple-init type="submit" class="btn btn-primary" id="drawButton">
                     Draw!
                 </button>
-                <script src="../src/task7_2/forms.js"></script>
+                <script src="../src/task7/2/forms.js"></script>
             </form>
         </div>
 
         <div class="col-lg-10" id="graph">
-            <script src="../src/task7_2/graph.js"></script>
+            <script src="../src/task7/2/graph.js"></script>
         </div>
     </div>
 </div>
