@@ -9,10 +9,6 @@ function gcd(a, b) {
         return (gcd(b, a - Math.floor(a / b) * b));
 }
 
-function lcm(a, b) {
-    return (a * b) / gcd(a, b);
-}
-
 function countXCoord(amplitude, a, phase, time) {
     return amplitude * Math.sin(a * time + phase);
 }
@@ -72,7 +68,7 @@ function makeSliderStepsAndFrames(xGraphData, yGraphData) {
 }
 
 function countGraphData(amplitude1, amplitude2, frequency1, frequency2, phase, stepCount) {
-    const endTime = 2 * Math.PI * lcm(frequency1, frequency2) / (frequency1 * frequency2);
+    const endTime = 2 * Math.PI / gcd(frequency1, frequency2);
     const step = endTime / stepCount;
 
     let xGraphData = [];
