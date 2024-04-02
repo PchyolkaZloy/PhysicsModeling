@@ -199,6 +199,12 @@ function countAndDrawMagneticField(graphData) {
                 style: {
                     color: '#fdfdfd'
                 }
+            },
+            title: {
+                text: 'X (m)',
+                style: {
+                    color: '#fdfdfd'
+                }
             }
         },
 
@@ -210,6 +216,12 @@ function countAndDrawMagneticField(graphData) {
                 style: {
                     color: '#fdfdfd'
                 }
+            },
+            title: {
+                text: 'Y (m)',
+                style: {
+                    color: '#fdfdfd'
+                }
             }
         },
 
@@ -218,6 +230,7 @@ function countAndDrawMagneticField(graphData) {
                 color: '#fdfdfd'
             }
         },
+
         tooltip: {
             formatter: function () {
                 if (this.series.type === 'vector') {
