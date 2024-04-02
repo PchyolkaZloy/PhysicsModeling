@@ -2,8 +2,8 @@ function gcd(a, b) {
     if (a < b)
         return gcd(b, a);
 
-    // base case
-    if (Math.abs(b) < 0.001)
+    const precision = 1e-10;
+    if (Math.abs(b) < precision)
         return a;
     else
         return (gcd(b, a - Math.floor(a / b) * b));
