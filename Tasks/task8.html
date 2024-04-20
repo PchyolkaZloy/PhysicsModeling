@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Physics | Task 4</title>
+    <title>Physics | Task 8</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/description.css">
     <link rel="stylesheet" href="../css/dropdown.css">
@@ -42,22 +43,22 @@
                                     <a class="dropdown-item" href="task1.html">Task 1</a>
                                     <a class="dropdown-item" href="task2.html">Task 2</a>
                                     <a class="dropdown-item" href="task3.html">Task 3</a>
-                                    <a class="dropdown-item active" href="task4.html">Task 4</a>
+                                    <a class="dropdown-item" href="task4.html">Task 4</a>
                                     <a class="dropdown-item" href="task5.html">Task 5</a>
                                 </div>
                                 <div class="col-4 md-2">
                                     <a class="dropdown-item" href="task6.html">Task 6</a>
 
-                                    <a class="nav-link dropdown-item dropdown-toggle inner-dropdown-menu" href="#"
-                                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-item dropdown-toggle inner-dropdown-menu active"
+                                       href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Task 7
                                     </a>
-                                    <div class="dropdown-menu inner-dropdown-menu">
+                                    <div class="dropdown-menu">
                                         <a class="dropdown-item" href="task7_1.html">Beat</a>
                                         <a class="dropdown-item" href="task7_2.html">Lissajous curve</a>
                                     </div>
 
-                                    <a class="dropdown-item" href="task8.html">Task 8</a>
+                                    <a class="dropdown-item active" href="task8.html">Task 8</a>
                                     <a class="dropdown-item disabled" href="#">Task 9</a>
                                     <a class="dropdown-item disabled" href="#">Task 10</a>
                                 </div>
@@ -89,7 +90,6 @@
 <div class="container-fluid" id="main">
     <div class="row" id="mainRow">
         <div class="col-lg-2 container text-center" id="forms">
-
             <div id="descriptionOffCanvas">
                 <div class="offcanvas-content" id="description">
                     <div class="offcanvas-header">
@@ -108,29 +108,24 @@
 
                                 <tbody>
                                 <tr>
-                                    <td>Magnetic Induction</td>
-                                    <td>In tesla. Positive float number.</td>
+                                    <td>
+                                        Frequency
+                                    </td>
+                                    <td>In hertz. Positive float number greater than 0.</td>
                                 </tr>
                                 <tr>
-                                    <td>Rotation frequency</td>
-                                    <td>In hertz. Positive float number.</td>
+                                    <td>Amplitude</td>
+                                    <td>Positive float number greater than 0.</td>
                                 </tr>
                                 <tr>
-                                    <td>Resistance</td>
-                                    <td>In ohm. Positive float number.</td>
-                                </tr>
-                                <tr>
-                                    <td>Contour area</td>
-                                    <td>In square meters. Positive float number.</td>
-                                </tr>
-                                <tr>
-                                    <td>End time</td>
-                                    <td>In seconds. Affects the graph scale. Positive float number.</td>
+                                    <td>Phase</td>
+                                    <td>In radians. Float number.</td>
                                 </tr>
                                 <tr>
                                     <td>Steps count</td>
-                                    <td>Number of points to count function values in them. The more steps, the
-                                        better the accuracy, but the lower the performance. Positive integer number.
+                                    <td>Number of points to count functions values in them. The more steps, the
+                                        better the accuracy, but the lower the performance. Maximum: 100000. Positive
+                                        integer number.
                                     </td>
                                 </tr>
                                 </tbody>
@@ -143,12 +138,14 @@
                                 parameters that were not in the technical task, but that are involved in the
                                 construction of the graphics (more fine-tuning)</p>
                             <br>
-                            <p>Use checkbox to choose to draw graphs on one canvas or separately</p>
-                            <p>Explore the graph forms conveniently and efficiently using the menu in the top right
-                                corner in graph form.</p>
-                            <p>Legend allows to "disable" one of the plots (EMF or induced current) by clicking.</p>
+                            <p>Explore the graphs conveniently and efficiently using the menu in the top right
+                                corner in plot form.
+                                Click at "Play" the bottom of chart to see the animation. "Pause" - stop animation.
+                                Also with the help of slidebar you can see individual frames at intervals.</p>
                             <br>
-                            <p> If you try to enter incorrect data, this field will return to the default value</p>
+
+                            <p> If you try to enter incorrect data, this field will return to the default value. Integer
+                                types are given with integer type even if a real number is entered</p>
                         </div>
 
                         <div id="imageDescription">
@@ -162,13 +159,13 @@
 
                             <div class="collapse" id="imageCollapse">
                                 <div class="card card-body">
-                                    <img src="../png/task4.png" alt="Here was a picture of this task" class="img-fluid">
+                                    <img src="../png/task7_2.png" alt="Here was a picture of this task"
+                                         class="img-fluid">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
 
                 <div class="d-flex justify-content-center align-items-center">
                     <button class="btn btn-primary d-none d-lg-block" type="button" data-bs-toggle="offcanvas"
@@ -182,7 +179,6 @@
                 <button class="btn btn-primary d-lg-none" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#descriptionMobile" aria-controls="descriptionMobile">Description
                 </button>
-
                 <div class="offcanvas offcanvas-bottom d-lg-none" data-bs-scroll="true" data-bs-backdrop="false"
                      tabindex="-1" id="descriptionMobile" aria-labelledby="descriptionMobileLabel">
                 </div>
@@ -192,26 +188,28 @@
             <form id="graphForm">
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="induction" name="induction" value="1" placeholder="#">
-                    <label for="induction">Magnetic induction (T)</label>
+                    <input class="form-control" id="frequency1" name="frequency1" value="2" placeholder="#">
+                    <label for="frequency1">Frequency 1 (Hz)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="rotationFrequency" name="rotationFrequency"
-                           value="1" placeholder="#">
-                    <label for="rotationFrequency">Rotation frequency (Hz)</label>
+                    <input class="form-control" id="frequency2" name="frequency2" value="3" placeholder="#">
+                    <label for="frequency2">Frequency 2 (Hz)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="resistance" name="resistance" value="5" placeholder="#">
-                    <label for="resistance">Resistance (ohm)</label>
+                    <input class="form-control" id="amplitude1" name="amplitude1" value="1" placeholder="#">
+                    <label for="amplitude1">Amplitude 1</label>
                 </div>
 
-                <div class="form-switch">
-                    <input class="form-check-input" type="checkbox" id="checkbox" value="" checked>
-                    <label class="form-check-input-label" for="checkbox" style="font-style: normal">
-                        Draw in one plot
-                    </label>
+                <div class="form-floating mb-2">
+                    <input class="form-control" id="amplitude2" name="amplitude2" value="1" placeholder="#">
+                    <label for="amplitude2">Amplitude 2</label>
+                </div>
+
+                <div class="form-floating mb-2">
+                    <input class="form-control" id="phase" name="phase" value="0" placeholder="#">
+                    <label for="phase">Phase (rad)</label>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -222,21 +220,10 @@
                         </button>
                     </h2>
 
-
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
-                            <div class="form-floating mb-2">
-                                <input class="form-control" id="area" name="area" value="1" placeholder="#">
-                                <label for="area">Сontour area (m<sup>2</sup>)</label>
-                            </div>
-
-                            <div class="form-floating mb-2">
-                                <input class="form-control" id="endTime" name="endTime" value="10" placeholder="#">
-                                <label for="endTime">End time (sec)</label>
-                            </div>
-
                             <div class="form-floating">
-                                <input class="form-control" id="stepCount" name="stepCount" value="10000"
+                                <input class="form-control" id="stepCount" name="stepCount" value="50000"
                                        placeholder="#">
                                 <label for="stepCount">Steps count</label>
                             </div>
@@ -244,16 +231,15 @@
                     </div>
                 </div>
 
-
                 <button data-mdb-ripple-init type="submit" class="btn btn-primary" id="drawButton">
                     Draw!
                 </button>
-                <script src="../src/task4/forms.js"></script>
+                <script src="../src/task8/forms.js"></script>
             </form>
         </div>
 
         <div class="col-lg-10" id="graph">
-            <script src="../src/task4/graph.js"></script>
+            <script src="../src/task8/graph.js"></script>
         </div>
     </div>
 </div>
