@@ -49,7 +49,7 @@
                                 <div class="col-4 md-2">
                                     <a class="dropdown-item" href="task6.html">Task 6</a>
 
-                                    <a class="nav-link dropdown-item dropdown-toggle inner-dropdown-menu active"
+                                    <a class="nav-link dropdown-item dropdown-toggle inner-dropdown-menu"
                                        href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Task 7
                                     </a>
@@ -159,7 +159,7 @@
 
                             <div class="collapse" id="imageCollapse">
                                 <div class="card card-body">
-                                    <img src="../png/task7_2.png" alt="Here was a picture of this task"
+                                    <img src="../png/task8.png" alt="Here was a picture of this task"
                                          class="img-fluid">
                                 </div>
                             </div>
@@ -188,28 +188,23 @@
             <form id="graphForm">
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="frequency1" name="frequency1" value="2" placeholder="#">
-                    <label for="frequency1">Frequency 1 (Hz)</label>
+                    <input class="form-control" id="messageFrequency" name="messageFrequency" value="100" placeholder="#">
+                    <label for="messageFrequency">Message Frequency (Hz)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="frequency2" name="frequency2" value="3" placeholder="#">
-                    <label for="frequency2">Frequency 2 (Hz)</label>
+                    <input class="form-control" id="carrierFrequency" name="carrierFrequency" value="10" placeholder="#">
+                    <label for="carrierFrequency">Carrier Frequency (Hz)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="amplitude1" name="amplitude1" value="1" placeholder="#">
-                    <label for="amplitude1">Amplitude 1</label>
+                    <input class="form-control" id="messageAmplitude" name="messageAmplitude" value="1" placeholder="#">
+                    <label for="messageAmplitude">Message Amplitude</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="amplitude2" name="amplitude2" value="1" placeholder="#">
-                    <label for="amplitude2">Amplitude 2</label>
-                </div>
-
-                <div class="form-floating mb-2">
-                    <input class="form-control" id="phase" name="phase" value="0" placeholder="#">
-                    <label for="phase">Phase (rad)</label>
+                    <input class="form-control" id="carrierAmplitude" name="carrierAmplitude" value="2" placeholder="#">
+                    <label for="carrierAmplitude">Carrier Amplitude</label>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -223,7 +218,7 @@
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
                             <div class="form-floating">
-                                <input class="form-control" id="stepCount" name="stepCount" value="50000"
+                                <input class="form-control" id="stepCount" name="stepCount" value="10000"
                                        placeholder="#">
                                 <label for="stepCount">Steps count</label>
                             </div>
