@@ -33,7 +33,7 @@ function getData() {
         stepCount: customParseInteger(document.getElementById("stepCount"), defaultGraphData.stepCount),
     };
 
-    if (graphData.messageAmplitude / graphData.carrierAmplitude > 1) {
+    /*if (graphData.messageAmplitude / graphData.carrierAmplitude > 1) {
         alert("Message amplitude / carrier amplitude > 1!\n" +
             "Overmodulation occurs and reconstruction of message signal" +
             " from the transmitted signal would lead in loss of original signal.\n" +
@@ -45,7 +45,7 @@ function getData() {
         document.getElementById("carrierAmplitude").value = defaultGraphData.carrierAmplitude;
         graphData.messageAmplitude = defaultGraphData.carrierAmplitude;
     }
-
+*/
     return graphData;
 }
 

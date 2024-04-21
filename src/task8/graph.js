@@ -7,16 +7,8 @@ function countSignal(amplitude, frequency, time) {
     return amplitude * Math.cos(2 * Math.PI * frequency * time);
 }
 
-function countModulation(messageAmplitude, carrierSignal, messageSignal) {
-    return (1 + messageSignal / messageAmplitude) * carrierSignal;
-}
-
-function countSpectrum(messageFrequency, carrierFrequency, messageAmplitude, carrierAmplitude, time) {
-    return carrierAmplitude * Math.cos(2 * Math.PI * carrierFrequency * time) +
-        messageAmplitude / 2 * (
-            Math.cos(2 * Math.PI * time * (carrierFrequency + messageFrequency)) +
-            Math.cos(2 * Math.PI * time * (carrierFrequency - messageFrequency))
-        )
+function countModulation(carrierAmplitude, carrierSignal, messageSignal) {
+    return (1 + messageSignal / carrierAmplitude) * carrierSignal;
 }
 
 function countGraphData(messageFrequency, carrierFrequency, messageAmplitude, carrierAmplitude, stepCount) {
@@ -35,13 +27,52 @@ function countGraphData(messageFrequency, carrierFrequency, messageAmplitude, ca
     for (let time = 0; time < endTime; time += step) {
         carrierSignalData.push(countSignal(carrierAmplitude, carrierFrequency, time));
         messageSignalData.push(countSignal(messageAmplitude, messageFrequency, time));
-        modulationData.push(countModulation(messageAmplitude, carrierSignalData[index], messageSignalData[index]));
-        spectrumData.push(countSpectrum(messageFrequency, carrierFrequency, messageAmplitude, carrierAmplitude, time))
+        modulationData.push(countModulation(carrierAmplitude, carrierSignalData[index], messageSignalData[index]));
+
         timeData.push(time);
         ++index;
     }
 
+    spectrumData = countSpectrum(messageFrequency, carrierFrequency, messageAmplitude, carrierAmplitude);
+
     return {carrierSignalData, messageSignalData, modulationData, spectrumData, timeData};
+}
+
+function countSpectrum(messageFrequency, carrierFrequency, messageAmplitude, carrierAmplitude) {
+    let spectrumData = {
+        am_x: [],
+        am_y: [],
+        car_x: [],
+        car_y: [],
+        msg_x: [],
+        msg_y: [],
+        min_freq: 0,
+        max_freq: 0
+    };
+
+    // Не считаю через fft, так как сигналы простые гармоничные и, проанализировав уравнения, вывел,
+    // что спектр можно найти аналитически (разложить просто AM сигнал, используя тригонометрические преобразования)
+
+    spectrumData.msg_x.push(messageFrequency);
+    spectrumData.msg_y.push(messageAmplitude);
+
+    spectrumData.car_x.push(carrierFrequency);
+    spectrumData.car_y.push(carrierAmplitude);
+
+    spectrumData.am_x.push(carrierFrequency - messageFrequency);
+    spectrumData.am_y.push(messageAmplitude * 0.5);
+
+    spectrumData.am_x.push(carrierFrequency);
+    spectrumData.am_y.push(carrierAmplitude);
+
+    spectrumData.am_x.push(carrierFrequency + messageFrequency);
+    spectrumData.am_y.push(messageAmplitude * 0.5);
+
+    // При условии, что частота msg меньшe car
+    spectrumData.min_freq = Math.min(carrierFrequency - messageFrequency, messageFrequency);
+    spectrumData.max_freq = carrierFrequency + messageFrequency;
+
+    return spectrumData;
 }
 
 function drawGraphs(graphData) {
@@ -65,8 +96,8 @@ function drawGraphs(graphData) {
         mode: 'lines',
         name: "$c(t)$",
         hovertemplate: '<b>c(t)</b>: %{y}<extra></extra>',
-        xaxis: 'x',
-        yaxis: 'y',
+        xaxis: 'x2',
+        yaxis: 'y2',
     };
 
     const messageSignalGraphData = {
@@ -75,8 +106,8 @@ function drawGraphs(graphData) {
         mode: 'lines',
         name: "$m(t)$",
         hovertemplate: '<b>m(t)</b>: %{y}<extra></extra>',
-        xaxis: 'x2',
-        yaxis: 'y2',
+        xaxis: 'x',
+        yaxis: 'y',
     };
 
     const modulationSignalGraphData = {
@@ -89,17 +120,8 @@ function drawGraphs(graphData) {
         yaxis: 'y3',
     };
 
-    const spectrumGraphData = {
-        x: timeData,
-        y: spectrumData,
-        mode: 'lines',
-        name: "$s(t)$",
-        hovertemplate: '<b>s(t)</b>: %{y}<extra></extra>',
-        xaxis: 'x4',
-        yaxis: 'y4',
-    };
 
-    const layout = {
+    const layout1 = {
         grid: {
             rows: 3,
             columns: 2,
@@ -107,7 +129,7 @@ function drawGraphs(graphData) {
         },
 
         xaxis: {
-            domain: [0, 0.5],
+            domain: [0, 1],
             exponentformat: 'power',
             showspikes: true,
         },
@@ -119,7 +141,7 @@ function drawGraphs(graphData) {
         },
 
         xaxis2: {
-            domain: [0, 0.5],
+            domain: [0, 1],
             exponentformat: 'power',
             showspikes: true,
         },
@@ -131,7 +153,7 @@ function drawGraphs(graphData) {
         },
 
         xaxis3: {
-            domain: [0, 0.5],
+            domain: [0, 1],
             exponentformat: 'power',
             showspikes: true,
             title: '$\\text{Time } t, sec$'
@@ -143,17 +165,6 @@ function drawGraphs(graphData) {
             title: '$\\text{Amplitude } A$'
         },
 
-        xaxis4: {
-            domain: [0.55, 1],
-            exponentformat: 'power',
-            showspikes: true,
-        },
-        yaxis4: {
-            domain: [0, 1],
-            exponentformat: 'power',
-            showspikes: true,
-        },
-
         margin: {
             l: 65,
             r: 25,
@@ -162,25 +173,25 @@ function drawGraphs(graphData) {
 
         annotations: [
             {
-                text: `$\\text{Carrier signal}, c(t)$`,
+                text: `$\\text{Message signal}, c(t)$`,
                 font: {
                     size: 20,
                 },
                 showarrow: false,
                 align: 'center',
-                x: 0.2,
+                x: 0.5,
                 y: 1,
                 xref: 'paper',
                 yref: 'paper',
             },
             {
-                text: `$\\text{Message signal}, m(t)$`,
+                text: `$\\text{Carrier signal}, m(t)$`,
                 font: {
                     size: 20,
                 },
                 showarrow: false,
                 align: 'center',
-                x: 0.2,
+                x: 0.5,
                 y: 0.63,
                 xref: 'paper',
                 yref: 'paper',
@@ -192,13 +203,79 @@ function drawGraphs(graphData) {
                 },
                 showarrow: false,
                 align: 'center',
-                x: 0.2,
+                x: 0.5,
                 y: 0.26,
                 xref: 'paper',
                 yref: 'paper',
             }
         ],
         showlegend: false,
+    };
+
+    const messageSpectrumGraphData = {
+        x: spectrumData.msg_x,
+        y: spectrumData.msg_y,
+        type: 'bar',
+        name: "$\\text{Message signal}$",
+        hovertemplate: '<b>msg_s(f)</b>: %{y}<extra></extra>',
+
+    };
+
+    const carrierSpectrumGraphData = {
+        x: spectrumData.car_x,
+        y: spectrumData.car_y,
+        type: 'bar',
+        name: "$\\text{Carrier signal}$",
+        hovertemplate: '<b>car_s(f)</b>: %{y}<extra></extra>',
+
+    };
+
+    const amSpectrumGraphData = {
+        x: spectrumData.am_x,
+        y: spectrumData.am_y,
+        type: 'bar',
+        name: "$\\text{AM signal}$",
+        hovertemplate: '<b>am_s(f)</b>: %{y}<extra></extra>',
+
+    };
+
+    const layout2 = {
+        barmode: 'overlay',
+        bargap: 0.9,
+        title: {
+            text: `$\\text{Signals spectrum}$`,
+            font: {
+                size: 20
+            }
+        },
+
+        xaxis: {
+            exponentformat: 'power',
+            showspikes: true,
+            title: '$\\text{Frequency }f, Hz$',
+            autorange: true,
+        },
+        yaxis: {
+            domain: [0, 0.97],
+            exponentformat: 'power',
+            showspikes: true,
+            title: '$\\text{Amplitude } A$'
+        },
+
+        margin: {
+            l: 65,
+            r: 25,
+            t: 80,
+        },
+
+        legend: {
+            font: {
+                size: 16,
+            },
+            x: 0,
+            y: 1,
+            xanchor: 'left',
+        },
     };
 
     const config = {
@@ -208,15 +285,19 @@ function drawGraphs(graphData) {
         responsive: true,
     };
 
-    Plotly.newPlot('graph',
-        [carrierSignalGraphData, messageSignalGraphData, modulationSignalGraphData, spectrumGraphData],
-        layout, config);
+    Plotly.newPlot('graph1',
+        [carrierSignalGraphData, messageSignalGraphData, modulationSignalGraphData],
+        layout1, config);
+
+    Plotly.newPlot('graph2',
+        [carrierSpectrumGraphData, messageSpectrumGraphData, amSpectrumGraphData],
+        layout2, config);
 }
 
 function drawDefaultGraphs() {
     const defaultGraphData = {
-        messageFrequency: 100,
-        carrierFrequency: 10,
+        messageFrequency: 10,
+        carrierFrequency: 100,
         messageAmplitude: 1,
         carrierAmplitude: 2,
         stepCount: 10000
