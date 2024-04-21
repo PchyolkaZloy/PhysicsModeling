@@ -33,19 +33,12 @@ function getData() {
         stepCount: customParseInteger(document.getElementById("stepCount"), defaultGraphData.stepCount),
     };
 
-    /*if (graphData.messageAmplitude / graphData.carrierAmplitude > 1) {
-        alert("Message amplitude / carrier amplitude > 1!\n" +
+    if (graphData.messageAmplitude / graphData.carrierAmplitude > 1) {
+        alert("[WARNING] Message amplitude / carrier amplitude > 1!\n" +
             "Overmodulation occurs and reconstruction of message signal" +
             " from the transmitted signal would lead in loss of original signal.\n" +
-            "Works only when message amplitude / carrier amplitude <= 1. Setting to default values.");
-
-        document.getElementById("messageAmplitude").value = defaultGraphData.messageAmplitude;
-        graphData.messageAmplitude = defaultGraphData.messageAmplitude;
-
-        document.getElementById("carrierAmplitude").value = defaultGraphData.carrierAmplitude;
-        graphData.messageAmplitude = defaultGraphData.carrierAmplitude;
+            "Spectrum plots correct works only when message amplitude / carrier amplitude <= 1.");
     }
-*/
     return graphData;
 }
 

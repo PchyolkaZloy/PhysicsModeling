@@ -39,40 +39,26 @@ function countGraphData(messageFrequency, carrierFrequency, messageAmplitude, ca
 }
 
 function countSpectrum(messageFrequency, carrierFrequency, messageAmplitude, carrierAmplitude) {
-    let spectrumData = {
-        am_x: [],
-        am_y: [],
-        car_x: [],
-        car_y: [],
-        msg_x: [],
-        msg_y: [],
-        min_freq: 0,
-        max_freq: 0
-    };
-
     // Не считаю через fft, так как сигналы простые гармоничные и, проанализировав уравнения, вывел,
-    // что спектр можно найти аналитически (разложить просто AM сигнал, используя тригонометрические преобразования)
-
-    spectrumData.msg_x.push(messageFrequency);
-    spectrumData.msg_y.push(messageAmplitude);
-
-    spectrumData.car_x.push(carrierFrequency);
-    spectrumData.car_y.push(carrierAmplitude);
-
-    spectrumData.am_x.push(carrierFrequency - messageFrequency);
-    spectrumData.am_y.push(messageAmplitude * 0.5);
-
-    spectrumData.am_x.push(carrierFrequency);
-    spectrumData.am_y.push(carrierAmplitude);
-
-    spectrumData.am_x.push(carrierFrequency + messageFrequency);
-    spectrumData.am_y.push(messageAmplitude * 0.5);
-
-    // При условии, что частота msg меньшe car
-    spectrumData.min_freq = Math.min(carrierFrequency - messageFrequency, messageFrequency);
-    spectrumData.max_freq = carrierFrequency + messageFrequency;
-
-    return spectrumData;
+    // что спектр можно найти аналитически (разложить AM сигнал, используя тригонометрические преобразования)
+    // подробно: https://www.pd.isu.ru/method/rtcs/Theory/spectrumam.htm
+    // https://en.wikipedia.org/wiki/Amplitude_modulation#Spectrum
+    return {
+        am_x: [
+            [carrierFrequency - messageFrequency, carrierFrequency - messageFrequency],
+            [carrierFrequency, carrierFrequency],
+            [carrierFrequency + messageFrequency, carrierFrequency + messageFrequency],
+        ],
+        am_y: [
+            [0, messageAmplitude * 0.5],
+            [0, carrierAmplitude],
+            [0, messageAmplitude * 0.5]
+        ],
+        car_x: [carrierFrequency, carrierFrequency],
+        car_y: [0, carrierAmplitude],
+        msg_x: [messageFrequency, messageFrequency],
+        msg_y: [0, messageAmplitude],
+    };
 }
 
 function drawGraphs(graphData) {
@@ -215,33 +201,50 @@ function drawGraphs(graphData) {
     const messageSpectrumGraphData = {
         x: spectrumData.msg_x,
         y: spectrumData.msg_y,
-        type: 'bar',
+        mode: 'lines',
         name: "$\\text{Message signal}$",
         hovertemplate: '<b>msg_s(f)</b>: %{y}<extra></extra>',
-
     };
 
     const carrierSpectrumGraphData = {
         x: spectrumData.car_x,
         y: spectrumData.car_y,
-        type: 'bar',
+        mode: 'lines',
         name: "$\\text{Carrier signal}$",
         hovertemplate: '<b>car_s(f)</b>: %{y}<extra></extra>',
-
     };
 
-    const amSpectrumGraphData = {
-        x: spectrumData.am_x,
-        y: spectrumData.am_y,
-        type: 'bar',
+    const amSpectrumGraphData1 = {
+        x: spectrumData.am_x[0],
+        y: spectrumData.am_y[0],
+        line: {color: 'rgb(252,0,0)'},
+        mode: 'lines',
+        legendgroup: 'AM signal',
         name: "$\\text{AM signal}$",
         hovertemplate: '<b>am_s(f)</b>: %{y}<extra></extra>',
+    };
 
+    const amSpectrumGraphData2 = {
+        x: spectrumData.am_x[1],
+        y: spectrumData.am_y[1],
+        line: {color: 'rgb(252,0,0)'},
+        mode: 'lines',
+        legendgroup: 'AM signal',
+        name: "",
+        hovertemplate: '<b>am_s(f)</b>: %{y}<extra></extra>',
+    };
+
+    const amSpectrumGraphData3 = {
+        x: spectrumData.am_x[2],
+        y: spectrumData.am_y[2],
+        line: {color: 'rgb(252,0,0)'},
+        mode: 'lines',
+        legendgroup: 'AM signal',
+        name: "",
+        hovertemplate: '<b>am_s(f)</b>: %{y}<extra></extra>',
     };
 
     const layout2 = {
-        barmode: 'overlay',
-        bargap: 0.9,
         title: {
             text: `$\\text{Signals spectrum}$`,
             font: {
@@ -269,6 +272,9 @@ function drawGraphs(graphData) {
         },
 
         legend: {
+            onhover: 'none', // Отключить всплывающие подсказки
+            customdata: true, // Использовать `customdata` в легенде
+            title: 'AM signal',
             font: {
                 size: 16,
             },
@@ -290,7 +296,7 @@ function drawGraphs(graphData) {
         layout1, config);
 
     Plotly.newPlot('graph2',
-        [carrierSpectrumGraphData, messageSpectrumGraphData, amSpectrumGraphData],
+        [carrierSpectrumGraphData, messageSpectrumGraphData, amSpectrumGraphData1, amSpectrumGraphData2, amSpectrumGraphData3],
         layout2, config);
 }
 
