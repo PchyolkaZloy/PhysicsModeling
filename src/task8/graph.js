@@ -201,6 +201,7 @@ function drawGraphs(graphData) {
     const messageSpectrumGraphData = {
         x: spectrumData.msg_x,
         y: spectrumData.msg_y,
+        line: {color: 'rgb(221,3,245)'},
         mode: 'lines',
         name: "$\\text{Message signal}$",
         hovertemplate: '<b>msg_s(f)</b>: %{y}<extra></extra>',

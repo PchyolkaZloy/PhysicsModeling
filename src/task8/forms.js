@@ -37,7 +37,7 @@ function getData() {
         alert("[WARNING] Message amplitude / carrier amplitude > 1!\n" +
             "Overmodulation occurs and reconstruction of message signal" +
             " from the transmitted signal would lead in loss of original signal.\n" +
-            "Spectrum plots correct works only when message amplitude / carrier amplitude <= 1.");
+            "Correct works when message amplitude / carrier amplitude <= 1.");
     }
     return graphData;
 }
