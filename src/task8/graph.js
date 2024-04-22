@@ -120,7 +120,7 @@ function drawGraphs(graphData) {
             showspikes: true,
         },
         yaxis: {
-            domain: [0.7, 0.97],
+            domain: [0.7, 0.96],
             exponentformat: 'power',
             showspikes: true,
             title: '$\\text{Amplitude } A$'
