@@ -179,27 +179,26 @@
             </div>
 
             <form id="graphForm">
-
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="messageFrequency" name="messageFrequency" value="10"
+                    <input class="form-control" id="waveLength" name="waveLength" value="500"
                            placeholder="#">
-                    <label for="messageFrequency">Message Frequency (Hz)</label>
+                    <label for="waveLength">Wave length (nm)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="carrierFrequency" name="carrierFrequency" value="100"
+                    <input class="form-control" id="refractiveIndex" name="refractiveIndex" value="1"
                            placeholder="#">
-                    <label for="carrierFrequency">Carrier Frequency (Hz)</label>
+                    <label for="refractiveIndex">Refractive Index</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="messageAmplitude" name="messageAmplitude" value="1" placeholder="#">
-                    <label for="messageAmplitude">Message Amplitude</label>
+                    <input class="form-control" id="slitSpace" name="slitSpace" value="0.05" placeholder="#">
+                    <label for="slitSpace">Dist. between slits (m)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="carrierAmplitude" name="carrierAmplitude" value="2" placeholder="#">
-                    <label for="carrierAmplitude">Carrier Amplitude</label>
+                    <input class="form-control" id="slitWidth" name="slitWidth" value="0.01" placeholder="#">
+                    <label for="slitWidth">Slit width (m)</label>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -212,6 +211,12 @@
 
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
+                            <div class="form-floating mb-2">
+                                <input class="form-control" id="endAngle" name="endAngle" value="0.01"
+                                placeholder="#">
+                                <label for="endAngle">Viewing angle (deg)</label>
+                            </div>
+
                             <div class="form-floating">
                                 <input class="form-control" id="stepCount" name="stepCount" value="10000"
                                        placeholder="#">
@@ -228,7 +233,7 @@
             </form>
         </div>
 
-        <div class="col-lg-10">
+        <div class="col-lg-10" id="graph">
             <script src="../src/task9/graph.js"></script>
         </div>
     </div>
