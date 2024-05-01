@@ -91,9 +91,9 @@ function drawDefaultGraph() {
     defaultGraphData = {
         waveLength: 500 * 1e-9,
         refractiveIndex: 1,
-        slitSpace: 0.05,
-        slitWidth: 0.01,
-        endAngle: 0.01,
+        slitSpace: 0.005,
+        slitWidth: 0.001,
+        endAngle: 0.1,
         stepCount: 10000
     };
 
