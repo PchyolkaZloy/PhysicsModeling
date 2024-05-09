@@ -125,8 +125,13 @@
                                     <td>In meters. Positive float number greater than 0.</td>
                                 </tr>
                                 <tr>
-                                    <td>Viewing angle</td>
-                                    <td>In degrees. Select interval to view chart. Positive float number greater than 0.
+                                    <td>Length to screen</td>
+                                    <td>In meters. Positive float number greater than 0.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Viewing radius</td>
+                                    <td>In meters. Select interval to view chart. Positive float number greater than 0.
                                     </td>
                                 </tr>
                                 <tr>
@@ -211,6 +216,11 @@
                     <label for="slitWidth">Slit width (m)</label>
                 </div>
 
+                <div class="form-floating mb-2">
+                    <input class="form-control" id="lengthToScreen" name="lengthToScreen" value="1" placeholder="#">
+                    <label for="lengthToScreen">Length to screen (m)</label>
+                </div>
+
                 <div class="accordion" id="accord">
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
@@ -222,9 +232,9 @@
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
                             <div class="form-floating mb-2">
-                                <input class="form-control" id="endAngle" name="endAngle" value="0.1"
+                                <input class="form-control" id="viewRadius" name="viewRadius" value="0.002"
                                        placeholder="#">
-                                <label for="endAngle">Viewing angle (deg)</label>
+                                <label for="viewRadius">Viewing radius (m)</label>
                             </div>
 
                             <div class="form-floating">

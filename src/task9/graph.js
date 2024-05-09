@@ -1,69 +1,65 @@
 /*
 Sources
 https://sites.ualberta.ca/~pogosyan/teaching/PHYS_130/FALL_2010/lectures/lect36/lecture36.html
+https://lampz.tugraz.at/~hadley/physikm/outline/formulas.en.php
 https://en.wikipedia.org/wiki/Double-slit_experiment
 https://www.youtube.com/watch?v=Wbttrnz7ft4
 */
 
-function degreeToRadian(degree) {
-    return degree * Math.PI / 180;
+function alpha(waveLength, slitWidth, x, refractiveIndex, lengthToScreen) {
+    return (Math.PI * slitWidth / (waveLength / refractiveIndex)) * Math.sin(x / lengthToScreen);
 }
 
-function alpha(waveLength, slitWidth, angle, refractiveIndex) {
-    return (Math.PI * slitWidth / (waveLength / refractiveIndex)) * Math.sin(angle);
-}
-
-function beta(waveLength, slitSpace, angle, refractiveIndex) {
-    return (Math.PI * slitSpace / (waveLength / refractiveIndex)) * Math.sin(angle);
+function beta(waveLength, slitSpace, x, refractiveIndex, lengthToScreen) {
+    return (Math.PI * slitSpace / (waveLength / refractiveIndex)) * Math.sin(x / lengthToScreen);
 }
 
 function intensive(alpha, beta) {
     return (Math.cos(beta) ** 2) * ((Math.sin(alpha)) / (alpha)) ** 2;
 }
 
-function countGraphData(waveLength, refractiveIndex, slitSpace, slitWidth, endAngle, stepCount) {
-    const step = endAngle / stepCount;
+function countGraphData(waveLength, refractiveIndex, slitSpace, slitWidth, lengthToScreen, viewRadius, stepCount) {
+    const step = viewRadius * 2 / stepCount;
     let intensiveData = [];
-    let angleData = [];
+    let xData = [];
 
-    for (let angle = -endAngle / 2; angle <= endAngle / 2; angle += step) {
-        let radianAngel = degreeToRadian(angle);
-        intensiveData.push(
-            intensive(
-                alpha(waveLength, slitWidth, radianAngel, refractiveIndex),
-                beta(waveLength, slitSpace, radianAngel, refractiveIndex)));
-        angleData.push(angle);
+    for (let x = -viewRadius; x <= viewRadius; x += step) {
+        intensiveData.push(intensive(
+            alpha(waveLength, slitWidth, x, refractiveIndex, lengthToScreen),
+            beta(waveLength, slitSpace, x, refractiveIndex, lengthToScreen)));
+        xData.push(x);
     }
 
-    return {intensiveData, angleData};
+    return {intensiveData, xData};
 }
 
 function drawGraph(graphData) {
     const {
         intensiveData,
-        angleData
+        xData
     } = countGraphData(
         graphData.waveLength,
         graphData.refractiveIndex,
         graphData.slitSpace,
         graphData.slitWidth,
-        graphData.endAngle,
+        graphData.lengthToScreen,
+        graphData.viewRadius,
         graphData.stepCount
     );
 
 
     const intensiveGraphData = {
-        x: angleData,
+        x: xData,
         y: intensiveData,
         mode: 'lines',
-        hovertemplate: '<b>I(Th)</b>: %{y}<extra></extra>',
+        hovertemplate: '<b>I(x)</b>: %{y}<extra></extra>',
     };
 
     const layout = {
         xaxis: {
             exponentformat: 'power',
             showspikes: true,
-            title: '$\\text{Angle }\\Theta, deg$'
+            title: '$\\text{Position }x, m$'
         },
         yaxis: {
             exponentformat: 'power',
@@ -93,7 +89,8 @@ function drawDefaultGraph() {
         refractiveIndex: 1,
         slitSpace: 0.005,
         slitWidth: 0.001,
-        endAngle: 0.1,
+        lengthToScreen: 1,
+        viewRadius: 0.002,
         stepCount: 10000
     };
 

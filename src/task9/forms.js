@@ -31,7 +31,8 @@ function getData() {
         refractiveIndex: 1,
         slitSpace: 0.005,
         slitWidth: 0.001,
-        endAngle: 0.1,
+        lengthToScreen: 1,
+        viewRadius: 0.002,
         stepCount: 10000
     };
 
@@ -40,7 +41,8 @@ function getData() {
         refractiveIndex: customParseFloatGreaterZero(document.getElementById("refractiveIndex"), defaultGraphData.refractiveIndex),
         slitSpace: customParseFloatGreaterZero(document.getElementById("slitSpace"), defaultGraphData.slitSpace),
         slitWidth: customParseFloatGreaterZero(document.getElementById("slitWidth"), defaultGraphData.slitWidth),
-        endAngle: parseDegrees(document.getElementById("endAngle"), defaultGraphData.endAngle),
+        lengthToScreen: customParseFloatGreaterZero(document.getElementById("lengthToScreen"), defaultGraphData.lengthToScreen),
+        viewRadius: parseDegrees(document.getElementById("viewRadius"), defaultGraphData.viewRadius),
         stepCount: customParseInteger(document.getElementById("stepCount"), defaultGraphData.stepCount),
     };
 }
