@@ -7,6 +7,15 @@ function customParseFloatGreaterZero(element, defaultValue) {
     return parseFloat(element.value);
 }
 
+function customParseFloatGreaterOrEqualOne(element, defaultValue) {
+    if (isNaN(element.value) || element.value < 1) {
+        element.value = defaultValue
+        alert(element.id + " have to be float number => 1. Setting to default value: " + defaultValue)
+    }
+
+    return parseFloat(element.value);
+}
+
 function customParseInteger(element, defaultValue) {
     if (isNaN(element.value) || element.value <= 0) {
         element.value = defaultValue
@@ -14,15 +23,6 @@ function customParseInteger(element, defaultValue) {
     }
 
     return parseInt(element.value);
-}
-
-function parseDegrees(element, defaultValue) {
-    if (isNaN(element.value) || element.value <= 0 || element.value > 180) {
-        element.value = defaultValue
-        alert("Degrees have to be float number > 0 and <= 180. Setting to default value: " + defaultValue)
-    }
-
-    return parseFloat(element.value);
 }
 
 function getData() {
@@ -38,11 +38,11 @@ function getData() {
 
     return {
         waveLength: 1e-9 * customParseFloatGreaterZero(document.getElementById("waveLength"), defaultGraphData.waveLength),
-        refractiveIndex: customParseFloatGreaterZero(document.getElementById("refractiveIndex"), defaultGraphData.refractiveIndex),
+        refractiveIndex: customParseFloatGreaterOrEqualOne(document.getElementById("refractiveIndex"), defaultGraphData.refractiveIndex),
         slitSpace: customParseFloatGreaterZero(document.getElementById("slitSpace"), defaultGraphData.slitSpace),
         slitWidth: customParseFloatGreaterZero(document.getElementById("slitWidth"), defaultGraphData.slitWidth),
         lengthToScreen: customParseFloatGreaterZero(document.getElementById("lengthToScreen"), defaultGraphData.lengthToScreen),
-        viewRadius: parseDegrees(document.getElementById("viewRadius"), defaultGraphData.viewRadius),
+        viewRadius: customParseFloatGreaterZero(document.getElementById("viewRadius"), defaultGraphData.viewRadius),
         stepCount: customParseInteger(document.getElementById("stepCount"), defaultGraphData.stepCount),
     };
 }
