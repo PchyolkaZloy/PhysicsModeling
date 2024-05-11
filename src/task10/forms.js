@@ -26,17 +26,17 @@ function parseFloatGreaterOrEqualOne(element, defaultValue) {
 }
 
 function getData() {
-    defaultGraphData = {
+    const defaultGraphData = {
         waveLength: 500,
         lensRadius: 1,
-        lensRefractiveIndex: 1,
+        lensRefractiveIndex: 1.5,
         betweenRefractiveIndex: 1,
-        plateRefractiveIndex: 1,
+        plateRefractiveIndex: 1.5,
         endRadius: 0.002,
         stepCount: 10000
     };
 
-    return {
+    let graphData = {
         waveLength: 1e-9 * parseFloatGreaterZero(document.getElementById("waveLength"), defaultGraphData.waveLength),
         lensRadius: parseFloatGreaterZero(document.getElementById("lensRadius"), defaultGraphData.lensRadius),
         lensRefractiveIndex: parseFloatGreaterOrEqualOne(document.getElementById("lensRefractiveIndex"), defaultGraphData.lensRefractiveIndex),
@@ -45,6 +45,18 @@ function getData() {
         endRadius: parseFloatGreaterZero(document.getElementById("endRadius"), defaultGraphData.endRadius),
         stepCount: parseInteger(document.getElementById("stepCount"), defaultGraphData.stepCount),
     };
+
+    if (graphData.lensRefractiveIndex <= graphData.betweenRefractiveIndex ||
+        graphData.plateRefractiveIndex <= graphData.betweenRefractiveIndex) {
+        alert("Refractive index between plate and lens have to be less than lens refractive index" +
+            " and less than plate refractive index! Setting to default values.");
+
+        graphData.lensRefractiveIndex = defaultGraphData.lensRefractiveIndex;
+        graphData.betweenRefractiveIndex = defaultGraphData.betweenRefractiveIndex;
+        graphData.plateRefractiveIndex = defaultGraphData.plateRefractiveIndex;
+    }
+
+    return graphData;
 }
 
 

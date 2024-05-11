@@ -26,7 +26,7 @@ function customParseInteger(element, defaultValue) {
 }
 
 function getData() {
-    defaultGraphData = {
+    const defaultGraphData = {
         waveLength: 500,
         refractiveIndex: 1,
         slitSpace: 0.005,

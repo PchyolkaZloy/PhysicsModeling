@@ -4,19 +4,12 @@ https://study.physics.itmo.ru/pluginfile.php/4244/mod_resource/content/14/%D0%9E
 https://en.wikipedia.org/wiki/Fresnel_equations
 */
 
-function fresnelCoeffR(n1, n2, alpha, beta) {
-    return (n1 * Math.cos(alpha) - n2 * Math.cos(beta)) / (n1 * Math.cos(alpha) + n2 * Math.cos(beta));
-}
 
-function fresnelCoeffR2(n1, n2) {
+function fresnelCoeffR(n1, n2) {
     return ((n2 - n1) / (n2 + n1)) ** 2;
 }
 
-function fresnelCoeffT(n1, n2, alpha, beta) {
-    return (2 * n1 * Math.cos(alpha)) / (n2 * Math.cos(alpha) + n1 * Math.cos(beta));
-}
-
-function fresnelCoeffT2(n1, n2) {
+function fresnelCoeffT(n1, n2) {
     return (4 * n1 * n2) / ((n2 + n1) ** 2);
 }
 
@@ -25,35 +18,14 @@ function opticalDifference(lensRadius, radius, betweenRefractiveIndex, waveLengt
 }
 
 function intensive(waveLength, lensRadius, lensRefractiveIndex, betweenRefractiveIndex, plateRefractiveIndex, radius) {
-    let alpha = Math.asin(radius / lensRadius);
+    const R12 = fresnelCoeffR(lensRefractiveIndex, betweenRefractiveIndex);
+    const R23 = fresnelCoeffR(betweenRefractiveIndex, plateRefractiveIndex);
 
-    const R12 = fresnelCoeffR(lensRefractiveIndex, betweenRefractiveIndex, Math.PI / 2 - alpha,
-        Math.asin((Math.sin(Math.PI / 2 - alpha) * lensRefractiveIndex) / betweenRefractiveIndex));
-    const R23 = fresnelCoeffR(betweenRefractiveIndex, plateRefractiveIndex, Math.PI / 2 - alpha,
-        Math.asin((Math.sin(Math.PI / 2 - alpha) * betweenRefractiveIndex) / plateRefractiveIndex));
+    const T12 = fresnelCoeffT(lensRefractiveIndex, betweenRefractiveIndex);
+    const T21 = fresnelCoeffT(betweenRefractiveIndex, lensRefractiveIndex);
 
-    const T12 = fresnelCoeffT(lensRefractiveIndex, betweenRefractiveIndex, Math.PI / 2 - alpha,
-        Math.asin((Math.sin(Math.PI / 2 - alpha) * lensRefractiveIndex) / betweenRefractiveIndex));
-    const T21 = fresnelCoeffT(betweenRefractiveIndex, lensRefractiveIndex, Math.PI / 2 - alpha,
-        Math.asin((Math.sin(Math.PI / 2 - alpha) * betweenRefractiveIndex) / lensRefractiveIndex));
-
-    return R12 + T12 * R23 * T21 + 2 * Math.sqrt(T12 * T21) * Math.cos(2 * Math.PI
-        * opticalDifference(lensRadius, radius, betweenRefractiveIndex, waveLength) / waveLength);
-}
-
-function intensive2(waveLength, lensRadius, lensRefractiveIndex, betweenRefractiveIndex, plateRefractiveIndex, radius) {
-    const R12 = fresnelCoeffR2(lensRefractiveIndex, betweenRefractiveIndex);
-    const R23 = fresnelCoeffR2(betweenRefractiveIndex, plateRefractiveIndex);
-
-    const T12 = fresnelCoeffT2(lensRefractiveIndex, betweenRefractiveIndex);
-    const T21 = fresnelCoeffT2(betweenRefractiveIndex, lensRefractiveIndex);
-
-    return R12 + T12 * R23 * T21 + 2 * Math.sqrt(R12 * R23 * T12 * T21) * Math.cos(2 * Math.PI
-        * opticalDifference(lensRadius, radius, betweenRefractiveIndex, waveLength) / waveLength);
-}
-
-function intensiveNative(waveLength, lensRadius, radius) {
-    return Math.sin((Math.PI * radius ** 2) / (waveLength * lensRadius)) ** 2;
+    return R12 + T12 * R23 * T21 + 2 * Math.sqrt(R12 * R23 * T12 * T21) * Math.cos(
+        2 * Math.PI * opticalDifference(lensRadius, radius, betweenRefractiveIndex, waveLength) / waveLength);
 }
 
 function countGraphData(
@@ -101,7 +73,7 @@ function drawGraph(graphData) {
         yaxis: {
             exponentformat: 'power',
             showspikes: true,
-            title: '$\\text{Normalized intensity }I$'
+            title: '$\\text{Intensity }I, \\frac{W}{m^2}$'
         },
         margin: {
             l: 65,
