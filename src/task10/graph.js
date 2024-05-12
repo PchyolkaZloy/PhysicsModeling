@@ -28,8 +28,13 @@ function intensive(waveLength, lensRadius, lensRefractiveIndex, betweenRefractiv
         2 * Math.PI * opticalDifference(lensRadius, radius, betweenRefractiveIndex, waveLength) / waveLength);
 }
 
-function countGraphData(
-    waveLength, lensRadius, lensRefractiveIndex, betweenRefractiveIndex, plateRefractiveIndex, endRadius, stepCount) {
+function countGraphData(waveLength,
+                        lensRadius,
+                        lensRefractiveIndex,
+                        betweenRefractiveIndex,
+                        plateRefractiveIndex,
+                        endRadius,
+                        stepCount) {
     const step = endRadius / stepCount;
     let intensiveData = [];
     let radiusData = [];

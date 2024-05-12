@@ -49,7 +49,8 @@ function getData() {
     if (graphData.lensRefractiveIndex <= graphData.betweenRefractiveIndex ||
         graphData.plateRefractiveIndex <= graphData.betweenRefractiveIndex) {
         alert("Refractive index between plate and lens have to be less than lens refractive index" +
-            " and less than plate refractive index! Setting to default values.");
+            " and less than plate refractive index! \n" +
+            "Setting indexes to default values.");
 
         graphData.lensRefractiveIndex = defaultGraphData.lensRefractiveIndex;
         graphData.betweenRefractiveIndex = defaultGraphData.betweenRefractiveIndex;
