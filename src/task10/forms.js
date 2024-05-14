@@ -52,6 +52,10 @@ function getData() {
             " and less than plate refractive index! \n" +
             "Setting indexes to default values.");
 
+        document.getElementById("lensRefractiveIndex").value = defaultGraphData.lensRefractiveIndex;
+        document.getElementById("betweenRefractiveIndex").value = defaultGraphData.betweenRefractiveIndex;
+        document.getElementById("plateRefractiveIndex").value = defaultGraphData.plateRefractiveIndex;
+
         graphData.lensRefractiveIndex = defaultGraphData.lensRefractiveIndex;
         graphData.betweenRefractiveIndex = defaultGraphData.betweenRefractiveIndex;
         graphData.plateRefractiveIndex = defaultGraphData.plateRefractiveIndex;
@@ -64,6 +68,19 @@ function getData() {
 document.getElementById("graphForm").addEventListener("submit", function (e) {
     e.preventDefault();
     const graphData = getData();
-    drawGraph(graphData);
-    drawRings(graphData);
+    const {
+        intensiveData,
+        radiusData
+    } = countGraphData(
+        graphData.waveLength,
+        graphData.lensRadius,
+        graphData.lensRefractiveIndex,
+        graphData.betweenRefractiveIndex,
+        graphData.plateRefractiveIndex,
+        graphData.endRadius,
+        graphData.stepCount
+    );
+
+    drawGraph(intensiveData, radiusData);
+    drawRings(intensiveData, radiusData, graphData.waveLength, graphData.endRadius, graphData.stepCount);
 });

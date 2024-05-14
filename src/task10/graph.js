@@ -2,6 +2,7 @@
 Sources
 https://study.physics.itmo.ru/pluginfile.php/4244/mod_resource/content/14/%D0%9E%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BB%D0%B0%D0%B1%D0%BE%D1%80%D0%B0%D1%82%D0%BE%D1%80%D0%BD%D0%BE%D0%B9%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%8B%204.03.pdf
 https://en.wikipedia.org/wiki/Fresnel_equations
+https://pchz.notion.site/2-9b8f874a4c784666802b4790137f81fb?pvs=4
 */
 
 
@@ -84,35 +85,24 @@ function waveLengthToRgb(wavelength, gamma) {
 }
 
 
-function drawRings(graphData) {
-    const {
-        intensiveData,
-        radiusData
-    } = countGraphData(
-        graphData.waveLength,
-        graphData.lensRadius,
-        graphData.lensRefractiveIndex,
-        graphData.betweenRefractiveIndex,
-        graphData.plateRefractiveIndex,
-        graphData.endRadius,
-        graphData.stepCount
-    );
+function drawRings(intensiveData, radiusData, waveLength, endRadius, stepCount) {
     const canvas = document.getElementById('myCanvas');
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const container = canvas.parentNode;
-    canvas.width = container.offsetWidth ;
-    canvas.height = container.offsetHeight ;
+    canvas.width = container.offsetWidth;
+    canvas.height = container.offsetHeight;
 
 
     const maxIntensity = Math.max(...intensiveData);
     const canvasRadius = canvas.height / 2;
 
     for (let i = 0; i < intensiveData.length; ++i) {
-        const color = waveLengthToRgb(graphData.waveLength, Math.abs(intensiveData[i] / maxIntensity));
+        const color = waveLengthToRgb(waveLength, Math.abs(intensiveData[i] / maxIntensity));
         ctx.beginPath();
-        ctx.arc(canvas.width / 2, canvas.height / 2, canvasRadius * (radiusData[i] / graphData.endRadius),
+        ctx.arc(canvas.width / 2, canvas.height / 2,
+            canvasRadius * (radiusData[i] / endRadius),
             0, 2 * Math.PI);
 
         ctx.lineWidth = 0.1;
@@ -121,20 +111,7 @@ function drawRings(graphData) {
     }
 }
 
-function drawGraph(graphData) {
-    const {
-        intensiveData,
-        radiusData
-    } = countGraphData(
-        graphData.waveLength,
-        graphData.lensRadius,
-        graphData.lensRefractiveIndex,
-        graphData.betweenRefractiveIndex,
-        graphData.plateRefractiveIndex,
-        graphData.endRadius,
-        graphData.stepCount
-    );
-
+function drawGraph(intensiveData, radiusData) {
     const intensiveGraphData = {
         x: radiusData,
         y: intensiveData,
@@ -170,8 +147,8 @@ function drawGraph(graphData) {
     Plotly.newPlot('graph', [intensiveGraphData], layout, config);
 }
 
-function drawDefaultGraph() {
-    defaultGraphData = {
+function drawDefaultGraphs() {
+    const defaultGraphData = {
         waveLength: 500 * 1e-9,
         lensRadius: 1,
         lensRefractiveIndex: 1.5,
@@ -181,8 +158,21 @@ function drawDefaultGraph() {
         stepCount: 10000
     };
 
-    drawGraph(defaultGraphData);
-    drawRings(defaultGraphData);
+    const {
+        intensiveData,
+        radiusData
+    } = countGraphData(
+        defaultGraphData.waveLength,
+        defaultGraphData.lensRadius,
+        defaultGraphData.lensRefractiveIndex,
+        defaultGraphData.betweenRefractiveIndex,
+        defaultGraphData.plateRefractiveIndex,
+        defaultGraphData.endRadius,
+        defaultGraphData.stepCount
+    );
+
+    drawGraph(intensiveData, radiusData);
+    drawRings(intensiveData, radiusData, defaultGraphData.waveLength, defaultGraphData.endRadius, defaultGraphData.stepCount);
 }
 
-drawDefaultGraph();
+drawDefaultGraphs();
