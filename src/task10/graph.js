@@ -15,8 +15,12 @@ function fresnelCoeffT(n1, n2) {
 }
 
 
-function opticalDifference(lensRadius, radius, betweenRefractiveIndex, waveLength) {
+function opticalDifference1(lensRadius, radius, betweenRefractiveIndex, waveLength) {
     return 2 * (lensRadius - Math.sqrt(lensRadius ** 2 - radius ** 2)) * betweenRefractiveIndex + waveLength / 2;
+}
+
+function opticalDifference2(lensRadius, radius, betweenRefractiveIndex) {
+    return 2 * (lensRadius - Math.sqrt(lensRadius ** 2 - radius ** 2)) * betweenRefractiveIndex;
 }
 
 function intensive(
@@ -27,8 +31,14 @@ function intensive(
     plateRefractiveIndex,
     radius,
     R12, R23, T12, T21) {
-    return R12 + T12 * R23 * T21 + 2 * Math.sqrt(R12 * R23 * T12 * T21) * Math.cos(
-        2 * Math.PI * opticalDifference(lensRadius, radius, betweenRefractiveIndex, waveLength) / waveLength);
+    if (betweenRefractiveIndex > plateRefractiveIndex) {
+        return R12 + T12 * R23 * T21 + 2 * Math.sqrt(R12 * R23 * T12 * T21) *
+            Math.cos(2 * Math.PI * opticalDifference2(lensRadius, radius, betweenRefractiveIndex) / waveLength);
+    }
+
+    // lensRefractiveIndex > betweenRefractiveIndex && plateRefractiveIndex > betweenRefractiveIndex
+    return R12 + T12 * R23 * T21 + 2 * Math.sqrt(R12 * R23 * T12 * T21) *
+        Math.cos(2 * Math.PI * opticalDifference1(lensRadius, radius, betweenRefractiveIndex, waveLength) / waveLength);
 }
 
 function countGraphData(
