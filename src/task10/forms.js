@@ -63,5 +63,7 @@ function getData() {
 
 document.getElementById("graphForm").addEventListener("submit", function (e) {
     e.preventDefault();
-    drawGraph(getData());
+    const graphData = getData();
+    drawGraph(graphData);
+    drawRings(graphData);
 });

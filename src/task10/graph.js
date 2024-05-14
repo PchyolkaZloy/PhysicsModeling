@@ -63,6 +63,64 @@ function countGraphData(
     return {intensiveData, radiusData};
 }
 
+function waveLengthToRgb(wavelength, gamma) {
+    const waveLen = wavelength / 1e-9;
+
+    if (380 <= waveLen && waveLen <= 440) {
+        return {r: 0.5 * gamma, g: 0, b: 0.5 * gamma};
+    } else if (440 <= waveLen && waveLen <= 490) {
+        return {r: 0, g: 0, b: 1.0};
+    } else if (490 <= waveLen && waveLen <= 510) {
+        return {r: 0.0, g: gamma, b: gamma};
+    } else if (510 <= waveLen && waveLen <= 580) {
+        return {r: 0, g: gamma, b: 0.0};
+    } else if (580 <= waveLen && waveLen <= 645) {
+        return {r: gamma, g: 0.5 * gamma, b: 0};
+    } else if (645 <= waveLen && waveLen <= 770) {
+        return {r: gamma, g: 0.0, b: 0.0};
+    } else {
+        return {r: gamma, g: gamma, b: gamma};
+    }
+}
+
+
+function drawRings(graphData) {
+    const {
+        intensiveData,
+        radiusData
+    } = countGraphData(
+        graphData.waveLength,
+        graphData.lensRadius,
+        graphData.lensRefractiveIndex,
+        graphData.betweenRefractiveIndex,
+        graphData.plateRefractiveIndex,
+        graphData.endRadius,
+        graphData.stepCount
+    );
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const container = canvas.parentNode;
+    canvas.width = container.offsetWidth ;
+    canvas.height = container.offsetHeight ;
+
+
+    const maxIntensity = Math.max(...intensiveData);
+    const canvasRadius = canvas.height / 2;
+
+    for (let i = 0; i < intensiveData.length; ++i) {
+        const color = waveLengthToRgb(graphData.waveLength, Math.abs(intensiveData[i] / maxIntensity));
+        ctx.beginPath();
+        ctx.arc(canvas.width / 2, canvas.height / 2, canvasRadius * (radiusData[i] / graphData.endRadius),
+            0, 2 * Math.PI);
+
+        ctx.lineWidth = 0.1;
+        ctx.strokeStyle = `rgb(${color.r * 255}, ${color.g * 255}, ${color.b * 255})`;
+        ctx.stroke();
+    }
+}
+
 function drawGraph(graphData) {
     const {
         intensiveData,
@@ -124,6 +182,7 @@ function drawDefaultGraph() {
     };
 
     drawGraph(defaultGraphData);
+    drawRings(defaultGraphData);
 }
 
 drawDefaultGraph();
