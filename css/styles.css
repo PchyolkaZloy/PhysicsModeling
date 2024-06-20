@@ -26,3 +26,11 @@ p.lead {
     font-family: "Lucida Console", "Courier New", monospace;
     text-align: center;
 }
+
+.fa-github {
+    font-size: 28px;
+}
+
+#navbarDropdown {
+    font-size: 20px
+}
