@@ -1,5 +1,5 @@
 /**
- * position - 3d vector<int>
+ * position - 3d vector<float>
  * velocity - 3d vector<float>
  * charge can be negative
  * mass - const
