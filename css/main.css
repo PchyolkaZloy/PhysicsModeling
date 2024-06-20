@@ -65,3 +65,8 @@ label {
 #navbarDropdown {
     font-size: 20px
 }
+
+#dropdownContainer .dropdown-item {
+    text-align: left;
+    font-size: 18px;
+}
