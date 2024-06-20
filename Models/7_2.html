@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Physics | Task 1</title>
+    <title>Physics | Task 7</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/description.css">
     <link rel="stylesheet" href="../css/dropdown.css">
@@ -39,30 +40,30 @@
                         <div class="container" id="dropdownContainer">
                             <div class="row">
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item active" href="#">Task 1</a>
-                                    <a class="dropdown-item" href="task2.html">Task 2</a>
-                                    <a class="dropdown-item" href="task3.html">Task 3</a>
-                                    <a class="dropdown-item" href="task4.html">Task 4</a>
-                                    <a class="dropdown-item" href="task5.html">Task 5</a>
+                                    <a class="dropdown-item" href="1.html">Task 1</a>
+                                    <a class="dropdown-item" href="2.html">Task 2</a>
+                                    <a class="dropdown-item" href="3.html">Task 3</a>
+                                    <a class="dropdown-item" href="4.html">Task 4</a>
+                                    <a class="dropdown-item" href="5.html">Task 5</a>
                                 </div>
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item" href="task6.html">Task 6</a>
+                                    <a class="dropdown-item" href="6.html">Task 6</a>
 
-                                    <a class="nav-link dropdown-item dropdown-toggle inner-dropdown-menu" href="#"
-                                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-item dropdown-toggle inner-dropdown-menu active"
+                                       href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Task 7
                                     </a>
-                                    <div class="dropdown-menu inner-dropdown-menu">
-                                        <a class="dropdown-item" href="task7_1.html">Beat</a>
-                                        <a class="dropdown-item" href="task7_2.html">Lissajous curve</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="7_1.html">Beat</a>
+                                        <a class="dropdown-item active" href="#">Lissajous curve</a>
                                     </div>
 
-                                    <a class="dropdown-item" href="task8.html">Task 8</a>
-                                    <a class="dropdown-item" href="task9.html">Task 9</a>
-                                    <a class="dropdown-item" href="task10.html">Task 10</a>
+                                    <a class="dropdown-item" href="8.html">Task 8</a>
+                                    <a class="dropdown-item" href="9.html">Task 9</a>
+                                    <a class="dropdown-item" href="10.html">Task 10</a>
                                 </div>
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item" href="task11.html">Task 11</a>
+                                    <a class="dropdown-item" href="11.html">Task 11</a>
                                     <a class="dropdown-item disabled" href="#">Task 12</a>
                                     <a class="dropdown-item disabled" href="#">Task 13</a>
                                     <a class="dropdown-item disabled" href="#">Task 14</a>
@@ -89,7 +90,6 @@
 <div class="container-fluid" id="main">
     <div class="row" id="mainRow">
         <div class="col-lg-2 container text-center" id="forms">
-
             <div id="descriptionOffCanvas">
                 <div class="offcanvas-content" id="description">
                     <div class="offcanvas-header">
@@ -105,38 +105,28 @@
                                     <th scope="col">Description</th>
                                 </tr>
                                 </thead>
+
                                 <tbody>
                                 <tr>
-                                    <td>Charge</td>
-                                    <td>In coulombs. Can be negative. Float number.</td>
+                                    <td>
+                                        Frequency
+                                    </td>
+                                    <td>In hertz. Positive float number greater than 0.</td>
                                 </tr>
                                 <tr>
-                                    <td>Magnetic induction</td>
-                                    <td>Defined by a radius vector with coordinates (x, y, z) separated by spaces.
-                                        Coordinates are float numbers.
-                                    </td>
+                                    <td>Amplitude</td>
+                                    <td>Positive float number greater than 0.</td>
                                 </tr>
                                 <tr>
-                                    <td>Velocity of charge</td>
-                                    <td>Defined by a radius vector with coordinates (x, y, z) separated by spaces.
-                                        Coordinates are float numbers.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Flight time</td>
-                                    <td>In seconds. Affects the chart scale. More seconds - more charge
-                                        "flies" in the space on the graph. Float number.
-                                    </td>
+                                    <td>Phase</td>
+                                    <td>In radians. Float number.</td>
                                 </tr>
                                 <tr>
                                     <td>Steps count</td>
-                                    <td>Number of steps for solving differential equations. The more steps, the
-                                        better the accuracy, but the lower the performance. Integer number.
+                                    <td>Number of points to count functions values in them. The more steps, the
+                                        better the accuracy, but the lower the performance. Maximum: 100000. Positive
+                                        integer number.
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td>Mass of charge</td>
-                                    <td>In kilograms. Real number.</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -148,12 +138,14 @@
                                 parameters that were not in the technical task, but that are involved in the
                                 construction of the graphics (more fine-tuning)</p>
                             <br>
-                            <p>Explore the graph forms conveniently and efficiently using the menu in the top right
-                                corner in graph form.</p>
-                            <p>Legend allows to "disable" one of the plots (charge motion or magnetic induction) by
-                                clicking.</p>
+                            <p>Explore the graphs conveniently and efficiently using the menu in the top right
+                                corner in plot form.
+                                Click at "Play" the bottom of chart to see the animation. "Pause" - stop animation.
+                                Also with the help of slidebar you can see individual frames at intervals.</p>
                             <br>
-                            <p> If you try to enter incorrect data, this field will return to the default value</p>
+
+                            <p> If you try to enter incorrect data, this field will return to the default value. Integer
+                                types are given with integer type even if a real number is entered</p>
                         </div>
 
                         <div id="imageDescription">
@@ -167,13 +159,13 @@
 
                             <div class="collapse" id="imageCollapse">
                                 <div class="card card-body">
-                                    <img src="../png/task1.png" alt="Here was a picture of this task" class="img-fluid">
+                                    <img src="../png/task7_2.png" alt="Here was a picture of this task"
+                                         class="img-fluid">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
 
                 <div class="d-flex justify-content-center align-items-center">
                     <button class="btn btn-primary d-none d-lg-block" type="button" data-bs-toggle="offcanvas"
@@ -187,7 +179,6 @@
                 <button class="btn btn-primary d-lg-none" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#descriptionMobile" aria-controls="descriptionMobile">Description
                 </button>
-
                 <div class="offcanvas offcanvas-bottom d-lg-none" data-bs-scroll="true" data-bs-backdrop="false"
                      tabindex="-1" id="descriptionMobile" aria-labelledby="descriptionMobileLabel">
                 </div>
@@ -195,19 +186,30 @@
             </div>
 
             <form id="graphForm">
+
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="charge" name="charge" value="1" placeholder="#">
-                    <label for="charge">Charge (Coulomb)</label>
+                    <input class="form-control" id="frequency1" name="frequency1" value="2" placeholder="#">
+                    <label for="frequency1">Frequency 1 (Hz)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="induction" name="induction" value="1 0 0" placeholder="#">
-                    <label for="induction">Magnetic induction (vector)</label>
+                    <input class="form-control" id="frequency2" name="frequency2" value="3" placeholder="#">
+                    <label for="frequency2">Frequency 2 (Hz)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="velocity" name="velocity" value="1 1 0" placeholder="#">
-                    <label for="velocity">Velocity (vector)</label>
+                    <input class="form-control" id="amplitude1" name="amplitude1" value="1" placeholder="#">
+                    <label for="amplitude1">Amplitude 1</label>
+                </div>
+
+                <div class="form-floating mb-2">
+                    <input class="form-control" id="amplitude2" name="amplitude2" value="1" placeholder="#">
+                    <label for="amplitude2">Amplitude 2</label>
+                </div>
+
+                <div class="form-floating mb-2">
+                    <input class="form-control" id="phase" name="phase" value="0" placeholder="#">
+                    <label for="phase">Phase (rad)</label>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -220,20 +222,10 @@
 
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
-                            <div class="form-floating mb-2">
-                                <input class="form-control" id="time" name="time" value="50" placeholder="#">
-                                <label for="time">Flight time (sec)</label>
-                            </div>
-
-                            <div class="form-floating mb-2">
-                                <input class="form-control" id="steps" name="steps" value="100000"
-                                       placeholder="#">
-                                <label for="steps">Steps count</label>
-                            </div>
-
                             <div class="form-floating">
-                                <input class="form-control" id="mass" name="mass" value="1" placeholder="#">
-                                <label for="mass">Mass (kg)</label>
+                                <input class="form-control" id="stepCount" name="stepCount" value="50000"
+                                       placeholder="#">
+                                <label for="stepCount">Steps count</label>
                             </div>
                         </div>
                     </div>
@@ -243,12 +235,12 @@
                 <button data-mdb-ripple-init type="submit" class="btn btn-primary" id="drawButton">
                     Draw!
                 </button>
-                <script src="../src/task1/forms.js"></script>
+                <script src="../src/task7/2/forms.js"></script>
             </form>
         </div>
 
         <div class="col-lg-10" id="graph">
-            <script src="../src/task1/graph.js"></script>
+            <script src="../src/task7/2/graph.js"></script>
         </div>
     </div>
 </div>

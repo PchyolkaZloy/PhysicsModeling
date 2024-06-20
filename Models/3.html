@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Physics | Task 7</title>
+    <title>Physics | Task 3</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/description.css">
     <link rel="stylesheet" href="../css/dropdown.css">
@@ -14,11 +13,11 @@
     <link rel="icon" href="../png/icon.png">
 
     <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/vector.js"></script>
 </head>
-
 <body>
-
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="../index.html">Physics modeling</a>
@@ -40,30 +39,30 @@
                         <div class="container" id="dropdownContainer">
                             <div class="row">
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item" href="task1.html">Task 1</a>
-                                    <a class="dropdown-item" href="task2.html">Task 2</a>
-                                    <a class="dropdown-item" href="task3.html">Task 3</a>
-                                    <a class="dropdown-item" href="task4.html">Task 4</a>
-                                    <a class="dropdown-item" href="task5.html">Task 5</a>
+                                    <a class="dropdown-item" href="1.html">Task 1</a>
+                                    <a class="dropdown-item" href="2.html">Task 2</a>
+                                    <a class="dropdown-item active" href="#">Task 3</a>
+                                    <a class="dropdown-item" href="4.html">Task 4</a>
+                                    <a class="dropdown-item" href="5.html">Task 5</a>
                                 </div>
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item" href="task6.html">Task 6</a>
+                                    <a class="dropdown-item" href="6.html">Task 6</a>
 
-                                    <a class="nav-link dropdown-item dropdown-toggle inner-dropdown-menu active"
-                                       href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-item dropdown-toggle inner-dropdown-menu" href="#"
+                                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Task 7
                                     </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="task7_1.html">Beat</a>
-                                        <a class="dropdown-item active" href="#">Lissajous curve</a>
+                                    <div class="dropdown-menu inner-dropdown-menu">
+                                        <a class="dropdown-item" href="7_1.html">Beat</a>
+                                        <a class="dropdown-item" href="7_2.html">Lissajous curve</a>
                                     </div>
 
-                                    <a class="dropdown-item" href="task8.html">Task 8</a>
-                                    <a class="dropdown-item" href="task9.html">Task 9</a>
-                                    <a class="dropdown-item" href="task10.html">Task 10</a>
+                                    <a class="dropdown-item" href="8.html">Task 8</a>
+                                    <a class="dropdown-item" href="9.html">Task 9</a>
+                                    <a class="dropdown-item" href="10.html">Task 10</a>
                                 </div>
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item" href="task11.html">Task 11</a>
+                                    <a class="dropdown-item" href="11.html">Task 11</a>
                                     <a class="dropdown-item disabled" href="#">Task 12</a>
                                     <a class="dropdown-item disabled" href="#">Task 13</a>
                                     <a class="dropdown-item disabled" href="#">Task 14</a>
@@ -89,7 +88,7 @@
 
 <div class="container-fluid" id="main">
     <div class="row" id="mainRow">
-        <div class="col-lg-2 container text-center" id="forms">
+        <div class="col-lg-3 container text-center" id="forms">
             <div id="descriptionOffCanvas">
                 <div class="offcanvas-content" id="description">
                     <div class="offcanvas-header">
@@ -105,27 +104,29 @@
                                     <th scope="col">Description</th>
                                 </tr>
                                 </thead>
-
                                 <tbody>
                                 <tr>
-                                    <td>
-                                        Frequency
+                                    <td>Amperage</td>
+                                    <td>In amperes. The sign of the amperage shows the direction of current:
+                                        plus on us, minus - from us. Float number.
                                     </td>
-                                    <td>In hertz. Positive float number greater than 0.</td>
                                 </tr>
                                 <tr>
-                                    <td>Amplitude</td>
-                                    <td>Positive float number greater than 0.</td>
+                                    <td>Coordinates</td>
+                                    <td>Coordinates of currents (x, y) separated by spaces. Can be in [0; 100]. Float
+                                        numbers.
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Phase</td>
-                                    <td>In radians. Float number.</td>
+                                    <td>Vectors count</td>
+                                    <td>Number of vectors per column/row. WARNING: The more vectors, the more memory and
+                                        resources are needed to calculate the graph. Maximum value 150. Positive integer
+                                        number.
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Steps count</td>
-                                    <td>Number of points to count functions values in them. The more steps, the
-                                        better the accuracy, but the lower the performance. Maximum: 100000. Positive
-                                        integer number.
+                                    <td>Vector length</td>
+                                    <td>In pixels. Positive integer number.
                                     </td>
                                 </tr>
                                 </tbody>
@@ -138,14 +139,17 @@
                                 parameters that were not in the technical task, but that are involved in the
                                 construction of the graphics (more fine-tuning)</p>
                             <br>
-                            <p>Explore the graphs conveniently and efficiently using the menu in the top right
-                                corner in plot form.
-                                Click at "Play" the bottom of chart to see the animation. "Pause" - stop animation.
-                                Also with the help of slidebar you can see individual frames at intervals.</p>
+                            <p>Use the checkboxes to select how many currents you want to represent. Set their amperage
+                                and coordinates {x, y}.
+                                <br>
+                                When you move the cursor on the vector you can find its starting point, its direction
+                                (the degree measure starts at 270 degrees and goes clockwise!) and the scalar.
+                                <br>
+                                "Heat map" of vectors allows faster and easier analysis of the graph</p>
+                            <p>Legend allows to "disable" one of the plots by
+                                clicking.</p>
                             <br>
-
-                            <p> If you try to enter incorrect data, this field will return to the default value. Integer
-                                types are given with integer type even if a real number is entered</p>
+                            <p> If you try to enter incorrect data, this field will return to the default value</p>
                         </div>
 
                         <div id="imageDescription">
@@ -159,8 +163,7 @@
 
                             <div class="collapse" id="imageCollapse">
                                 <div class="card card-body">
-                                    <img src="../png/task7_2.png" alt="Here was a picture of this task"
-                                         class="img-fluid">
+                                    <img src="../png/task3.png" alt="Here was a picture of this task" class="img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -179,6 +182,7 @@
                 <button class="btn btn-primary d-lg-none" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#descriptionMobile" aria-controls="descriptionMobile">Description
                 </button>
+
                 <div class="offcanvas offcanvas-bottom d-lg-none" data-bs-scroll="true" data-bs-backdrop="false"
                      tabindex="-1" id="descriptionMobile" aria-labelledby="descriptionMobileLabel">
                 </div>
@@ -186,30 +190,89 @@
             </div>
 
             <form id="graphForm">
+                <div class="row align-items-center">
+                    <div class="col-lg-1">
+                        <input class="form-check-input" type="checkbox" id="checkbox1" aria-label="..."
+                               checked disabled>
+                    </div>
 
-                <div class="form-floating mb-2">
-                    <input class="form-control" id="frequency1" name="frequency1" value="2" placeholder="#">
-                    <label for="frequency1">Frequency 1 (Hz)</label>
+                    <div class="col-lg-5">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="amperage1" name="amperage" placeholder="#" value="-1"/>
+                            <label for="amperage1">Amperage (A)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="coordinates1" name="coordinates" placeholder="#"
+                                   value="35 35"/>
+                            <label for="coordinates1">Coordinates (x, y)</label>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-floating mb-2">
-                    <input class="form-control" id="frequency2" name="frequency2" value="3" placeholder="#">
-                    <label for="frequency2">Frequency 2 (Hz)</label>
+                <div class="row align-items-center">
+                    <div class="col-lg-1">
+                        <input class="form-check-input" type="checkbox" id="checkbox2" aria-label="..." checked>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="amperage2" name="amperage" placeholder="#" value="1"/>
+                            <label for="amperage2">Amperage (A)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="coordinates2" name="coordinates" placeholder="#"
+                                   value="35 65"/>
+                            <label for="coordinates2">Coordinates (x, y)</label>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-floating mb-2">
-                    <input class="form-control" id="amplitude1" name="amplitude1" value="1" placeholder="#">
-                    <label for="amplitude1">Amplitude 1</label>
+                <div class="row align-items-center">
+                    <div class="col-lg-1">
+                        <input class="form-check-input" type="checkbox" id="checkbox3" aria-label="..." checked>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="amperage3" name="amperage" placeholder="#" value="1"/>
+                            <label for="amperage3">Amperage (A)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="coordinates3" name="coordinates" placeholder="#"
+                                   value="65 35"/>
+                            <label for="coordinates3">Coordinates (x, y)</label>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-floating mb-2">
-                    <input class="form-control" id="amplitude2" name="amplitude2" value="1" placeholder="#">
-                    <label for="amplitude2">Amplitude 2</label>
-                </div>
+                <div class="row align-items-center">
+                    <div class="col-lg-1">
+                        <input class="form-check-input" type="checkbox" id="checkbox4" aria-label="..." checked>
+                    </div>
 
-                <div class="form-floating mb-2">
-                    <input class="form-control" id="phase" name="phase" value="0" placeholder="#">
-                    <label for="phase">Phase (rad)</label>
+                    <div class="col-lg-5">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="amperage4" name="amperage" placeholder="#" value="-1"/>
+                            <label for="amperage4">Amperage (A)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="coordinates4" name="coordinates" placeholder="#"
+                                   value="65 65"/>
+                            <label for="coordinates4">Coordinates (x, y)</label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -219,32 +282,35 @@
                             Optional Settings
                         </button>
                     </h2>
-
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
+                            <div class="form-floating mb-2">
+                                <input class="form-control" id="vectorsCount" name="vectorsCount" placeholder="#"
+                                       value="75"/>
+                                <label for="vectorsCount">Vectors count</label>
+                            </div>
+
                             <div class="form-floating">
-                                <input class="form-control" id="stepCount" name="stepCount" value="50000"
-                                       placeholder="#">
-                                <label for="stepCount">Steps count</label>
+                                <input class="form-control" id="vectorLength" name="vectorLength" placeholder="#"
+                                       value="10"/>
+                                <label for="vectorLength">Vector length</label>
                             </div>
                         </div>
                     </div>
                 </div>
 
-
-                <button data-mdb-ripple-init type="submit" class="btn btn-primary" id="drawButton">
+                <button id="drawButton" data-mdb-ripple-init type="submit" class="btn btn-primary">
                     Draw!
                 </button>
-                <script src="../src/task7/2/forms.js"></script>
             </form>
+            <script src="../src/task3/forms.js"></script>
         </div>
 
-        <div class="col-lg-10" id="graph">
-            <script src="../src/task7/2/graph.js"></script>
+        <div class="col-lg-9" id="graph">
+            <script src="../src/task3/graph.js"></script>
         </div>
     </div>
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -253,3 +319,4 @@
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
 </body>
+</html>

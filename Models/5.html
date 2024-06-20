@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Physics | Task 2</title>
+    <title>Physics | Task 5</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/main.css">
@@ -15,7 +15,9 @@
     <script src='//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
+
 <body>
+
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="../index.html">Physics modeling</a>
@@ -37,30 +39,30 @@
                         <div class="container" id="dropdownContainer">
                             <div class="row">
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item" href="task1.html">Task 1</a>
-                                    <a class="dropdown-item active" href="#">Task 2</a>
-                                    <a class="dropdown-item" href="task3.html">Task 3</a>
-                                    <a class="dropdown-item" href="task4.html">Task 4</a>
-                                    <a class="dropdown-item" href="task5.html">Task 5</a>
+                                    <a class="dropdown-item" href="1.html">Task 1</a>
+                                    <a class="dropdown-item" href="2.html">Task 2</a>
+                                    <a class="dropdown-item" href="3.html">Task 3</a>
+                                    <a class="dropdown-item" href="4.html">Task 4</a>
+                                    <a class="dropdown-item active" href="#">Task 5</a>
                                 </div>
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item" href="task6.html">Task 6</a>
+                                    <a class="dropdown-item" href="6.html">Task 6</a>
 
                                     <a class="nav-link dropdown-item dropdown-toggle inner-dropdown-menu" href="#"
                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Task 7
                                     </a>
                                     <div class="dropdown-menu inner-dropdown-menu">
-                                        <a class="dropdown-item" href="task7_1.html">Beat</a>
-                                        <a class="dropdown-item" href="task7_2.html">Lissajous curve</a>
+                                        <a class="dropdown-item" href="7_1.html">Beat</a>
+                                        <a class="dropdown-item" href="7_2.html">Lissajous curve</a>
                                     </div>
 
-                                    <a class="dropdown-item" href="task8.html">Task 8</a>
-                                    <a class="dropdown-item" href="task9.html">Task 9</a>
-                                    <a class="dropdown-item" href="task10.html">Task 10</a>
+                                    <a class="dropdown-item" href="8.html">Task 8</a>
+                                    <a class="dropdown-item" href="9.html">Task 9</a>
+                                    <a class="dropdown-item" href="10.html">Task 10</a>
                                 </div>
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item" href="task11.html">Task 11</a>
+                                    <a class="dropdown-item" href="11.html">Task 11</a>
                                     <a class="dropdown-item disabled" href="#">Task 12</a>
                                     <a class="dropdown-item disabled" href="#">Task 13</a>
                                     <a class="dropdown-item disabled" href="#">Task 14</a>
@@ -102,33 +104,45 @@
                                     <th scope="col">Description</th>
                                 </tr>
                                 </thead>
+
                                 <tbody>
                                 <tr>
-                                    <td>Radius</td>
-                                    <td>In meters. Positive float number.</td>
+                                    <td>
+                                        R<sub>0</sub>
+                                    </td>
+                                    <td>Plate radius. In meters. Positive float number.</td>
                                 </tr>
                                 <tr>
-                                    <td>Turns amount</td>
-                                    <td>Positive integer number.
+                                    <td>d</td>
+                                    <td>Distance between the plates. In meters. Positive float number.</td>
+                                </tr>
+                                <tr>
+                                    <td>U<sub>0</sub></td>
+                                    <td>Voltage amplitude. In volts. Positive float number.</td>
+                                </tr>
+                                <tr>
+                                    <td>&omega;</td>
+                                    <td>Angular velocity. In 1/radian. Positive float number.</td>
+                                </tr>
+                                <tr>
+                                    <td>r</td>
+                                    <td>Radial coordinate r for second graph. In meters. Positive float number.
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Amperage</td>
-                                    <td>In ampere. Float number.
+                                    <td>Steps count</td>
+                                    <td>Number of points to count functions values in them. The more steps, the
+                                        better the accuracy, but the lower the performance. Positive integer number.
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Points count</td>
-                                    <td>In seconds. Affects the graphic image accuracy. The more points, the
-                                        better the accuracy, but the lower the performance. Float number.
+                                    <td>End r</td>
+                                    <td>In meters. Affects the first graph scale. Positive float number.
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>X dist</td>
-                                    <td>In meters. Affects the scale of the graph. Displays which area from X=0 is
-                                        displayed on the graph. The default values are selected by radius. The coils are
-                                        arranged at +- (X dist / 2). Positive float number.
-                                    </td>
+                                    <td>End time</td>
+                                    <td>In seconds. Affects the second graph scale. Positive float number.</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -142,10 +156,8 @@
                             <br>
                             <p>Explore the graph forms conveniently and efficiently using the menu in the top right
                                 corner in graph form.</p>
-                            <p>Legend allows to "disable" one of the plots by
-                                clicking.</p>
-                            <br>
-                            <p> If you try to enter incorrect data, this field will return to the default value</p>
+                            <p> If you try to enter incorrect data, this field will return to the default value. Integer
+                                types are given with integer type even if a real number is entered</p>
                         </div>
 
                         <div id="imageDescription">
@@ -159,7 +171,7 @@
 
                             <div class="collapse" id="imageCollapse">
                                 <div class="card card-body">
-                                    <img src="../png/task2.png" alt="Here was a picture of this task" class="img-fluid">
+                                    <img src="../png/task5.png" alt="Here was a picture of this task" class="img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -178,7 +190,6 @@
                 <button class="btn btn-primary d-lg-none" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#descriptionMobile" aria-controls="descriptionMobile">Description
                 </button>
-
                 <div class="offcanvas offcanvas-bottom d-lg-none" data-bs-scroll="true" data-bs-backdrop="false"
                      tabindex="-1" id="descriptionMobile" aria-labelledby="descriptionMobileLabel">
                 </div>
@@ -186,19 +197,38 @@
             </div>
 
             <form id="graphForm">
-                <div class="form-floating mb-2">
-                    <input class="form-control" id="radius" name="radius" placeholder="#" value="0.5"/>
-                    <label for="radius">Radius (m)</label>
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="radius" name="radius" value="0.03" placeholder="#">
+                            <label for="radius">R<sub>0</sub> (m)</label>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="distance" name="distance"
+                                   value="0.005" placeholder="#">
+                            <label for="distance">d (m)</label>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-floating mb-2">
-                    <input class="form-control" id="turnsAmount" name="turnsAmount" placeholder="#" value="10"/>
-                    <label for="turnsAmount">Turns amount</label>
-                </div>
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="voltage" name="voltage" value="150" placeholder="#">
+                            <label for="voltage">U<sub>0</sub> (V)</label>
+                        </div>
+                    </div>
 
-                <div class="form-floating mb-2">
-                    <input class="form-control" id="amperage" name="amperage" placeholder="#" value="1"/>
-                    <label for="amperage">Amperage (A)</label>
+                    <div class="col-6">
+                        <div class="form-floating mb-2">
+                            <input class="form-control" id="angularVelocity" name="angularVelocity"
+                                   value="376.9911" placeholder="#">
+                            <label for="angularVelocity">&omega; (1/rad)</label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -208,34 +238,58 @@
                             Optional Settings
                         </button>
                     </h2>
+
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
-                        <div class="accordion-body">
-                            <div class="form-floating mb-2">
-                                <input class="form-control" id="steps" name="steps" placeholder="#"
-                                       value="10000"/>
-                                <label for="steps">Points count</label>
+                        <div class="row align-items-center" style="margin-top: 20px">
+                            <div class="col-6">
+                                <div class="form-floating mb-2">
+                                    <input class="form-control" id="stepCount" name="stepCount" value="10000"
+                                           placeholder="#">
+                                    <label for="stepCount">Steps count</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-floating mb-2">
+                                    <input class="form-control" id="radialCoordinate" name="radialCoordinate"
+                                           value="0.02" placeholder="#">
+                                    <label for="radialCoordinate">r (m)</label>
+                                </div>
                             </div>
 
-                            <div class="form-floating">
-                                <input class="form-control" id="dist" name="dist" placeholder="#" value="0.5"/>
-                                <label for="dist">X dist (m)</label>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-6">
+                                <div class="form-floating mb-2">
+                                    <input class="form-control" id="endRadialCoordinate" name="endRadialCoordinate"
+                                           value="0.2" placeholder="#">
+                                    <label for="endRadialCoordinate">End r (m)</label>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-floating mb-2">
+                                    <input class="form-control" id="endTime" name="endTime"
+                                           value="0.1" placeholder="#">
+                                    <label for="endTime">End time (s)</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <button id="drawButton" data-mdb-ripple-init type="submit" class="btn btn-primary">
+                <button data-mdb-ripple-init type="submit" class="btn btn-primary" id="drawButton">
                     Draw!
                 </button>
+                <script src="../src/task5/forms.js"></script>
             </form>
-            <script src="../src/task2/forms.js"></script>
         </div>
 
         <div class="col-lg-10" id="graph">
-            <script src="../src/task2/graph.js"></script>
+            <script src="../src/task5/graph.js"></script>
         </div>
     </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -244,4 +298,3 @@
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
 </body>
-</html>

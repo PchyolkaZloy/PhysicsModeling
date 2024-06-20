@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Physics | Task 10</title>
+    <title>Physics | Task 6</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -40,30 +40,30 @@
                         <div class="container" id="dropdownContainer">
                             <div class="row">
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item" href="task1.html">Task 1</a>
-                                    <a class="dropdown-item" href="task2.html">Task 2</a>
-                                    <a class="dropdown-item" href="task3.html">Task 3</a>
-                                    <a class="dropdown-item" href="task4.html">Task 4</a>
-                                    <a class="dropdown-item" href="task5.html">Task 5</a>
+                                    <a class="dropdown-item" href="1.html">Task 1</a>
+                                    <a class="dropdown-item" href="2.html">Task 2</a>
+                                    <a class="dropdown-item" href="3.html">Task 3</a>
+                                    <a class="dropdown-item" href="4.html">Task 4</a>
+                                    <a class="dropdown-item" href="5.html">Task 5</a>
                                 </div>
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item" href="task6.html">Task 6</a>
+                                    <a class="dropdown-item active" href="#">Task 6</a>
 
-                                    <a class="nav-link dropdown-item dropdown-toggle inner-dropdown-menu"
-                                       href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-item dropdown-toggle inner-dropdown-menu" href="#"
+                                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Task 7
                                     </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="task7_1.html">Beat</a>
-                                        <a class="dropdown-item" href="task7_2.html">Lissajous curve</a>
+                                    <div class="dropdown-menu inner-dropdown-menu">
+                                        <a class="dropdown-item" href="7_1.html">Beat</a>
+                                        <a class="dropdown-item" href="7_2.html">Lissajous curve</a>
                                     </div>
 
-                                    <a class="dropdown-item" href="task8.html">Task 8</a>
-                                    <a class="dropdown-item" href="task9.html">Task 9</a>
-                                    <a class="dropdown-item active" href="#">Task 10</a>
+                                    <a class="dropdown-item" href="8.html">Task 8</a>
+                                    <a class="dropdown-item" href="9.html">Task 9</a>
+                                    <a class="dropdown-item" href="10.html">Task 10</a>
                                 </div>
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item" href="task11.html">Task 11</a>
+                                    <a class="dropdown-item" href="11.html">Task 11</a>
                                     <a class="dropdown-item disabled" href="#">Task 12</a>
                                     <a class="dropdown-item disabled" href="#">Task 13</a>
                                     <a class="dropdown-item disabled" href="#">Task 14</a>
@@ -108,31 +108,32 @@
 
                                 <tbody>
                                 <tr>
-                                    <td>Wave length</td>
-                                    <td>In nanometers. Positive float number greater than 0.</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Lens radius</td>
-                                    <td>In meters. Positive float number greater than 0.
+                                    <td>
+                                        Inductance
                                     </td>
+                                    <td>In henry. Positive float number greater than 0.</td>
                                 </tr>
-
                                 <tr>
-                                    <td>Refractive index</td>
-                                    <td>Positive float number greater or equal 1.</td>
+                                    <td>Resistance</td>
+                                    <td>In ohms. Positive float number.</td>
                                 </tr>
-
                                 <tr>
-                                    <td>Viewing radius</td>
-                                    <td>In meters. Select interval to view chart. Positive float number greater than 0.
-                                    </td>
+                                    <td>Capacitance</td>
+                                    <td>In farads. Positive float number greater than 0.</td>
+                                </tr>
+                                <tr>
+                                    <td>Initial Charge q<sub>0</sub></td>
+                                    <td>In coulombs. Positive float number.</td>
                                 </tr>
                                 <tr>
                                     <td>Steps count</td>
                                     <td>Number of points to count functions values in them. The more steps, the
                                         better the accuracy, but the lower the performance. Positive integer number.
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>End time</td>
+                                    <td>In seconds. Affects the graphs scales. Positive float number.</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -144,9 +145,9 @@
                                 parameters that were not in the technical task, but that are involved in the
                                 construction of the graphics (more fine-tuning)</p>
                             <br>
+                            <p>Use checkbox to choose to draw charge phase portrait</p>
                             <p>Explore the graphs conveniently and efficiently using the menu in the top right
                                 corner in plot form.</p>
-                            <br>
                             <p> If you try to enter incorrect data, this field will return to the default value. Integer
                                 types are given with integer type even if a real number is entered</p>
                         </div>
@@ -155,14 +156,14 @@
                             <p class="d-inline-flex gap-1">
                                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#imageCollapse" aria-expanded="false"
-                                        aria-controls="imageCollapse" style="margin-top: 20px;">Image from lecture
+                                        aria-controls="imageCollapse" style="margin-top: 20px;">
+                                    Image from lecture (RUS)
                                 </button>
                             </p>
 
                             <div class="collapse" id="imageCollapse">
                                 <div class="card card-body">
-                                    <img src="../png/task10.png" alt="Here was a picture of this task"
-                                         class="img-fluid">
+                                    <img src="../png/task6.png" alt="Here was a picture of this task" class="img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -188,34 +189,27 @@
             </div>
 
             <form id="graphForm">
+
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="waveLength" name="waveLength" value="500"
-                           placeholder="#">
-                    <label for="waveLength">Wave length (nm)</label>
+                    <input class="form-control" id="inductance" name="inductance" value="1" placeholder="#">
+                    <label for="inductance">Inductance (H)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="lensRadius" name="lensRadius" value="1"
-                           placeholder="#">
-                    <label for="lensRadius">Lens radius (m)</label>
+                    <input class="form-control" id="resistance" name="resistance" value="1" placeholder="#">
+                    <label for="resistance">Resistance (ohm)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="lensRefractiveIndex" name="lensRefractiveIndex" value="1.5"
-                           placeholder="#">
-                    <label for="lensRefractiveIndex">Lens refractive index</label>
+                    <input class="form-control" id="capacitance" name="capacitance" value="0.001" placeholder="#">
+                    <label for="capacitance">Capacitance (F)</label>
                 </div>
 
-                <div class="form-floating mb-2">
-                    <input class="form-control" id="betweenRefractiveIndex" name="betweenRefractiveIndex" value="1"
-                           placeholder="#">
-                    <label for="betweenRefractiveIndex">Refractive index between</label>
-                </div>
-
-                <div class="form-floating mb-2">
-                    <input class="form-control" id="plateRefractiveIndex" name="plateRefractiveIndex" value="1.5"
-                           placeholder="#">
-                    <label for="plateRefractiveIndex">Plate refractive index</label>
+                <div class="form-switch">
+                    <input class="form-check-input" type="checkbox" id="checkbox" value="">
+                    <label class="form-check-input-label" for="checkbox" style="font-style: normal">
+                        Draw phase portrait
+                    </label>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -229,9 +223,14 @@
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
                             <div class="form-floating mb-2">
-                                <input class="form-control" id="endRadius" name="endRadius" value="0.002"
+                                <input class="form-control" id="initialCharge" name="initialCharge" value="1"
                                        placeholder="#">
-                                <label for="endRadius">Viewing radius (m)</label>
+                                <label for="initialCharge">Initial Charge (C)</label>
+                            </div>
+
+                            <div class="form-floating mb-2">
+                                <input class="form-control" id="endTime" name="endTime" value="10" placeholder="#">
+                                <label for="endTime">End time (sec)</label>
                             </div>
 
                             <div class="form-floating">
@@ -243,21 +242,16 @@
                     </div>
                 </div>
 
+
                 <button data-mdb-ripple-init type="submit" class="btn btn-primary" id="drawButton">
                     Draw!
                 </button>
-                <script src="../src/task10/forms.js"></script>
+                <script src="../src/task6/forms.js"></script>
             </form>
         </div>
 
-        <div class="col-lg-10">
-            <div class="row">
-                <div class="col-lg-5" id="graph"></div>
-                <div class="col-lg-7" id="myCanvasDiv">
-                    <canvas id="myCanvas"></canvas>
-                </div>
-                <script src="../src/task10/graph.js"></script>
-            </div>
+        <div class="col-lg-10" id="graph">
+            <script src="../src/task6/graph.js"></script>
         </div>
     </div>
 </div>

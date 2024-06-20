@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Physics | Task 11</title>
+    <title>Physics | Task 8</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -40,30 +40,30 @@
                         <div class="container" id="dropdownContainer">
                             <div class="row">
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item" href="task1.html">Task 1</a>
-                                    <a class="dropdown-item" href="task2.html">Task 2</a>
-                                    <a class="dropdown-item" href="task3.html">Task 3</a>
-                                    <a class="dropdown-item" href="task4.html">Task 4</a>
-                                    <a class="dropdown-item" href="task5.html">Task 5</a>
+                                    <a class="dropdown-item" href="1.html">Task 1</a>
+                                    <a class="dropdown-item" href="2.html">Task 2</a>
+                                    <a class="dropdown-item" href="3.html">Task 3</a>
+                                    <a class="dropdown-item" href="4.html">Task 4</a>
+                                    <a class="dropdown-item" href="5.html">Task 5</a>
                                 </div>
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item" href="task6.html">Task 6</a>
+                                    <a class="dropdown-item" href="6.html">Task 6</a>
 
                                     <a class="nav-link dropdown-item dropdown-toggle inner-dropdown-menu"
                                        href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Task 7
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="task7_1.html">Beat</a>
-                                        <a class="dropdown-item" href="task7_2.html">Lissajous curve</a>
+                                        <a class="dropdown-item" href="7_1.html">Beat</a>
+                                        <a class="dropdown-item" href="7_2.html">Lissajous curve</a>
                                     </div>
 
-                                    <a class="dropdown-item" href="task8.html">Task 8</a>
-                                    <a class="dropdown-item" href="task9.html">Task 9</a>
-                                    <a class="dropdown-item" href="task10.html">Task 10</a>
+                                    <a class="dropdown-item active" href="#">Task 8</a>
+                                    <a class="dropdown-item" href="9.html">Task 9</a>
+                                    <a class="dropdown-item" href="10.html">Task 10</a>
                                 </div>
                                 <div class="col-4 md-2">
-                                    <a class="dropdown-item active" href="#">Task 11</a>
+                                    <a class="dropdown-item" href="11.html">Task 11</a>
                                     <a class="dropdown-item disabled" href="#">Task 12</a>
                                     <a class="dropdown-item disabled" href="#">Task 13</a>
                                     <a class="dropdown-item disabled" href="#">Task 14</a>
@@ -108,25 +108,12 @@
 
                                 <tbody>
                                 <tr>
-                                    <td>Splits number</td>
-                                    <td>Positive integer number greater than 0.</td>
+                                    <td>Frequency</td>
+                                    <td>In hertz. Positive float number greater than 0.</td>
                                 </tr>
                                 <tr>
-                                    <td>Split width</td>
-                                    <td>In meters. Positive float number greater than 0.</td>
-                                </tr>
-                                <tr>
-                                    <td>Distance between splits</td>
-                                    <td>In meters. Positive float number greater than 0.</td>
-                                </tr>
-                                <tr>
-                                    <td>Wave length</td>
-                                    <td>In nanometers. Positive float number greater than 0.</td>
-                                </tr>
-                                <tr>
-                                    <td>Viewing radius</td>
-                                    <td>In radians. Select interval to view chart. Positive float number greater than 0.
-                                    </td>
+                                    <td>Amplitude</td>
+                                    <td>Positive float number greater than 0.</td>
                                 </tr>
                                 <tr>
                                     <td>Steps count</td>
@@ -145,8 +132,11 @@
                                 construction of the graphics (more fine-tuning)</p>
                             <br>
                             <p>Explore the graphs conveniently and efficiently using the menu in the top right
-                                corner in plot form.</p>
+                                corner in plot form.
+                                Legend allows to "disable" one of the spectrum plots by clicking.</p>
                             <br>
+
+
                             <p> If you try to enter incorrect data, this field will return to the default value. Integer
                                 types are given with integer type even if a real number is entered</p>
                         </div>
@@ -155,13 +145,14 @@
                             <p class="d-inline-flex gap-1">
                                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#imageCollapse" aria-expanded="false"
-                                        aria-controls="imageCollapse" style="margin-top: 20px;">Image from lecture
+                                        aria-controls="imageCollapse" style="margin-top: 20px;">
+                                    Image from lecture (RUS)
                                 </button>
                             </p>
 
                             <div class="collapse" id="imageCollapse">
                                 <div class="card card-body">
-                                    <img src="../png/task11.png" alt="Here was a picture of this task"
+                                    <img src="../png/task8.png" alt="Here was a picture of this task"
                                          class="img-fluid">
                                 </div>
                             </div>
@@ -188,24 +179,27 @@
             </div>
 
             <form id="graphForm">
+
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="splitsNumber" name="splitsNumber" value="2" placeholder="#">
-                    <label for="splitsNumber">Splits number</label>
+                    <input class="form-control" id="messageFrequency" name="messageFrequency" value="10"
+                           placeholder="#">
+                    <label for="messageFrequency">Message Frequency (Hz)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="splitWidth" name="splitWidth" value="0.001" placeholder="#">
-                    <label for="splitWidth">Split width (m)</label>
+                    <input class="form-control" id="carrierFrequency" name="carrierFrequency" value="100"
+                           placeholder="#">
+                    <label for="carrierFrequency">Carrier Frequency (Hz)</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="period" name="period" value="0.005" placeholder="#">
-                    <label for="period">Distance between splits (m)</label>
+                    <input class="form-control" id="messageAmplitude" name="messageAmplitude" value="1" placeholder="#">
+                    <label for="messageAmplitude">Message Amplitude</label>
                 </div>
 
                 <div class="form-floating mb-2">
-                    <input class="form-control" id="waveLength" name="waveLength" value="500" placeholder="#">
-                    <label for="waveLength">Wave length (nm)</label>
+                    <input class="form-control" id="carrierAmplitude" name="carrierAmplitude" value="2" placeholder="#">
+                    <label for="carrierAmplitude">Carrier Amplitude</label>
                 </div>
 
                 <div class="accordion" id="accord">
@@ -218,14 +212,8 @@
 
                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accord">
                         <div class="accordion-body">
-                            <div class="form-floating mb-2">
-                                <input class="form-control" id="endAngle" name="endAngle" value="0.001"
-                                       placeholder="#">
-                                <label for="endAngle">Viewing radius (rad)</label>
-                            </div>
-
                             <div class="form-floating">
-                                <input class="form-control" id="stepCount" name="stepCount" value="100000"
+                                <input class="form-control" id="stepCount" name="stepCount" value="10000"
                                        placeholder="#">
                                 <label for="stepCount">Steps count</label>
                             </div>
@@ -236,17 +224,18 @@
                 <button data-mdb-ripple-init type="submit" class="btn btn-primary" id="drawButton">
                     Draw!
                 </button>
-                <script src="../src/task11/forms.js"></script>
+                <script src="../src/task8/forms.js"></script>
             </form>
         </div>
 
         <div class="col-lg-10">
             <div class="row">
-                <div class="col-lg-6" id="graph"></div>
-                <div class="col-lg-6" id="myCanvasDiv">
-                    <canvas id="myCanvas"></canvas>
+                <div class="col-lg-7" id="graph1" style="height: 90vh;">
+                    <script src="../src/task8/graph.js"></script>
                 </div>
-                <script src="../src/task11/graph.js"></script>
+                <div class="col-lg-5" id="graph2" style="height: 90vh;">
+                    <script src="../src/task8/graph.js"></script>
+                </div>
             </div>
         </div>
     </div>
