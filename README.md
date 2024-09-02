@@ -10,7 +10,7 @@ This repository hosts a variety of physical simulation solutions, each accompani
 
 To explore the simulations, follow these simple steps:
 
-1. Navigate to the "Tasks" section of the repository.
+1. Navigate to the "Models" section of the navbar.
 2. Select the desired solution number from the dropdown menu located at the top of the page.
 3. Explore the task description and its meticulously crafted solution.
 
