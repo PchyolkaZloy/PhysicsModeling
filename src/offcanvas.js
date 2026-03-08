@@ -1,15 +1,19 @@
-let offCanvasContent = document.querySelector('.offcanvas-content').innerHTML;
+const offCanvasTemplate = document.querySelector('.offcanvas-content');
+
+function renderOffcanvas(target) {
+    const clone = offCanvasTemplate.cloneNode(true);
+    target.replaceChildren(clone);
+    attachEventListeners(target);
+}
 
 document.getElementById('descriptionMobile').addEventListener('show.bs.offcanvas',
     function () {
-        this.innerHTML = offCanvasContent;
-        attachEventListeners(this);
+        renderOffcanvas(this);
     });
 
 document.getElementById('descriptionDesktop').addEventListener('show.bs.offcanvas',
     function () {
-        this.innerHTML = offCanvasContent;
-        attachEventListeners(this);
+        renderOffcanvas(this);
     });
 
 function attachEventListeners(offCanvasElement) {
