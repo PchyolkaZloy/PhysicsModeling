@@ -2,6 +2,8 @@ const offCanvasTemplate = document.querySelector('.offcanvas-content');
 
 function renderOffcanvas(target) {
     const clone = offCanvasTemplate.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.style.display = 'block';
     target.replaceChildren(clone);
     attachEventListeners(target);
 }
